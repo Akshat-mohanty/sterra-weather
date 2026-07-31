@@ -195,6 +195,7 @@ function renderForecast(daily) {
 }
 
 let chartAnimFrame;
+let lastChartWidth = 0;
 
 function drawHourlyChart(hourly) {
   const canvas = document.getElementById('hourly-chart');
@@ -202,6 +203,7 @@ function drawHourlyChart(hourly) {
   if (chartAnimFrame) cancelAnimationFrame(chartAnimFrame);
   
   const W = canvas.parentElement.offsetWidth;
+  lastChartWidth = W;
   const H = canvas.parentElement.offsetHeight;
   const dpr = window.devicePixelRatio || 1;
   
@@ -393,7 +395,13 @@ function setUnit(u) {
 }
 
 window.addEventListener('resize', () => {
-  if (S.data) drawHourlyChart(S.data.hourly);
+  const canvas = document.getElementById('hourly-chart');
+  if (!canvas) return;
+  const w = canvas.parentElement.offsetWidth;
+  if (w !== lastChartWidth) {
+    lastChartWidth = w;
+    if (S.data) drawHourlyChart(S.data.hourly);
+  }
 });
 
 (function init() {
