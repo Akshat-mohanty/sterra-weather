@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sterra Weather — Desktop</title>
+  <meta name="description" content="A clean, minimalistic weather dashboard."/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="style.css?v=9"/>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <div class="nav-brand" onclick="show('welcome-screen')" title="Go to Home">
+      <span class="brand-dot"></span>
+      <span class="brand-name">STERRA</span>
+    </div>
+
+    <div class="nav-center">
+      <div class="search-box">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="city-input" type="text" placeholder="Search a city..." autocomplete="off"/>
+        <button class="locate-btn" onclick="getUserLocation()" aria-label="Use my location">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>
+        </button>
+      </div>
+      <div id="suggestions" class="suggestions hidden"></div>
+    </div>
+
+    <div class="nav-right">
+      
+    </div>
+  </nav>
+
+  <div class="state-container">
+    <div id="welcome-screen" class="state-msg">
+      <h1>Sterra Weather</h1>
+      <p>Search for a city above to begin.</p>
+    </div>
+    <div id="loading-screen" class="state-msg hidden">
+      <div class="spinner"></div>
+      <p>Fetching forecast...</p>
+    </div>
+    <div id="error-screen" class="state-msg hidden">
+      <h1>Unable to load</h1>
+      <p id="error-msg">Check your connection or try another city.</p>
+      <button class="retry-btn" onclick="retry()">Try again</button>
+    </div>
+  </div>
+
+  <main id="dashboard" class="dashboard hidden">
+    
+    <section class="col-left">
+      <div class="location-header">
+        <h1 id="loc-city">—</h1>
+        <p id="loc-region">—</p>
+      </div>
+
+      <div class="hero-temp-wrapper">
+        <div class="hero-temp" id="hero-temp">—</div>
+        <div class="hero-deg" id="hero-deg">°C</div>
+      </div>
+
+      <div class="hero-condition">
+        <span class="hero-icon" id="hero-icon"></span>
+        <span class="hero-desc" id="hero-desc">—</span>
+      </div>
+
+      <div class="hero-hilo">
+        Feels like <span id="hero-feels">—</span> &nbsp;·&nbsp; <span id="hero-range">—</span>
+      </div>
+
+      <div class="sun-times">
+        <div class="sun-box">
+          <span class="sun-lbl">SUNRISE</span>
+          <span class="sun-val" id="sunrise-val">—</span>
+        </div>
+        <div class="sun-divider"></div>
+        <div class="sun-box">
+          <span class="sun-lbl">SUNSET</span>
+          <span class="sun-val" id="sunset-val">—</span>
+        </div>
+      </div>
+      
+      <p class="updated-ts" id="updated-ts">—</p>
+    </section>
+
+    <section class="col-right">
+      
+      <div class="panel chart-panel">
+        <div class="panel-header">
+          <h2>TODAY'S FORECAST</h2>
+          <span id="loc-time" class="time-label">—</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="hourly-chart" width="700" height="180"></canvas>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-lbl">HUMIDITY</div>
+          <div class="stat-val" id="st-humidity">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">WIND</div>
+          <div class="stat-val" id="st-wind">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">UV INDEX</div>
+          <div class="stat-val" id="st-uv">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">PRESSURE</div>
+          <div class="stat-val" id="st-pressure">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">VISIBILITY</div>
+          <div class="stat-val" id="st-vis">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">DEW POINT</div>
+          <div class="stat-val" id="st-dew">—</div>
+        </div>
+      </div>
+
+      <div class="panel forecast-panel">
+        <div class="panel-header">
+          <h2>7-DAY FORECAST</h2>
+        </div>
+        <div class="forecast-row" id="forecast-row">
+          
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    © 2026 Akshat Mohanty. Built with ❤️
+  </footer>
+
+  <script src="app.js?v=9"></script>
+</body>
+</html>
