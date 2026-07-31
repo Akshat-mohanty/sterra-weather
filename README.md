@@ -3,7 +3,6 @@
 A beautiful, desktop-optimized weather dashboard built with clean, modern web technologies.
 
 Give it a try!
-
 [Sterra Weather](https://sterra-weather.vercel.app)
 
 ## Features
