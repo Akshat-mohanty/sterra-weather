@@ -104,6 +104,11 @@ function show(id) {
     const el = document.getElementById(s);
     if (el) el.classList.toggle('hidden', s !== id);
   });
+  
+  const unitToggle = document.getElementById('unit-toggle-container');
+  if (unitToggle) {
+    unitToggle.classList.toggle('hidden', id !== 'dashboard');
+  }
 }
 
 function render(data) {
