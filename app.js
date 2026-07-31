@@ -216,10 +216,18 @@ function drawHourlyChart(hourly) {
   ctx.scale(dpr, dpr);
 
   const nowH = new Date().getHours();
-  const temps = hourly.temperature_2m.slice(nowH, nowH + 24).map(cvt);
-  const times = hourly.time.slice(nowH, nowH + 24);
+  const rawTemps = hourly.temperature_2m.slice(nowH, nowH + 24).map(cvt);
+  const rawTimes = hourly.time.slice(nowH, nowH + 24);
 
-  if (temps.length < 2) return;
+  if (rawTemps.length < 2) return;
+
+  const step = W < 500 ? 4 : 3; 
+  const temps = [];
+  const times = [];
+  for (let i = 0; i < rawTemps.length; i += step) {
+    temps.push(rawTemps[i]);
+    times.push(rawTimes[i]);
+  }
 
   const pad = { t: 30, r: 20, b: 30, l: 20 };
   const cW = W - pad.l - pad.r;
@@ -270,7 +278,7 @@ function drawHourlyChart(hourly) {
     ctx.fill();
 
     ctx.fillStyle = '#0D0D0D';
-    for (let i = 0; i < temps.length; i += 4) {
+    for (let i = 0; i < temps.length; i++) {
       const x = xS(i), y = yS(temps[i]);
       if (x > clipW) continue;
       
