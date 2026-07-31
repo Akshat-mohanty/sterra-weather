@@ -203,10 +203,15 @@ function drawHourlyChart(hourly) {
   
   const W = canvas.parentElement.offsetWidth;
   const H = canvas.parentElement.offsetHeight;
-  canvas.width = W;
-  canvas.height = H;
+  const dpr = window.devicePixelRatio || 1;
+  
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = `${W}px`;
+  canvas.style.height = `${H}px`;
   
   const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
 
   const nowH = new Date().getHours();
   const temps = hourly.temperature_2m.slice(nowH, nowH + 24).map(cvt);
