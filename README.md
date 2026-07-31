@@ -1,6 +1,10 @@
 # Sterra Weather
 
-A beautiful, desktop-optimized weather dashboard built with clean, modern web technologies. 
+A beautiful, desktop-optimized weather dashboard built with clean, modern web technologies.
+
+Give it a try!
+
+[Sterra Weather](https://sterra-weather.vercel.app)
 
 ## Features
 - **Minimalist Aesthetic:** Clean white, cream, and pure black design with typography-focused layouts.
