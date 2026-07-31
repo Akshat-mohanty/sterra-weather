@@ -123,7 +123,7 @@ function render(data) {
   document.getElementById('hero-deg').textContent = sym();
   const iconEl = document.getElementById('hero-icon');
   iconEl.textContent = emoji;
-  if ([0, 1].includes(cur.weather_code)) {
+  if (cur.weather_code === 0) {
     iconEl.classList.add('spinning');
   } else {
     iconEl.classList.remove('spinning');
