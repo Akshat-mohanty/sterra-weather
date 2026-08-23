@@ -109,6 +109,33 @@ function show(id) {
   if (unitToggle) {
     unitToggle.classList.toggle('hidden', id !== 'dashboard');
   }
+
+  const bg = document.getElementById('weather-ambient-bg');
+  if (bg && id !== 'dashboard') {
+    bg.classList.remove('active');
+  }
+}
+
+function updateWeatherBg(cur) {
+  const bg = document.getElementById('weather-ambient-bg');
+  if (!bg || !cur) return;
+  
+  bg.className = '';
+  const code = cur.weather_code;
+  const temp = cur.temperature_2m;
+  const isDay = cur.is_day === 1;
+
+  if (!isDay) {
+    bg.classList.add('bg-night', 'active');
+  } else if ((code >= 71 && code <= 86) || temp < 0) {
+    bg.classList.add('bg-cold-snow', 'active');
+  } else if ((code >= 51 && code <= 67) || (code >= 80 && code <= 99)) {
+    bg.classList.add('bg-rainy', 'active');
+  } else if (code === 0 || code === 1) {
+    bg.classList.add('bg-sunny', 'active');
+  } else {
+    bg.classList.add('bg-cloudy', 'active');
+  }
 }
 
 function render(data) {
@@ -116,6 +143,8 @@ function render(data) {
   const cur = data.current;
   const daily = data.daily;
   const [cond, emoji] = wmo(cur.weather_code);
+
+  updateWeatherBg(cur);
 
   document.getElementById('loc-city').textContent = S.city || '—';
   document.getElementById('loc-region').textContent = S.region || '—';
@@ -157,6 +186,8 @@ function render(data) {
   updateTime();
   const now = new Date();
   document.getElementById('updated-ts').textContent = 
+    `Last updated ${now.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' })}`;
+}yId('updated-ts').textContent = 
     `Last updated ${now.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' })}`;
 
   show('dashboard');

@@ -49,6 +49,59 @@ body {
   overflow: hidden;
 }
 
+#weather-ambient-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), background 1s ease;
+}
+
+#weather-ambient-bg.active {
+  opacity: 1;
+}
+
+.bg-sunny {
+  background: 
+    radial-gradient(circle at 80% 15%, rgba(251, 191, 36, 0.32) 0%, rgba(245, 158, 11, 0.16) 35%, transparent 65%),
+    radial-gradient(circle at 15% 75%, rgba(234, 88, 12, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 0%, rgba(253, 224, 71, 0.1) 0%, transparent 60%),
+    linear-gradient(180deg, #120e0c 0%, #0c1017 100%);
+}
+
+.bg-cold-snow {
+  background: 
+    radial-gradient(circle at 25% 20%, rgba(16, 185, 129, 0.28) 0%, rgba(52, 211, 153, 0.12) 35%, transparent 65%),
+    radial-gradient(circle at 85% 70%, rgba(6, 182, 212, 0.2) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 0%, rgba(167, 243, 208, 0.12) 0%, transparent 60%),
+    linear-gradient(180deg, #071513 0%, #0c1017 100%);
+}
+
+.bg-rainy {
+  background: 
+    radial-gradient(circle at 75% 20%, rgba(2, 132, 199, 0.3) 0%, rgba(56, 189, 248, 0.14) 40%, transparent 65%),
+    radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 0%, rgba(125, 211, 252, 0.15) 0%, transparent 60%),
+    linear-gradient(180deg, #09121d 0%, #0c1017 100%);
+}
+
+.bg-cloudy {
+  background: 
+    radial-gradient(circle at 50% 15%, rgba(148, 163, 184, 0.2) 0%, rgba(100, 116, 139, 0.1) 45%, transparent 65%),
+    radial-gradient(circle at 80% 80%, rgba(51, 65, 85, 0.2) 0%, transparent 60%),
+    linear-gradient(180deg, #0f131a 0%, #0c1017 100%);
+}
+
+.bg-night {
+  background: 
+    radial-gradient(circle at 85% 15%, rgba(99, 102, 241, 0.22) 0%, rgba(49, 46, 129, 0.18) 40%, transparent 65%),
+    radial-gradient(circle at 15% 85%, rgba(30, 27, 75, 0.3) 0%, transparent 60%),
+    linear-gradient(180deg, #080a14 0%, #0c1017 100%);
+}
+
 .top-nav {
   display: flex;
   align-items: center;
