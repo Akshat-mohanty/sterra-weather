@@ -349,14 +349,11 @@ async function doSearch(q) {
       el.className = 'menu__item sug-item';
       
       let marqueeParts = '';
-      for (let k = 0; k < 2; k++) {
+      for (let k = 0; k < 4; k++) {
         marqueeParts += `
           <div class="marquee__part">
             <span class="mq-title">${r.name}</span>
             <span class="mq-tag">${geo}</span>
-            <span class="mq-country">${countryName}</span>
-            <span class="mq-tag mq-action">VIEW FORECAST ↗</span>
-            <span class="mq-sep">✦</span>
           </div>
         `;
       }
