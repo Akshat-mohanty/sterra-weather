@@ -327,13 +327,6 @@ input.addEventListener('input', e => {
   timer = setTimeout(() => doSearch(q), 300);
 });
 
-function fmtCoord(lat, lon) {
-  if (typeof lat !== 'number' || typeof lon !== 'number') return '';
-  const latStr = Math.abs(lat).toFixed(1) + '°' + (lat >= 0 ? 'N' : 'S');
-  const lonStr = Math.abs(lon).toFixed(1) + '°' + (lon >= 0 ? 'E' : 'W');
-  return `${latStr} · ${lonStr}`;
-}
-
 async function doSearch(q) {
   try {
     const results = await geocode(q);
@@ -342,42 +335,11 @@ async function doSearch(q) {
     sugBox.innerHTML = '';
     results.slice(0, 6).forEach((r) => {
       const parts = [r.admin1, r.country].filter(Boolean).join(', ');
-      const countryName = r.country || r.admin1 || 'GLOBAL';
-      const geo = fmtCoord(r.latitude, r.longitude);
-
       const el = document.createElement('div');
-      el.className = 'menu__item sug-item';
-      
-      let marqueeParts = '';
-      for (let k = 0; k < 4; k++) {
-        marqueeParts += `
-          <div class="marquee__part">
-            <span class="mq-title">${r.name}</span>
-            <span class="mq-tag">${geo}</span>
-          </div>
-        `;
-      }
-
-      el.innerHTML = `
-        <div class="menu__item-link">
-          <strong>${r.name}</strong>
-          <small>${parts}</small>
-        </div>
-        <div class="marquee">
-          <div class="marquee__inner-wrap">
-            <div class="marquee__inner">
-              ${marqueeParts}
-            </div>
-          </div>
-        </div>
-      `;
-
+      el.className = 'sug-item';
+      el.innerHTML = `<strong>${r.name}</strong><small>${parts}</small>`;
       el.onclick = () => pick(r);
       sugBox.appendChild(el);
-
-      if (window.initFlowingMenuItem) {
-        window.initFlowingMenuItem(el, { speed: 10 });
-      }
     });
     sugBox.classList.remove('hidden');
   } catch(e) {}
