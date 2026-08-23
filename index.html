@@ -10,29 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   
-  <link rel="stylesheet" href="style.css?v=23"/>
-  <style>
-    .spinner-svg {
-      animation: svg-rotate 2s linear infinite;
-      margin: 0 auto 16px;
-      color: var(--ink);
-      display: block;
-    }
-    .spinner-svg .path {
-      stroke-dasharray: 1, 200;
-      stroke-dashoffset: 0;
-      animation: svg-dash 1.5s ease-in-out infinite;
-      stroke-linecap: round;
-    }
-    @keyframes svg-rotate {
-      100% { transform: rotate(360deg); }
-    }
-    @keyframes svg-dash {
-      0% { stroke-dasharray: 1, 200; stroke-dashoffset: 0; }
-      50% { stroke-dasharray: 89, 200; stroke-dashoffset: -35px; }
-      100% { stroke-dasharray: 89, 200; stroke-dashoffset: -124px; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css?v=25"/>
 </head>
 <body>
   <div id="light-rays-container"></div>
@@ -71,10 +49,12 @@
       <p>Search for a city above to begin your journey.</p>
     </div>
     <div id="loading-screen" class="state-msg hidden">
-      <svg class="spinner-svg" viewBox="0 0 50 50" width="34" height="34">
-        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="4" stroke="currentColor"></circle>
-      </svg>
-      <p>Fetching forecast...</p>
+      <div class="loader-beacon">
+        <div class="beacon-core"></div>
+        <div class="beacon-ring ring-1"></div>
+        <div class="beacon-ring ring-2"></div>
+      </div>
+      <p class="loader-text">Gathering atmospheric data...</p>
     </div>
     <div id="error-screen" class="state-msg hidden">
       <h1>Unable to load</h1>
