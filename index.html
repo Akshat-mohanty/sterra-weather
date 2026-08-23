@@ -36,6 +36,11 @@
 </head>
 <body>
   <div id="light-rays-container"></div>
+  <div id="unit-toggle-container" class="unit-toggle-top hidden">
+    <button id="unit-c" class="unit-btn active" onclick="setUnit('C')">°C</button>
+    <button id="unit-f" class="unit-btn" onclick="setUnit('F')">°F</button>
+  </div>
+
   <nav class="top-nav">
     <div class="nav-brand" onclick="show('welcome-screen')" title="Go to Home">
       <span class="brand-dot"></span>
@@ -51,10 +56,6 @@
     </div>
 
     <div class="nav-right">
-      <div id="unit-toggle-container" class="unit-toggle hidden">
-        <button id="unit-c" class="unit-btn active" onclick="setUnit('C')">°C</button>
-        <button id="unit-f" class="unit-btn" onclick="setUnit('F')">°F</button>
-      </div>
       <button class="locate-btn" onclick="getUserLocation()" aria-label="Use my location" title="Use my location">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <circle cx="12" cy="12" r="3.5"/>
@@ -176,7 +177,7 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="app.js?v=21"></script>
+  <script src="app.js?v=22"></script>
   <script src="lightrays.js?v=2"></script>
   <script src="flowingmenu.js?v=1"></script>
 </body>

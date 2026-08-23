@@ -248,24 +248,40 @@ body {
 }
 
 .nav-right { width: 200px; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
-.unit-toggle {
+.unit-toggle-top {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  z-index: 60;
   display: flex;
-  border: 1px solid var(--border);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  animation: fadeInUp 0.3s ease-out;
 }
 .unit-btn {
   background: none;
   border: none;
   padding: 6px 12px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
   color: var(--ink-3);
   transition: background 0.2s, color 0.2s;
 }
-.unit-btn.active { background: var(--ink); color: var(--bg-color); }
-.unit-btn:hover:not(.active) { background: var(--panel-bg); }
+.unit-btn.active {
+  background: #FFFFFF;
+  color: #0C1017;
+  font-weight: 600;
+}
+.unit-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+}
 
 .state-container { position: absolute; inset: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; z-index: 10; }
 .state-msg { text-align: center; pointer-events: auto; padding: 40px; animation: fadeInUp 0.5s ease-out; }
