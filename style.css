@@ -227,6 +227,8 @@ body {
   width: 100%;
   padding: 40px 32px;
   gap: 48px;
+  position: relative;
+  z-index: 10;
 }
 
 .col-left { 

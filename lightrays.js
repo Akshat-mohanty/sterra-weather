@@ -1,38 +1,19 @@
-import { Renderer, Program, Triangle, Mesh } from 'https://cdn.jsdelivr.net/npm/ogl@1.0.11/dist/ogl.mjs';
+(function () {
+  'use strict';
 
-const hexToRgb = hex => {
-  const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1];
-};
+  const container = document.getElementById('light-rays-container');
+  if (!container) return;
 
-const getAnchorAndDir = (origin, w, h) => {
-  const outside = 0.2;
-  return { anchor: [0.5 * w, -outside * h], dir: [0, 1] };
-};
+  const canvas = document.createElement('canvas');
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  canvas.style.display = 'block';
+  container.appendChild(canvas);
 
-export class LightRays {
-  constructor(containerId) {
-    this.container = document.getElementById(containerId);
-    if (!this.container) return;
+  const gl = canvas.getContext('webgl', { alpha: true, antialias: false });
+  if (!gl) return;
 
-    this.mouse = { x: 0.5, y: 0.5 };
-    this.smoothMouse = { x: 0.5, y: 0.5 };
-    
-    this.init();
-  }
-
-  init() {
-    this.renderer = new Renderer({
-      dpr: Math.min(window.devicePixelRatio, 2),
-      alpha: true
-    });
-    
-    const gl = this.renderer.gl;
-    gl.canvas.style.width = '100%';
-    gl.canvas.style.height = '100%';
-    this.container.appendChild(gl.canvas);
-
-    const vert = `
+  const vertSrc = `
 attribute vec2 position;
 varying vec2 vUv;
 void main() {
@@ -40,10 +21,11 @@ void main() {
   gl_Position = vec4(position, 0.0, 1.0);
 }`;
 
-    const frag = `precision highp float;
+  const fragSrc = `precision highp float;
 
 uniform float iTime;
 uniform vec2  iResolution;
+
 uniform vec2  rayPos;
 uniform vec2  rayDir;
 uniform vec3  raysColor;
@@ -130,68 +112,120 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 void main() {
   vec4 color;
   mainImage(color, gl_FragCoord.xy);
-  gl_FragColor  = color;
+  gl_FragColor = color;
 }`;
 
-    this.uniforms = {
-      iTime: { value: 0 },
-      iResolution: { value: [1, 1] },
-      rayPos: { value: [0, 0] },
-      rayDir: { value: [0, 1] },
-      raysColor: { value: hexToRgb('#ffffff') },
-      raysSpeed: { value: 1 },
-      lightSpread: { value: 0.5 },
-      rayLength: { value: 3 },
-      pulsating: { value: 0.0 },
-      fadeDistance: { value: 1 },
-      saturation: { value: 1 },
-      mousePos: { value: [0.5, 0.5] },
-      mouseInfluence: { value: 0.1 },
-      noiseAmount: { value: 0 },
-      distortion: { value: 0 }
-    };
-
-    const geometry = new Triangle(gl);
-    const program = new Program(gl, { vertex: vert, fragment: frag, uniforms: this.uniforms });
-    this.mesh = new Mesh(gl, { geometry, program });
-
-    window.addEventListener('resize', () => this.resize());
-    window.addEventListener('mousemove', (e) => {
-      const rect = this.container.getBoundingClientRect();
-      this.mouse.x = (e.clientX - rect.left) / rect.width;
-      this.mouse.y = (e.clientY - rect.top) / rect.height;
-    });
-
-    this.resize();
-    requestAnimationFrame((t) => this.renderLoop(t));
+  function createShader(gl, type, source) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, source);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+      console.error(gl.getShaderInfoLog(s));
+      gl.deleteShader(s);
+      return null;
+    }
+    return s;
   }
 
-  resize() {
-    const { clientWidth: wCSS, clientHeight: hCSS } = this.container;
-    this.renderer.setSize(wCSS, hCSS);
-    
-    const dpr = this.renderer.dpr;
-    const w = wCSS * dpr;
-    const h = hCSS * dpr;
+  const vertShader = createShader(gl, gl.VERTEX_SHADER, vertSrc);
+  const fragShader = createShader(gl, gl.FRAGMENT_SHADER, fragSrc);
+  const program = gl.createProgram();
+  gl.attachShader(program, vertShader);
+  gl.attachShader(program, fragShader);
+  gl.linkProgram(program);
 
-    this.uniforms.iResolution.value = [w, h];
-
-    const { anchor, dir } = getAnchorAndDir('top-center', w, h);
-    this.uniforms.rayPos.value = anchor;
-    this.uniforms.rayDir.value = dir;
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    console.error(gl.getProgramInfoLog(program));
+    return;
   }
 
-  renderLoop(t) {
-    this.uniforms.iTime.value = t * 0.001;
+  gl.useProgram(program);
 
-    const smoothing = 0.92;
-    this.smoothMouse.x = this.smoothMouse.x * smoothing + this.mouse.x * (1 - smoothing);
-    this.smoothMouse.y = this.smoothMouse.y * smoothing + this.mouse.y * (1 - smoothing);
-    this.uniforms.mousePos.value = [this.smoothMouse.x, this.smoothMouse.y];
+  const posBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+    -1, -1,
+     3, -1,
+    -1,  3
+  ]), gl.STATIC_DRAW);
 
-    this.renderer.render({ scene: this.mesh });
-    requestAnimationFrame((t) => this.renderLoop(t));
+  const posAttr = gl.getAttribLocation(program, 'position');
+  gl.enableVertexAttribArray(posAttr);
+  gl.vertexAttribPointer(posAttr, 2, gl.FLOAT, false, 0, 0);
+
+  const uLoc = {
+    iTime: gl.getUniformLocation(program, 'iTime'),
+    iResolution: gl.getUniformLocation(program, 'iResolution'),
+    rayPos: gl.getUniformLocation(program, 'rayPos'),
+    rayDir: gl.getUniformLocation(program, 'rayDir'),
+    raysColor: gl.getUniformLocation(program, 'raysColor'),
+    raysSpeed: gl.getUniformLocation(program, 'raysSpeed'),
+    lightSpread: gl.getUniformLocation(program, 'lightSpread'),
+    rayLength: gl.getUniformLocation(program, 'rayLength'),
+    pulsating: gl.getUniformLocation(program, 'pulsating'),
+    fadeDistance: gl.getUniformLocation(program, 'fadeDistance'),
+    saturation: gl.getUniformLocation(program, 'saturation'),
+    mousePos: gl.getUniformLocation(program, 'mousePos'),
+    mouseInfluence: gl.getUniformLocation(program, 'mouseInfluence'),
+    noiseAmount: gl.getUniformLocation(program, 'noiseAmount'),
+    distortion: gl.getUniformLocation(program, 'distortion')
+  };
+
+  gl.uniform3f(uLoc.raysColor, 1.0, 1.0, 1.0);
+  gl.uniform1f(uLoc.raysSpeed, 1.0);
+  gl.uniform1f(uLoc.lightSpread, 0.5);
+  gl.uniform1f(uLoc.rayLength, 3.0);
+  gl.uniform1f(uLoc.pulsating, 0.0);
+  gl.uniform1f(uLoc.fadeDistance, 1.0);
+  gl.uniform1f(uLoc.saturation, 1.0);
+  gl.uniform1f(uLoc.mouseInfluence, 0.1);
+  gl.uniform1f(uLoc.noiseAmount, 0.0);
+  gl.uniform1f(uLoc.distortion, 0.0);
+
+  const mouse = { x: 0.5, y: 0.5 };
+  const smoothMouse = { x: 0.5, y: 0.5 };
+
+  window.addEventListener('mousemove', function (e) {
+    const rect = container.getBoundingClientRect();
+    if (rect.width > 0 && rect.height > 0) {
+      mouse.x = (e.clientX - rect.left) / rect.width;
+      mouse.y = (e.clientY - rect.top) / rect.height;
+    }
+  });
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = container.clientWidth || window.innerWidth;
+    const h = container.clientHeight || window.innerHeight;
+    const renderW = Math.floor(w * dpr);
+    const renderH = Math.floor(h * dpr);
+
+    if (canvas.width !== renderW || canvas.height !== renderH) {
+      canvas.width = renderW;
+      canvas.height = renderH;
+      gl.viewport(0, 0, renderW, renderH);
+      gl.uniform2f(uLoc.iResolution, renderW, renderH);
+
+      const outside = 0.2;
+      gl.uniform2f(uLoc.rayPos, 0.5 * renderW, -outside * renderH);
+      gl.uniform2f(uLoc.rayDir, 0.0, 1.0);
+    }
   }
-}
 
-new LightRays('light-rays-container');
+  window.addEventListener('resize', resize);
+  resize();
+
+  function render(time) {
+    resize();
+    gl.uniform1f(uLoc.iTime, time * 0.001);
+
+    smoothMouse.x += (mouse.x - smoothMouse.x) * 0.08;
+    smoothMouse.y += (mouse.y - smoothMouse.y) * 0.08;
+    gl.uniform2f(uLoc.mousePos, smoothMouse.x, smoothMouse.y);
+
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+})();
