@@ -35,7 +35,7 @@
   </style>
 </head>
 <body>
-
+  <div id="light-rays-container"></div>
   <nav class="top-nav">
     <div class="nav-brand" onclick="show('welcome-screen')" title="Go to Home">
       <span class="brand-dot"></span>
@@ -63,8 +63,9 @@
 
   <div class="state-container">
     <div id="welcome-screen" class="state-msg">
-      <h1>Sterra Weather</h1>
-      <p>Search for a city above to begin.</p>
+      <div class="welcome-badge"><span class="badge-tag">NEW</span> Sterra Weather v2.0</div>
+      <h1>May these lights guide<br>you to clear skies</h1>
+      <p>Search for a city above to begin your journey.</p>
     </div>
     <div id="loading-screen" class="state-msg hidden">
       <svg class="spinner-svg" viewBox="0 0 50 50" width="34" height="34">
@@ -172,6 +173,7 @@
     © 2026 Akshat Mohanty. Built with ❤️
   </footer>
 
-  <script src="app.js?v=18"></script>
+  <script src="app.js?v=19"></script>
+  <script type="module" src="lightrays.js?v=1"></script>
 </body>
 </html>

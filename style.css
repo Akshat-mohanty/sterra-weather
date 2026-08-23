@@ -1,11 +1,11 @@
 :root {
-  --bg-color:    #FFFFFF;
-  --panel-bg:    #FAFAF8;
-  --panel-hover: #F2F2EE;
-  --border:      #E8E8E2;
-  --ink:         #0D0D0D;
-  --ink-2:       #4A4A4A;
-  --ink-3:       #7A7A7A;
+  --bg-color:    #0C1017;
+  --panel-bg:    rgba(255, 255, 255, 0.03);
+  --panel-hover: rgba(255, 255, 255, 0.06);
+  --border:      rgba(255, 255, 255, 0.1);
+  --ink:         #FFFFFF;
+  --ink-2:       #A0AAB4;
+  --ink-3:       #6B7684;
   
   --ff-serif: 'Playfair Display', Georgia, serif;
   --ff-sans:  'Inter', system-ui, sans-serif;
@@ -39,16 +39,32 @@ body {
   to { transform: rotate(360deg); }
 }
 
+#light-rays-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
 .top-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 32px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-color);
+  padding: 8px 12px 8px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  max-width: 800px;
+  margin: 24px auto 0 auto;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   position: sticky;
-  top: 0;
+  top: 24px;
   z-index: 50;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .nav-brand {
@@ -83,19 +99,16 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--panel-bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  padding: 0 12px;
   width: 100%;
-  max-width: 260px;
+  max-width: 300px;
   margin: 0 auto;
-  transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .search-box:focus-within { 
-  border-color: var(--ink);
-  max-width: 340px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  max-width: 400px;
 }
 .search-icon { color: var(--ink-3); }
 #city-input {
@@ -163,15 +176,46 @@ body {
   color: var(--ink-3);
   transition: background 0.2s, color 0.2s;
 }
-.unit-btn.active { background: var(--ink); color: #fff; }
+.unit-btn.active { background: var(--ink); color: var(--bg-color); }
 .unit-btn:hover:not(.active) { background: var(--panel-bg); }
 
 .state-container { position: absolute; inset: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; z-index: 10; }
-.state-msg { text-align: center; pointer-events: auto; background: var(--bg-color); padding: 40px; animation: fadeInUp 0.5s ease-out; }
-.state-msg h1 { font-family: var(--ff-serif); font-weight: 400; margin-bottom: 8px; }
-.state-msg p { color: var(--ink-3); }
+.state-msg { text-align: center; pointer-events: auto; padding: 40px; animation: fadeInUp 0.5s ease-out; }
+
+.welcome-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 4px 12px 4px 4px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--ink-2);
+  margin-bottom: 24px;
+}
+.badge-tag {
+  background: #fff;
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+#welcome-screen h1 {
+  font-family: var(--ff-sans);
+  font-weight: 700;
+  font-size: 3.5rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.1;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.state-msg p { color: var(--ink-2); font-size: 1.1rem; }
 .spinner { width: 30px; height: 30px; border: 2px solid var(--border); border-top-color: var(--ink); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px; }
-.retry-btn { margin-top: 16px; background: var(--ink); color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; transition: transform 0.2s, background 0.2s; }
+.retry-btn { margin-top: 16px; background: var(--ink); color: var(--bg-color); border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; transition: transform 0.2s, background 0.2s; }
 .retry-btn:hover { transform: scale(1.05); background: var(--ink-2); }
 
 .dashboard {
