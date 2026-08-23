@@ -336,10 +336,38 @@ async function doSearch(q) {
     results.slice(0, 6).forEach(r => {
       const parts = [r.admin1, r.country].filter(Boolean).join(', ');
       const el = document.createElement('div');
-      el.className = 'sug-item';
-      el.innerHTML = `<strong>${r.name}</strong><small>${parts}</small>`;
+      el.className = 'menu__item sug-item';
+      
+      let marqueeParts = '';
+      for (let k = 0; k < 6; k++) {
+        marqueeParts += `
+          <div class="marquee__part">
+            <span>${r.name}</span>
+            <div class="marquee__dot"></div>
+          </div>
+        `;
+      }
+
+      el.innerHTML = `
+        <div class="menu__item-link">
+          <strong>${r.name}</strong>
+          <small>${parts}</small>
+        </div>
+        <div class="marquee">
+          <div class="marquee__inner-wrap">
+            <div class="marquee__inner">
+              ${marqueeParts}
+            </div>
+          </div>
+        </div>
+      `;
+
       el.onclick = () => pick(r);
       sugBox.appendChild(el);
+
+      if (window.initFlowingMenuItem) {
+        window.initFlowingMenuItem(el, { speed: 8 });
+      }
     });
     sugBox.classList.remove('hidden');
   } catch(e) {}
