@@ -327,14 +327,12 @@ input.addEventListener('input', e => {
   timer = setTimeout(() => doSearch(q), 300);
 });
 
-const MARQUEE_IMGS = [
-  'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=240&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=240&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=240&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=240&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=240&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=240&auto=format&fit=crop'
-];
+function fmtCoord(lat, lon) {
+  if (typeof lat !== 'number' || typeof lon !== 'number') return '';
+  const latStr = Math.abs(lat).toFixed(1) + '°' + (lat >= 0 ? 'N' : 'S');
+  const lonStr = Math.abs(lon).toFixed(1) + '°' + (lon >= 0 ? 'E' : 'W');
+  return `${latStr} · ${lonStr}`;
+}
 
 async function doSearch(q) {
   try {
@@ -342,12 +340,10 @@ async function doSearch(q) {
     if (!results.length) { sugBox.classList.add('hidden'); return; }
     
     sugBox.innerHTML = '';
-    results.slice(0, 6).forEach((r, idx) => {
+    results.slice(0, 6).forEach((r) => {
       const parts = [r.admin1, r.country].filter(Boolean).join(', ');
-      const countryOrRegion = r.country || r.admin1 || 'LIVE';
-      const img1 = MARQUEE_IMGS[idx % MARQUEE_IMGS.length];
-      const img2 = MARQUEE_IMGS[(idx + 2) % MARQUEE_IMGS.length];
-      const img3 = MARQUEE_IMGS[(idx + 4) % MARQUEE_IMGS.length];
+      const countryName = r.country || r.admin1 || 'GLOBAL';
+      const geo = fmtCoord(r.latitude, r.longitude);
 
       const el = document.createElement('div');
       el.className = 'menu__item sug-item';
@@ -356,12 +352,11 @@ async function doSearch(q) {
       for (let k = 0; k < 2; k++) {
         marqueeParts += `
           <div class="marquee__part">
-            <span>${r.name}</span>
-            <div class="marquee__img" style="background-image: url('${img1}')"></div>
-            <span>${countryOrRegion}</span>
-            <div class="marquee__img" style="background-image: url('${img2}')"></div>
-            <span>FORECAST</span>
-            <div class="marquee__img" style="background-image: url('${img3}')"></div>
+            <span class="mq-title">${r.name}</span>
+            <span class="mq-tag">${geo}</span>
+            <span class="mq-country">${countryName}</span>
+            <span class="mq-tag mq-action">VIEW FORECAST ↗</span>
+            <span class="mq-sep">✦</span>
           </div>
         `;
       }
@@ -384,7 +379,7 @@ async function doSearch(q) {
       sugBox.appendChild(el);
 
       if (window.initFlowingMenuItem) {
-        window.initFlowingMenuItem(el, { speed: 12 });
+        window.initFlowingMenuItem(el, { speed: 10 });
       }
     });
     sugBox.classList.remove('hidden');
