@@ -126,14 +126,22 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
   cursor: pointer;
-  color: var(--ink-3);
-  padding: 4px;
-  transition: color 0.2s, transform 0.2s;
+  color: var(--ink-2);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  transition: color 0.2s, background 0.2s, transform 0.2s, border-color 0.2s;
 }
-.locate-btn:hover { color: var(--ink); transform: scale(1.1); }
+.locate-btn:hover { 
+  color: #FFFFFF; 
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.08); 
+}
 
 .suggestions {
   position: absolute;
@@ -159,7 +167,7 @@ body {
 .sug-item:hover { background: var(--panel-bg); }
 .sug-item small { color: var(--ink-3); margin-left: 6px; font-size: 0.8rem; }
 
-.nav-right { width: 200px; display: flex; justify-content: flex-end; }
+.nav-right { width: 200px; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
 .unit-toggle {
   display: flex;
   border: 1px solid var(--border);
