@@ -325,8 +325,21 @@ body {
   animation-delay: 0.1s;
 }
 
-.location-header h1 { font-family: var(--ff-serif); font-size: 2.5rem; font-weight: 500; line-height: 1.1; }
-.location-header p { color: var(--ink-3); margin-top: 4px; }
+.location-header h1 { 
+  font-family: var(--ff-sans); 
+  font-size: 2.75rem; 
+  font-weight: 700; 
+  letter-spacing: -0.03em; 
+  line-height: 1.1; 
+  color: #FFFFFF;
+}
+.location-header p { 
+  color: #8E96A4; 
+  font-size: 0.95rem; 
+  font-weight: 400; 
+  margin-top: 6px; 
+  letter-spacing: -0.01em;
+}
 
 .hero-temp-wrapper { display: flex; align-items: flex-start; margin-top: 32px; }
 .hero-temp { font-family: var(--ff-sans); font-size: 7.5rem; font-weight: 300; line-height: 0.9; letter-spacing: -0.04em; }
@@ -335,7 +348,7 @@ body {
 .hero-condition { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
 .hero-icon { font-size: 2rem; }
 .hero-icon.spinning { animation: spin-slow 8s linear infinite; }
-.hero-desc { font-family: var(--ff-serif); font-size: 1.5rem; font-style: italic; color: var(--ink-2); }
+.hero-desc { font-family: var(--ff-sans); font-size: 1.4rem; font-weight: 500; color: var(--ink-2); }
 
 .hero-hilo { margin-top: 12px; color: var(--ink-2); font-size: 0.95rem; }
 
@@ -387,7 +400,7 @@ body {
 }
 .stat-lbl { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 8px; transition: color 0.3s; }
 .stat-box:hover .stat-lbl { color: var(--ink); }
-.stat-val { font-family: var(--ff-serif); font-size: 1.5rem; }
+.stat-val { font-family: var(--ff-sans); font-weight: 600; font-size: 1.5rem; }
 
 .forecast-panel {
   animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
