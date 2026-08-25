@@ -255,8 +255,8 @@ function initAmbientParticles(code, phase, temp) {
     ambientAnimId = null;
   }
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth + 200;
+  canvas.height = window.innerHeight + 200;
 
   let mode = 'ambient';
   if ((code >= 71 && code <= 86) || temp < 0) mode = 'snow';
