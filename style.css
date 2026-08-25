@@ -82,8 +82,8 @@ body {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  filter: saturate(1.2) brightness(0.72) contrast(1.08);
-  transform: scale(1.06);
+  filter: saturate(1.18) brightness(0.68) contrast(1.12);
+  transform: scale(1.05);
   transition: background-image 1s ease-in-out, transform 12s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform, opacity;
 }
@@ -96,7 +96,7 @@ body {
   position: absolute;
   inset: 0;
   mix-blend-mode: screen;
-  opacity: 0.75;
+  opacity: 0.85;
   transition: background 1.2s ease, opacity 1s ease;
   pointer-events: none;
 }
@@ -116,8 +116,8 @@ body {
   inset: 0;
   z-index: 3;
   background: 
-    radial-gradient(ellipse at 50% 12%, rgba(12, 16, 23, 0.2) 0%, rgba(12, 16, 23, 0.65) 55%, rgba(12, 16, 23, 0.94) 100%),
-    linear-gradient(180deg, rgba(12, 16, 23, 0.25) 0%, rgba(12, 16, 23, 0.55) 45%, rgba(12, 16, 23, 0.95) 100%);
+    radial-gradient(ellipse at 50% 15%, rgba(12, 16, 23, 0.1) 0%, rgba(12, 16, 23, 0.6) 50%, rgba(12, 16, 23, 0.94) 100%),
+    linear-gradient(180deg, rgba(12, 16, 23, 0.15) 0%, rgba(12, 16, 23, 0.5) 45%, rgba(12, 16, 23, 0.96) 100%);
   backdrop-filter: blur(1.5px);
   -webkit-backdrop-filter: blur(1.5px);
 }

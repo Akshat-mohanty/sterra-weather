@@ -151,72 +151,72 @@ function getWeatherBgImage(cur, daily) {
   const phase = getTimePhase(curTime, sunrise, sunset, isDay);
 
   if (code >= 95) {
-    return 'https://images.unsplash.com/photo-1508873696983-2df5293cb32f?q=80&w=1920&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?q=90&w=2560&auto=format&fit=crop';
   }
   
   if ((code >= 71 && code <= 86) || (temp < 0 && (code >= 51 || code >= 61))) {
     if (phase === 'night' || phase === 'dusk') {
-      return 'https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?q=80&w=1920&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1516431883659-655d41c09bf9?q=90&w=2560&auto=format&fit=crop';
     }
     if (phase === 'dawn' || phase === 'sunset') {
-      return 'https://images.unsplash.com/photo-1517299321609-52687d1bc55a?q=80&w=1920&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=90&w=2560&auto=format&fit=crop';
     }
-    return 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=1920&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?q=90&w=2560&auto=format&fit=crop';
   }
 
   if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) {
     if (phase === 'night' || phase === 'dusk') {
-      return 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=1920&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1519692933481-e162a57d6721?q=90&w=2560&auto=format&fit=crop';
     }
     if (phase === 'dawn' || phase === 'sunset') {
-      return 'https://images.unsplash.com/photo-1519692933481-e162a57d6721?q=80&w=1920&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?q=90&w=2560&auto=format&fit=crop';
     }
-    return 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1920&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1428592953211-077101b2021b?q=90&w=2560&auto=format&fit=crop';
   }
 
   if (code === 45 || code === 48) {
     if (phase === 'night' || phase === 'dusk') {
-      return 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=90&w=2560&auto=format&fit=crop';
     }
     if (phase === 'dawn' || phase === 'sunset') {
-      return 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1920&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=90&w=2560&auto=format&fit=crop';
     }
-    return 'https://images.unsplash.com/photo-1487621167305-5d248087c724?q=80&w=1920&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1487621167305-5d248087c724?q=90&w=2560&auto=format&fit=crop';
   }
 
   if (code === 3) {
     if (phase === 'night' || phase === 'dusk') {
-      return 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1920&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=90&w=2560&auto=format&fit=crop';
     }
     if (phase === 'sunset' || phase === 'dawn') {
-      return 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=90&w=2560&auto=format&fit=crop';
     }
-    return 'https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?q=80&w=1920&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=90&w=2560&auto=format&fit=crop';
   }
 
   if (code === 2) {
     if (phase === 'night') {
-      return 'https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?q=80&w=1920&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?q=90&w=2560&auto=format&fit=crop';
     }
     if (phase === 'sunset' || phase === 'dusk') {
-      return 'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=80&w=1920&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=90&w=2560&auto=format&fit=crop';
     }
     if (phase === 'dawn') {
-      return 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1920&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=90&w=2560&auto=format&fit=crop';
     }
-    return 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=1920&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=90&w=2560&auto=format&fit=crop';
   }
 
   if (phase === 'night' || phase === 'dusk') {
-    return 'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1920&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=90&w=2560&auto=format&fit=crop';
   }
   if (phase === 'sunset') {
-    return 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=90&w=2560&auto=format&fit=crop';
   }
   if (phase === 'dawn') {
-    return 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=1920&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=90&w=2560&auto=format&fit=crop';
   }
-  return 'https://images.unsplash.com/photo-1601297183305-6df142704ea2?q=80&w=1920&auto=format&fit=crop';
+  return 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=90&w=2560&auto=format&fit=crop';
 }
 
 let ambientParticles = [];
