@@ -416,34 +416,6 @@ body {
   animation-delay: 0.1s;
 }
 
-.loc-time-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 5px 12px;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: #E2E8F0;
-  margin-bottom: 12px;
-  letter-spacing: 0.02em;
-  width: fit-content;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.pulse-clock-dot {
-  width: 6px;
-  height: 6px;
-  background: #34D399;
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(52, 211, 153, 0.8);
-  animation: pulse-dot 2s infinite;
-}
-
 .location-header h1 { 
   font-family: var(--ff-sans); 
   font-size: 2.75rem; 
