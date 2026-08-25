@@ -396,9 +396,6 @@ function render(data) {
   }, 50);
 
   updateTime();
-  const now = new Date();
-  document.getElementById('updated-ts').textContent = 
-    `Last updated ${now.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' })}`;
 }
 
 function fmtTime(iso) {

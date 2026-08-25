@@ -569,7 +569,6 @@ body {
 .fc-hi { font-size: 1.15rem; font-weight: 600; color: #FFFFFF; margin-top: 4px; }
 .fc-lo { font-size: 0.85rem; color: #94A3B8; font-weight: 500; }
 
-.updated-ts { text-align: center; font-size: 0.75rem; color: #94A3B8; margin-top: 48px; opacity: 0.9; transform: translateX(-60px); }
 .site-footer { text-align: center; padding: 20px; font-size: 0.72rem; color: #94A3B8; margin-top: auto; letter-spacing: 0.03em; opacity: 0.8; animation: fadeInUp 1s ease-out; }
 .hidden { display: none !important; }
 
@@ -579,5 +578,4 @@ body {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .forecast-row { overflow-x: auto; padding-bottom: 10px; }
   .fc-card { min-width: 80px; }
-  .updated-ts { transform: none; margin-top: 32px; }
 }
