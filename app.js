@@ -219,18 +219,133 @@ function getWeatherBgImage(cur, daily) {
   return 'https://images.unsplash.com/photo-1601297183305-6df142704ea2?q=80&w=1920&auto=format&fit=crop';
 }
 
+let ambientParticles = [];
+let ambientAnimId = null;
+
+function getAuroraGradient(code, phase, temp) {
+  if (code >= 95) {
+    return 'radial-gradient(circle at 50% 15%, rgba(147, 51, 234, 0.4) 0%, rgba(59, 130, 246, 0.2) 50%, transparent 75%)';
+  }
+  if ((code >= 71 && code <= 86) || temp < 0) {
+    return 'radial-gradient(circle at 35% 20%, rgba(16, 185, 129, 0.35) 0%, rgba(6, 182, 212, 0.25) 45%, transparent 75%), radial-gradient(circle at 80% 70%, rgba(147, 197, 253, 0.2) 0%, transparent 60%)';
+  }
+  if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) {
+    return 'radial-gradient(circle at 60% 20%, rgba(2, 132, 199, 0.35) 0%, rgba(37, 99, 235, 0.2) 50%, transparent 75%)';
+  }
+  if (phase === 'sunset' || phase === 'dusk') {
+    return 'radial-gradient(circle at 75% 25%, rgba(245, 158, 11, 0.4) 0%, rgba(239, 68, 68, 0.25) 45%, transparent 75%)';
+  }
+  if (phase === 'dawn') {
+    return 'radial-gradient(circle at 25% 25%, rgba(251, 146, 60, 0.35) 0%, rgba(236, 72, 153, 0.2) 45%, transparent 75%)';
+  }
+  if (phase === 'night') {
+    return 'radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.3) 0%, rgba(79, 70, 229, 0.15) 50%, transparent 75%)';
+  }
+  return 'radial-gradient(circle at 50% 10%, rgba(253, 224, 71, 0.3) 0%, rgba(245, 158, 11, 0.15) 45%, transparent 75%)';
+}
+
+function initAmbientParticles(code, phase, temp) {
+  const canvas = document.getElementById('weather-ambient-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  if (ambientAnimId) {
+    cancelAnimationFrame(ambientAnimId);
+    ambientAnimId = null;
+  }
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let mode = 'ambient';
+  if ((code >= 71 && code <= 86) || temp < 0) mode = 'snow';
+  else if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) mode = 'rain';
+  else if (code >= 95) mode = 'storm';
+  else if (phase === 'night') mode = 'stars';
+  else if (phase === 'sunset' || phase === 'dawn') mode = 'ember';
+
+  const count = mode === 'rain' ? 80 : mode === 'snow' ? 60 : mode === 'stars' ? 50 : 35;
+  ambientParticles = [];
+
+  for (let i = 0; i < count; i++) {
+    ambientParticles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: mode === 'rain' ? (Math.random() * 1.5 + 1) : (Math.random() * 2.5 + 0.8),
+      len: mode === 'rain' ? (Math.random() * 16 + 8) : 0,
+      vy: mode === 'rain' ? (Math.random() * 12 + 8) : mode === 'snow' ? (Math.random() * 1.5 + 0.5) : (Math.random() * 0.4 - 0.2),
+      vx: mode === 'rain' ? -1.5 : mode === 'snow' ? (Math.random() * 0.8 - 0.4) : (Math.random() * 0.4 - 0.2),
+      alpha: Math.random() * 0.5 + 0.2,
+      pulse: Math.random() * Math.PI * 2
+    });
+  }
+
+  function draw() {
+    if (!document.getElementById('weather-bg-container')?.classList.contains('active')) {
+      return;
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let p of ambientParticles) {
+      p.pulse += 0.03;
+      const curAlpha = mode === 'stars' ? p.alpha * (0.6 + 0.4 * Math.sin(p.pulse)) : p.alpha;
+      
+      ctx.beginPath();
+      if (mode === 'rain') {
+        ctx.strokeStyle = `rgba(186, 230, 253, ${curAlpha * 0.6})`;
+        ctx.lineWidth = 1.2;
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x + p.vx * 2, p.y + p.len);
+        ctx.stroke();
+      } else if (mode === 'snow') {
+        ctx.fillStyle = `rgba(255, 255, 255, ${curAlpha * 0.85})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (mode === 'ember') {
+        ctx.fillStyle = `rgba(251, 191, 36, ${curAlpha * 0.7})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.fillStyle = `rgba(255, 255, 255, ${curAlpha * 0.6})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
+      if (p.y < -20) { p.y = canvas.height + 20; }
+      if (p.x > canvas.width + 20) { p.x = -20; }
+      if (p.x < -20) { p.x = canvas.width + 20; }
+    }
+
+    ambientAnimId = requestAnimationFrame(draw);
+  }
+
+  draw();
+}
+
 function updateWeatherBg(cur, daily) {
   const container = document.getElementById('weather-bg-container');
   const imgEl = document.getElementById('weather-bg-image');
+  const auroraEl = document.getElementById('weather-bg-aurora');
   if (!container || !imgEl || !cur) return;
   
   const imgUrl = getWeatherBgImage(cur, daily);
+  const phase = getTimePhase(cur.time, daily?.sunrise?.[0], daily?.sunset?.[0], cur.is_day === 1);
   
+  if (auroraEl) {
+    auroraEl.style.background = getAuroraGradient(cur.weather_code, phase, cur.temperature_2m);
+  }
+
   const img = new Image();
   img.src = imgUrl;
   img.onload = () => {
     imgEl.style.backgroundImage = `url('${imgUrl}')`;
     container.classList.add('active');
+    initAmbientParticles(cur.weather_code, phase, cur.temperature_2m);
   };
 }
 
