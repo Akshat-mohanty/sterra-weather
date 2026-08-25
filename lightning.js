@@ -176,15 +176,17 @@
 
   const startTime = performance.now();
   const render = () => {
-    resizeCanvas();
-    const currentTime = performance.now();
-    gl.uniform1f(iTimeLocation, (currentTime - startTime) / 1000.0);
-    gl.uniform1f(uHueLocation, hue);
-    gl.uniform1f(uXOffsetLocation, xOffset);
-    gl.uniform1f(uSpeedLocation, speed);
-    gl.uniform1f(uIntensityLocation, intensity);
-    gl.uniform1f(uSizeLocation, size);
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    if (container.classList.contains('active')) {
+      resizeCanvas();
+      const currentTime = performance.now();
+      gl.uniform1f(iTimeLocation, (currentTime - startTime) / 1000.0);
+      gl.uniform1f(uHueLocation, hue);
+      gl.uniform1f(uXOffsetLocation, xOffset);
+      gl.uniform1f(uSpeedLocation, speed);
+      gl.uniform1f(uIntensityLocation, intensity);
+      gl.uniform1f(uSizeLocation, size);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+    }
     requestAnimationFrame(render);
   };
   requestAnimationFrame(render);

@@ -58,6 +58,11 @@ body {
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightning-container.active {
   opacity: 0.85;
 }
 
@@ -71,7 +76,6 @@ body {
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
-  opacity: 0.4;
 }
 
 .top-nav {

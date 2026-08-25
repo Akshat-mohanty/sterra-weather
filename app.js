@@ -109,6 +109,11 @@ function show(id) {
   if (unitToggle) {
     unitToggle.classList.toggle('hidden', id !== 'dashboard');
   }
+
+  const lightningEl = document.getElementById('lightning-container');
+  if (lightningEl && id !== 'dashboard') {
+    lightningEl.classList.remove('active');
+  }
 }
 
 function render(data) {
@@ -117,6 +122,12 @@ function render(data) {
   const cur = data.current;
   const daily = data.daily;
   const [cond, emoji] = wmo(cur.weather_code);
+
+  const lightningEl = document.getElementById('lightning-container');
+  if (lightningEl) {
+    const isThunder = cur.weather_code >= 95 || cur.weather_code === 82;
+    lightningEl.classList.toggle('active', isThunder);
+  }
 
   document.getElementById('loc-city').textContent = S.city || '—';
   document.getElementById('loc-region').textContent = S.region || '—';
