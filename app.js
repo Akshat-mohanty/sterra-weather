@@ -236,6 +236,7 @@ function updateWeatherBg(cur, daily) {
 
 function render(data) {
   S.data = data;
+  S.timezone = data.timezone;
   const cur = data.current;
   const daily = data.daily;
   const [cond, emoji] = wmo(cur.weather_code);
@@ -293,11 +294,26 @@ function fmtTime(iso) {
 function updateTime() {
   const el = document.getElementById('loc-time');
   if (!el) return;
-  const now = new Date();
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  el.textContent = `${days[now.getDay()]} ${now.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' })}`;
+  
+  try {
+    const tz = S.timezone || S.data?.timezone;
+    const now = new Date();
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: tz || undefined,
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    });
+    el.textContent = `${formatter.format(now)}`;
+  } catch(e) {
+    const now = new Date();
+    el.textContent = now.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
+  }
 }
-setInterval(updateTime, 60000);
+setInterval(updateTime, 10000);
 
 function renderForecast(daily) {
   const row = document.getElementById('forecast-row');
