@@ -110,32 +110,128 @@ function show(id) {
     unitToggle.classList.toggle('hidden', id !== 'dashboard');
   }
 
-  const bg = document.getElementById('weather-ambient-bg');
-  if (bg && id !== 'dashboard') {
-    bg.classList.remove('active');
+  const bgContainer = document.getElementById('weather-bg-container');
+  if (bgContainer && id !== 'dashboard') {
+    bgContainer.classList.remove('active');
   }
 }
 
-function updateWeatherBg(cur) {
-  const bg = document.getElementById('weather-ambient-bg');
-  if (!bg || !cur) return;
-  
-  bg.className = '';
-  const code = cur.weather_code;
-  const temp = cur.temperature_2m;
-  const isDay = cur.is_day === 1;
-
-  if (!isDay) {
-    bg.classList.add('bg-night', 'active');
-  } else if ((code >= 71 && code <= 86) || temp < 0) {
-    bg.classList.add('bg-cold-snow', 'active');
-  } else if ((code >= 51 && code <= 67) || (code >= 80 && code <= 99)) {
-    bg.classList.add('bg-rainy', 'active');
-  } else if (code === 0 || code === 1) {
-    bg.classList.add('bg-sunny', 'active');
-  } else {
-    bg.classList.add('bg-cloudy', 'active');
+function getTimePhase(curTimeIso, sunriseIso, sunsetIso, isDay) {
+  if (!curTimeIso || !sunriseIso || !sunsetIso) {
+    return isDay ? 'day' : 'night';
   }
+  const curMs = new Date(curTimeIso).getTime();
+  const riseMs = new Date(sunriseIso).getTime();
+  const setMs = new Date(sunsetIso).getTime();
+  const hourMs = 60 * 60 * 1000;
+  
+  if (Math.abs(curMs - riseMs) <= 45 * 60 * 1000) {
+    return 'dawn';
+  }
+  if (Math.abs(curMs - setMs) <= 45 * 60 * 1000) {
+    return 'sunset';
+  }
+  if (curMs > setMs && (curMs - setMs) <= 1.2 * hourMs) {
+    return 'dusk';
+  }
+  if (isDay === 1 || (curMs > riseMs && curMs < setMs)) {
+    return 'day';
+  }
+  return 'night';
+}
+
+function getWeatherBgImage(cur, daily) {
+  const code = cur.weather_code;
+  const isDay = cur.is_day === 1;
+  const temp = cur.temperature_2m;
+  const curTime = cur.time;
+  const sunrise = daily?.sunrise?.[0];
+  const sunset = daily?.sunset?.[0];
+  
+  const phase = getTimePhase(curTime, sunrise, sunset, isDay);
+
+  if (code >= 95) {
+    return 'https://images.unsplash.com/photo-1508873696983-2df5293cb32f?q=80&w=1920&auto=format&fit=crop';
+  }
+  
+  if ((code >= 71 && code <= 86) || (temp < 0 && (code >= 51 || code >= 61))) {
+    if (phase === 'night' || phase === 'dusk') {
+      return 'https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?q=80&w=1920&auto=format&fit=crop';
+    }
+    if (phase === 'dawn' || phase === 'sunset') {
+      return 'https://images.unsplash.com/photo-1517299321609-52687d1bc55a?q=80&w=1920&auto=format&fit=crop';
+    }
+    return 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=1920&auto=format&fit=crop';
+  }
+
+  if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) {
+    if (phase === 'night' || phase === 'dusk') {
+      return 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=1920&auto=format&fit=crop';
+    }
+    if (phase === 'dawn' || phase === 'sunset') {
+      return 'https://images.unsplash.com/photo-1519692933481-e162a57d6721?q=80&w=1920&auto=format&fit=crop';
+    }
+    return 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1920&auto=format&fit=crop';
+  }
+
+  if (code === 45 || code === 48) {
+    if (phase === 'night' || phase === 'dusk') {
+      return 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920&auto=format&fit=crop';
+    }
+    if (phase === 'dawn' || phase === 'sunset') {
+      return 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1920&auto=format&fit=crop';
+    }
+    return 'https://images.unsplash.com/photo-1487621167305-5d248087c724?q=80&w=1920&auto=format&fit=crop';
+  }
+
+  if (code === 3) {
+    if (phase === 'night' || phase === 'dusk') {
+      return 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1920&auto=format&fit=crop';
+    }
+    if (phase === 'sunset' || phase === 'dawn') {
+      return 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920&auto=format&fit=crop';
+    }
+    return 'https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?q=80&w=1920&auto=format&fit=crop';
+  }
+
+  if (code === 2) {
+    if (phase === 'night') {
+      return 'https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?q=80&w=1920&auto=format&fit=crop';
+    }
+    if (phase === 'sunset' || phase === 'dusk') {
+      return 'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=80&w=1920&auto=format&fit=crop';
+    }
+    if (phase === 'dawn') {
+      return 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1920&auto=format&fit=crop';
+    }
+    return 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=1920&auto=format&fit=crop';
+  }
+
+  if (phase === 'night' || phase === 'dusk') {
+    return 'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1920&auto=format&fit=crop';
+  }
+  if (phase === 'sunset') {
+    return 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920&auto=format&fit=crop';
+  }
+  if (phase === 'dawn') {
+    return 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=1920&auto=format&fit=crop';
+  }
+  return 'https://images.unsplash.com/photo-1601297183305-6df142704ea2?q=80&w=1920&auto=format&fit=crop';
+}
+
+function updateWeatherBg(cur, daily) {
+  const container = document.getElementById('weather-bg-container');
+  const imgEl = document.getElementById('weather-bg-image');
+  if (!container || !imgEl || !cur) return;
+  
+  const imgUrl = getWeatherBgImage(cur, daily);
+  
+  const img = new Image();
+  img.src = imgUrl;
+  img.onload = () => {
+    imgEl.style.backgroundImage = `url('${imgUrl}')`;
+    container.classList.add('active');
+  };
 }
 
 function render(data) {
@@ -144,7 +240,7 @@ function render(data) {
   const daily = data.daily;
   const [cond, emoji] = wmo(cur.weather_code);
 
-  updateWeatherBg(cur);
+  updateWeatherBg(cur, daily);
 
   document.getElementById('loc-city').textContent = S.city || '—';
   document.getElementById('loc-region').textContent = S.region || '—';
