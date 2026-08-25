@@ -48,7 +48,7 @@ body {
   to { transform: rotate(360deg); }
 }
 
-#light-rays-container {
+.lightning-container {
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -58,6 +58,20 @@ body {
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
+  opacity: 0.85;
+}
+
+#light-rays-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  inset: -100px;
+  width: calc(100vw + 200px);
+  height: calc(100vh + 200px);
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0.4;
 }
 
 .top-nav {
