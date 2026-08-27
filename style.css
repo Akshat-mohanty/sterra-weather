@@ -48,46 +48,28 @@ body {
   to { transform: rotate(360deg); }
 }
 
-.top-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 8px 6px 16px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  width: 100%;
-  max-width: 480px;
-  margin: 24px auto 0 auto;
-  position: sticky;
-  top: 24px;
-  z-index: 50;
-  box-shadow: 0 4px 20px rgba(44, 39, 34, 0.04);
-}
-
 .nav-brand {
   position: fixed;
-  top: 28px;
+  top: 24px;
   left: 32px;
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
   z-index: 60;
-  padding: 8px 14px;
-  background: rgba(255, 255, 255, 0.85);
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: 999px;
   box-shadow: 0 4px 16px rgba(44, 39, 34, 0.04);
-  transition: transform 0.2s ease, background 0.2s;
+  transition: transform 0.2s ease, background 0.2s, box-shadow 0.2s;
 }
 .nav-brand:hover {
   transform: scale(1.03);
   background: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(44, 39, 34, 0.08);
 }
 .brand-dot {
   width: 6px; height: 6px;
@@ -102,20 +84,57 @@ body {
   color: var(--ink);
 }
 
-.nav-center {
-  flex: 1;
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  width: 100%;
+  max-width: 520px;
+  margin: 24px auto 0 auto;
+  position: sticky;
+  top: 24px;
+  z-index: 50;
+}
+
+.search-container {
+  width: 100%;
   position: relative;
 }
+
 .search-box {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: transparent;
-  border: none;
-  padding: 0 4px 0 0;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 10px 8px 18px;
   width: 100%;
+  box-shadow: 0 8px 28px rgba(44, 39, 34, 0.06);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, transform 0.2s ease;
 }
-.search-icon { color: var(--ink-3); }
+
+.search-box:focus-within {
+  border-color: #1C1917;
+  background: #FFFFFF;
+  box-shadow: 0 12px 36px rgba(44, 39, 34, 0.1);
+  transform: translateY(-1px);
+}
+
+.search-icon {
+  color: var(--ink-3);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+.search-box:focus-within .search-icon {
+  color: var(--ink);
+}
+
 #city-input {
   flex: 1;
   min-width: 0;
@@ -124,32 +143,51 @@ body {
   outline: none;
   font-family: var(--ff-sans);
   font-size: 0.95rem;
+  font-weight: 450;
   color: var(--ink);
+  letter-spacing: -0.01em;
 }
 #city-input::placeholder {
   color: #A8A29E;
+  font-weight: 400;
 }
 
-.locate-btn {
-  display: flex;
+.locate-pill-btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  gap: 6px;
   background: #F5F2EB;
   border: 1px solid var(--border);
-  border-radius: 50%;
-  cursor: pointer;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-family: var(--ff-sans);
+  font-size: 0.78rem;
+  font-weight: 550;
   color: var(--ink-2);
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  transition: color 0.2s, background 0.2s, transform 0.2s, border-color 0.2s;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.locate-btn:hover { 
-  color: #1C1917; 
-  background: #E8E3DA;
-  border-color: #D6CFBE;
-  transform: scale(1.08); 
+
+.locate-pill-btn svg {
+  color: var(--ink-3);
+  transition: color 0.2s ease;
+}
+
+.locate-pill-btn:hover {
+  background: #1C1917;
+  color: #FAF8F5;
+  border-color: #1C1917;
+  transform: scale(1.02);
+  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.15);
+}
+
+.locate-pill-btn:hover svg {
+  color: #FAF8F5;
+}
+
+.locate-pill-btn:active {
+  transform: scale(0.97);
 }
 
 .suggestions {
@@ -200,7 +238,6 @@ body {
   color: #A8A29E;
 }
 
-.nav-right { display: flex; align-items: center; justify-content: flex-end; }
 .unit-toggle-top {
   position: fixed;
   top: 24px;
