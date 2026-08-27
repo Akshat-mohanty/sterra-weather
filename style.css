@@ -50,26 +50,23 @@ body {
 
 .nav-brand {
   position: fixed;
-  top: 24px;
-  left: 32px;
+  top: 32px;
+  left: 36px;
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
   z-index: 60;
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  box-shadow: 0 4px 16px rgba(44, 39, 34, 0.04);
-  transition: transform 0.2s ease, background 0.2s, box-shadow 0.2s;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .nav-brand:hover {
-  transform: scale(1.03);
-  background: #FFFFFF;
-  box-shadow: 0 6px 20px rgba(44, 39, 34, 0.08);
+  opacity: 0.75;
+  transform: scale(1.02);
 }
 .brand-dot {
   width: 6px; height: 6px;
@@ -78,7 +75,7 @@ body {
   animation: pulse-dot 3s infinite ease-in-out;
 }
 .brand-name {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.25em;
   color: var(--ink);
