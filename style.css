@@ -501,16 +501,35 @@ body {
 .fc-lo { font-size: 0.85rem; color: #78716C; font-weight: 500; }
 
 .site-footer { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
   text-align: center; 
   padding: 24px 20px; 
-  font-size: 0.72rem; 
-  font-weight: 500;
+  font-size: 0.75rem; 
+  font-weight: 450;
   color: #78716C; 
   margin-top: auto; 
-  letter-spacing: 0.04em; 
+  letter-spacing: 0.02em; 
   position: relative;
   z-index: 10;
   animation: fadeInUp 1s ease-out; 
+}
+.footer-divider {
+  color: #D6CFBE;
+}
+.bug-link {
+  color: #57534E;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #D6CFBE;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.bug-link:hover {
+  color: #1C1917;
+  text-decoration-color: #1C1917;
 }
 .hidden { display: none !important; }
 
