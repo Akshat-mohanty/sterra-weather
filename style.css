@@ -12,6 +12,14 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+::selection {
+  background-color: #eddbab;
+  color: #1C1917;
+}
+::-moz-selection {
+  background-color: #eddbab;
+  color: #1C1917;
+}
 html { 
   font-size: 16px; 
   -webkit-font-smoothing: antialiased;
