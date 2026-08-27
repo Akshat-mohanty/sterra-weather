@@ -500,20 +500,23 @@ body {
   background: #FFFFFF;
   border: 1px solid var(--border);
   box-shadow: 0 2px 8px rgba(44, 39, 34, 0.02);
-  cursor: default;
+  cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .fc-card:hover { 
-  transform: scale(1.02); 
-  background: #F5F2EB; 
-  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.08); 
-  border-color: #D6CFBE;
+  background: #1C1917; 
+  border-color: #1C1917;
+  transform: scale(1.04); 
+  box-shadow: 0 4px 16px rgba(28, 25, 23, 0.18); 
 }
-.fc-day { font-size: 0.75rem; font-weight: 600; color: #78716C; transition: color 0.3s; text-transform: uppercase; }
-.fc-card:hover .fc-day { color: #1C1917; }
-.fc-icon { font-size: 1.6rem; }
-.fc-hi { font-size: 1.15rem; font-weight: 600; color: #1C1917; margin-top: 4px; }
-.fc-lo { font-size: 0.85rem; color: #78716C; font-weight: 500; }
+.fc-day { font-size: 0.75rem; font-weight: 600; color: #78716C; transition: color 0.2s ease; text-transform: uppercase; }
+.fc-card:hover .fc-day { color: #A8A29E; }
+.fc-icon { font-size: 1.6rem; transition: transform 0.2s ease; }
+.fc-card:hover .fc-icon { transform: scale(1.1); }
+.fc-hi { font-size: 1.15rem; font-weight: 600; color: #1C1917; margin-top: 4px; transition: color 0.2s ease; }
+.fc-card:hover .fc-hi { color: #FAF8F5; }
+.fc-lo { font-size: 0.85rem; color: #78716C; font-weight: 500; transition: color 0.2s ease; }
+.fc-card:hover .fc-lo { color: #D6CFBE; }
 
 .site-footer { 
   display: flex;
