@@ -68,11 +68,11 @@ body {
   transform: translateY(-1px);
 }
 .brand-name {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.55rem;
-  font-weight: 600;
-  font-style: italic;
-  letter-spacing: -0.01em;
+  font-family: 'Michroma', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--ink);
   line-height: 1;
 }
