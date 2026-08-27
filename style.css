@@ -50,11 +50,10 @@ body {
 
 .nav-brand {
   position: fixed;
-  top: 32px;
+  top: 28px;
   left: 36px;
   display: flex;
   align-items: center;
-  gap: 8px;
   cursor: pointer;
   z-index: 60;
   padding: 0;
@@ -62,23 +61,20 @@ body {
   border: none;
   border-radius: 0;
   box-shadow: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 .nav-brand:hover {
-  opacity: 0.75;
-  transform: scale(1.02);
-}
-.brand-dot {
-  width: 6px; height: 6px;
-  background: var(--ink);
-  border-radius: 50%;
-  animation: pulse-dot 3s infinite ease-in-out;
+  opacity: 0.65;
+  transform: translateY(-1px);
 }
 .brand-name {
-  font-size: 0.8rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.55rem;
   font-weight: 600;
-  letter-spacing: 0.25em;
+  font-style: italic;
+  letter-spacing: -0.01em;
   color: var(--ink);
+  line-height: 1;
 }
 
 .top-nav {
