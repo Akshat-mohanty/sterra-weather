@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   
-  <link rel="stylesheet" href="style.css?v=60"/>
+  <link rel="stylesheet" href="style.css?v=65"/>
 </head>
 <body>
   <header class="global-nav">
@@ -44,32 +44,104 @@
   </header>
 
   <div class="state-container">
-    <div id="welcome-screen" class="state-msg">
-      <h1>Atmospheric clarity.<br/>Across every horizon.</h1>
-      <p class="welcome-tagline">Real-time meteorology, precision precipitation, and deep atmospheric telemetry rendered with effortless restraint.</p>
-      
-      <div class="welcome-cta-group">
-        <button class="btn-pill-primary" onclick="getUserLocation()">Use My Location</button>
-        <button class="btn-pill-secondary" onclick="document.getElementById('city-input').focus()">Search Cities</button>
-      </div>
+    <div id="welcome-screen" class="welcome-container">
+      <!-- Apple Hero Section -->
+      <section class="apple-hero-section">
+        <span class="apple-eyebrow">Sterra Weather Intelligence</span>
+        <h1 class="apple-hero-title">Atmospheric clarity.<br/>Across every horizon.</h1>
+        <p class="apple-hero-tagline">Real-time meteorology, precision precipitation, and deep atmospheric telemetry rendered with effortless restraint.</p>
+        
+        <div class="welcome-cta-group">
+          <button class="btn-pill-primary" onclick="getUserLocation()">Use My Location</button>
+          <button class="btn-pill-secondary" onclick="document.getElementById('city-input').focus()">Search Cities</button>
+        </div>
+      </section>
 
-      <div class="service-preview-row">
-        <div class="service-preview-card">
-          <div class="service-badge">Precision</div>
-          <div class="service-card-title">Hourly Telemetry</div>
-          <div class="service-card-desc">Dynamic temperature curve and atmospheric shift tracking.</div>
+      <!-- Section: Key Capabilities -->
+      <section class="apple-feature-section">
+        <div class="section-heading-wrap">
+          <span class="section-label">Architecture</span>
+          <h2 class="section-title">Telemetry built for total awareness.</h2>
+          <p class="section-subtitle">Every atmospheric data point is synchronized from high-resolution scientific meteorological models.</p>
         </div>
-        <div class="service-preview-card">
-          <div class="service-badge">Global</div>
-          <div class="service-card-title">Worldwide Geocoding</div>
-          <div class="service-card-desc">Instant coordinates for hundreds of thousands of locations.</div>
+
+        <div class="apple-card-grid-3">
+          <div class="apple-feature-card">
+            <div class="feature-icon-badge">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="apple-badge">Precision</div>
+            <h3 class="apple-card-title">Hourly Telemetry</h3>
+            <p class="apple-card-desc">Continuous 24-hour temperature spline and localized pressure fluctuation monitoring with zero noise.</p>
+          </div>
+
+          <div class="apple-feature-card">
+            <div class="feature-icon-badge">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+            </div>
+            <div class="apple-badge">Global</div>
+            <h3 class="apple-card-title">Worldwide Geocoding</h3>
+            <p class="apple-card-desc">Instant reverse geocoding and sub-second coordinates retrieval across millions of global metropolises and villages.</p>
+          </div>
+
+          <div class="apple-feature-card">
+            <div class="feature-icon-badge">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            </div>
+            <div class="apple-badge">Restraint</div>
+            <h3 class="apple-card-title">7-Day Horizon</h3>
+            <p class="apple-card-desc">Comprehensive extended forecasts showing highs, lows, and meteorological shifts with structural elegance.</p>
+          </div>
         </div>
-        <div class="service-preview-card">
-          <div class="service-badge">Restraint</div>
-          <div class="service-card-title">7-Day Horizon</div>
-          <div class="service-card-desc">Extended meteorological outlook structured for immediate clarity.</div>
+      </section>
+
+      <!-- Section: Why Sterra / Benefits -->
+      <section class="apple-feature-section alt-surface">
+        <div class="section-heading-wrap">
+          <span class="section-label">Experience</span>
+          <h2 class="section-title">Designed with profound respect for your attention.</h2>
+          <p class="section-subtitle">No ads, no algorithmic distractions, and no clutter. Just pure atmospheric clarity.</p>
         </div>
-      </div>
+
+        <div class="apple-card-grid-2">
+          <div class="apple-showcase-card">
+            <div class="apple-badge">Atmospheric Physics</div>
+            <h3 class="apple-card-title">Six-Dimension Telemetry</h3>
+            <p class="apple-card-desc">Monitor Humidity, Wind Velocity, UV Radiation, Barometric Surface Pressure, Optical Visibility, and Atmospheric Dew Point in real time.</p>
+            <div class="metrics-mini-strip">
+              <span class="mini-tag">Humidity</span>
+              <span class="mini-tag">Wind Speed</span>
+              <span class="mini-tag">UV Index</span>
+              <span class="mini-tag">Pressure</span>
+              <span class="mini-tag">Visibility</span>
+              <span class="mini-tag">Dew Point</span>
+            </div>
+          </div>
+
+          <div class="apple-showcase-card">
+            <div class="apple-badge">Privacy First</div>
+            <h3 class="apple-card-title">Local Geolocation Telemetry</h3>
+            <p class="apple-card-desc">Your location coordinates never leave your browser for tracking or marketing. Geolocation requests are resolved live via open standards.</p>
+            <div class="metrics-mini-strip">
+              <span class="mini-tag">Zero Profiling</span>
+              <span class="mini-tag">Open Data</span>
+              <span class="mini-tag">No Trackers</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Celestial Cycle -->
+      <section class="apple-feature-section">
+        <div class="apple-banner-card">
+          <div class="banner-content">
+            <span class="apple-badge">Solar Cycle</span>
+            <h2 class="section-title" style="margin-top: 8px;">Synchronized to the Sun.</h2>
+            <p class="section-subtitle" style="margin-bottom: 24px;">Calculates astronomical dawn and twilight transitions down to the exact minute for your target meridian.</p>
+            <button class="btn-pill-primary" onclick="getUserLocation()">Explore Local Weather</button>
+          </div>
+        </div>
+      </section>
     </div>
 
     <div id="loading-screen" class="state-msg hidden">
@@ -78,7 +150,7 @@
         <div class="beacon-ring ring-1"></div>
         <div class="beacon-ring ring-2"></div>
       </div>
-      <p class="loader-text">Gathering atmospheric data...</p>
+      <p class="loader-text">Gathering atmospheric telemetry...</p>
     </div>
 
     <div id="error-screen" class="state-msg hidden">
@@ -89,99 +161,148 @@
   </div>
 
   <main id="dashboard" class="dashboard hidden">
-    
-    <section class="col-left">
-      <div class="location-header">
-        <h1 id="loc-city">—</h1>
-        <p id="loc-region">—</p>
+    <!-- Sub-nav bar for active location -->
+    <div class="sub-nav-bar">
+      <div class="sub-nav-left">
+        <button class="btn-back-home" onclick="show('welcome-screen')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Overview</span>
+        </button>
+        <span class="sub-nav-divider">/</span>
+        <span class="sub-nav-city" id="subnav-city">—</span>
       </div>
-
-      <div class="hero-temp-wrapper">
-        <div class="hero-temp" id="hero-temp">—</div>
-        <div class="hero-deg" id="hero-deg">°C</div>
+      <div class="sub-nav-right">
+        <span id="loc-time" class="time-label">—</span>
       </div>
+    </div>
 
-      <div class="hero-condition">
-        <span class="hero-icon" id="hero-icon"></span>
-        <span class="hero-desc" id="hero-desc">—</span>
-      </div>
+    <div class="dashboard-grid">
+      <!-- Hero Product Showcase Column -->
+      <section class="col-hero-card">
+        <div class="location-header">
+          <span class="weather-eyebrow">Current Condition</span>
+          <h1 id="loc-city">—</h1>
+          <p id="loc-region">—</p>
+        </div>
 
-      <div class="hero-hilo">
-        Feels like <span id="hero-feels">—</span> &nbsp;·&nbsp; <span id="hero-range">—</span>
-      </div>
+        <div class="hero-temp-wrapper">
+          <div class="hero-temp" id="hero-temp">—</div>
+          <div class="hero-deg" id="hero-deg">°C</div>
+        </div>
 
-      <div class="sun-times">
-        <div class="sun-box">
-          <span class="sun-lbl">SUNRISE</span>
-          <span class="sun-val" id="sunrise-val">—</span>
+        <div class="hero-condition">
+          <span class="hero-icon" id="hero-icon"></span>
+          <span class="hero-desc" id="hero-desc">—</span>
         </div>
-        <div class="sun-divider"></div>
-        <div class="sun-box">
-          <span class="sun-lbl">SUNSET</span>
-          <span class="sun-val" id="sunset-val">—</span>
-        </div>
-      </div>
-    </section>
 
-    <section class="col-right">
-      
-      <div class="panel chart-panel">
-        <div class="panel-header">
-          <h2>Today's Forecast</h2>
-          <span id="loc-time" class="time-label">—</span>
+        <div class="hero-hilo">
+          Feels like <strong id="hero-feels">—</strong> &nbsp;·&nbsp; Range <strong id="hero-range">—</strong>
         </div>
-        <div class="canvas-wrap">
-          <canvas id="hourly-chart" width="700" height="180"></canvas>
-        </div>
-      </div>
 
-      <div class="stats-grid">
-        <div class="stat-box">
-          <div class="stat-lbl">Humidity</div>
-          <div class="stat-val" id="st-humidity">—</div>
+        <div class="sun-times-card">
+          <div class="sun-box">
+            <span class="sun-lbl">Sunrise</span>
+            <span class="sun-val" id="sunrise-val">—</span>
+          </div>
+          <div class="sun-divider"></div>
+          <div class="sun-box">
+            <span class="sun-lbl">Sunset</span>
+            <span class="sun-val" id="sunset-val">—</span>
+          </div>
         </div>
-        <div class="stat-box">
-          <div class="stat-lbl">Wind</div>
-          <div class="stat-val" id="st-wind">—</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-lbl">UV Index</div>
-          <div class="stat-val" id="st-uv">—</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-lbl">Pressure</div>
-          <div class="stat-val" id="st-pressure">—</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-lbl">Visibility</div>
-          <div class="stat-val" id="st-vis">—</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-lbl">Dew Point</div>
-          <div class="stat-val" id="st-dew">—</div>
-        </div>
-      </div>
+      </section>
 
-      <div class="panel forecast-panel">
-        <div class="panel-header">
-          <h2>7-Day Forecast</h2>
+      <!-- Telemetry Right Column -->
+      <section class="col-telemetry">
+        
+        <!-- Hourly Spline Panel -->
+        <div class="panel chart-panel">
+          <div class="panel-header">
+            <h2>Hourly Temperature Telemetry</h2>
+            <span class="panel-badge">24h Spline</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="hourly-chart" width="700" height="180"></canvas>
+          </div>
         </div>
-        <div class="forecast-row" id="forecast-row"></div>
-      </div>
 
-    </section>
+        <!-- 6 Metrics Grid -->
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-header">
+              <span class="stat-lbl">Humidity</span>
+              <span class="stat-glyph">💧</span>
+            </div>
+            <div class="stat-val" id="st-humidity">—</div>
+            <div class="stat-footnote">Relative atmospheric moisture</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-header">
+              <span class="stat-lbl">Wind Speed</span>
+              <span class="stat-glyph">💨</span>
+            </div>
+            <div class="stat-val" id="st-wind">—</div>
+            <div class="stat-footnote">10m surface velocity</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-header">
+              <span class="stat-lbl">UV Index</span>
+              <span class="stat-glyph">☀️</span>
+            </div>
+            <div class="stat-val" id="st-uv">—</div>
+            <div class="stat-footnote">Ultraviolet exposure level</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-header">
+              <span class="stat-lbl">Surface Pressure</span>
+              <span class="stat-glyph">⏱️</span>
+            </div>
+            <div class="stat-val" id="st-pressure">—</div>
+            <div class="stat-footnote">Barometric atmospheric reading</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-header">
+              <span class="stat-lbl">Visibility</span>
+              <span class="stat-glyph">👁️</span>
+            </div>
+            <div class="stat-val" id="st-vis">—</div>
+            <div class="stat-footnote">Horizontal visual range</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-header">
+              <span class="stat-lbl">Dew Point</span>
+              <span class="stat-glyph">🌡️</span>
+            </div>
+            <div class="stat-val" id="st-dew">—</div>
+            <div class="stat-footnote">Condensation threshold</div>
+          </div>
+        </div>
+
+        <!-- 7-Day Horizon Panel -->
+        <div class="panel forecast-panel">
+          <div class="panel-header">
+            <h2>7-Day Weather Horizon</h2>
+            <span class="panel-badge">Extended Forecast</span>
+          </div>
+          <div class="forecast-row" id="forecast-row"></div>
+        </div>
+
+      </section>
+    </div>
 
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <span>Copyright © 2026 Akshat Mohanty. All rights reserved.</span>
+      <div class="footer-legal">
+        <span>Copyright © 2026 Akshat Mohanty. Open source under MIT License.</span>
+      </div>
       <div class="footer-links">
         <a href="https://github.com/Akshat-mohanty/sterra-weather" target="_blank" rel="noopener noreferrer" class="bug-link">Found a Bug? GitHub Repository</a>
       </div>
     </div>
   </footer>
 
-  <script src="app.js?v=42"></script>
+  <script src="app.js?v=65"></script>
 </body>
 </html>

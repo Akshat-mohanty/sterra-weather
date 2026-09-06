@@ -119,6 +119,8 @@ function render(data) {
   const [cond, emoji] = wmo(cur.weather_code);
 
   document.getElementById('loc-city').textContent = S.city || '—';
+  const subnavCity = document.getElementById('subnav-city');
+  if (subnavCity) subnavCity.textContent = S.city || '—';
   document.getElementById('loc-region').textContent = S.region || '—';
   document.getElementById('hero-temp').textContent = cvt(cur.temperature_2m);
   document.getElementById('hero-deg').textContent = sym();
