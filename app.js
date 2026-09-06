@@ -279,7 +279,7 @@ function drawHourlyChart(hourly) {
       const mx = (xS(i-1) + xS(i)) / 2;
       ctx.bezierCurveTo(mx, yS(temps[i-1]), mx, yS(temps[i]), xS(i), yS(temps[i]));
     }
-    ctx.strokeStyle = '#0F172A';
+    ctx.strokeStyle = '#0071e3';
     ctx.lineWidth = 2.5;
     ctx.lineJoin = 'round';
     ctx.stroke();
@@ -288,33 +288,33 @@ function drawHourlyChart(hourly) {
     ctx.lineTo(xS(0), pad.t + cH);
     ctx.closePath();
     const grad = ctx.createLinearGradient(0, pad.t, 0, H);
-    grad.addColorStop(0, 'rgba(15, 23, 42, 0.08)');
-    grad.addColorStop(1, 'rgba(15, 23, 42, 0)');
+    grad.addColorStop(0, 'rgba(0, 113, 227, 0.12)');
+    grad.addColorStop(1, 'rgba(0, 113, 227, 0)');
     ctx.fillStyle = grad;
     ctx.fill();
 
-    ctx.fillStyle = '#0F172A';
+    ctx.fillStyle = '#1d1d1f';
     for (let i = 0; i < temps.length; i++) {
       const x = xS(i), y = yS(temps[i]);
       if (x > clipW) continue;
       
       ctx.beginPath();
-      ctx.arc(x, y, 4, 0, Math.PI*2);
+      ctx.arc(x, y, 3.5, 0, Math.PI*2);
       ctx.fill();
-      ctx.strokeStyle = '#FFFFFF';
+      ctx.strokeStyle = '#ffffff';
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      ctx.font = '600 13px Inter, sans-serif';
+      ctx.font = '600 13px -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(`${Math.round(temps[i])}°`, x, y - 12);
+      ctx.fillText(`${Math.round(temps[i])}°`, x, y - 10);
 
       const h = new Date(times[i]).getHours();
       const lbl = h === 0 ? '12 AM' : h < 12 ? `${h} AM` : h === 12 ? '12 PM' : `${h-12} PM`;
-      ctx.font = '500 11px Inter, sans-serif';
-      ctx.fillStyle = '#64748B';
+      ctx.font = '400 11px -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, sans-serif';
+      ctx.fillStyle = '#858585';
       ctx.fillText(i === 0 ? 'Now' : lbl, x, H - 8);
-      ctx.fillStyle = '#0F172A';
+      ctx.fillStyle = '#1d1d1f';
     }
     
     ctx.restore();

@@ -3,44 +3,75 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sterra Weather — Desktop</title>
-  <meta name="description" content="A clean, minimalistic weather dashboard."/>
+  <title>Sterra Weather — Apple Design</title>
+  <meta name="description" content="A clean, minimalistic weather dashboard crafted with Apple design restraint."/>
   
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   
-  <link rel="stylesheet" href="style.css?v=53"/>
+  <link rel="stylesheet" href="style.css?v=60"/>
 </head>
 <body>
-  <div class="nav-brand" onclick="show('welcome-screen')" title="Go to Home">
-    <span class="brand-name">Sterra</span>
-  </div>
-
-  <div id="unit-toggle-container" class="unit-toggle-top hidden">
-    <button id="unit-c" class="unit-btn active" onclick="setUnit('C')">°C</button>
-    <button id="unit-f" class="unit-btn" onclick="setUnit('F')">°F</button>
-  </div>
-
-  <nav class="top-nav">
-    <div class="search-container">
-      <div class="search-box">
-        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input id="city-input" type="text" placeholder="Search any city or region..." autocomplete="off"/>
-        <button class="locate-pill-btn" onclick="getUserLocation()" title="Detect my current location">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
-          <span>GPS</span>
-        </button>
+  <header class="global-nav">
+    <div class="global-nav-content">
+      <div class="nav-brand" onclick="show('welcome-screen')" title="Sterra Home">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+        </svg>
+        <span class="brand-name">Sterra</span>
       </div>
-      <div id="suggestions" class="suggestions hidden"></div>
+
+      <div class="nav-search-wrap">
+        <div class="search-box">
+          <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="city-input" type="text" placeholder="Search city or location..." autocomplete="off"/>
+          <button class="btn-gps" onclick="getUserLocation()" title="Use my location">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+            <span>GPS</span>
+          </button>
+        </div>
+        <div id="suggestions" class="suggestions hidden"></div>
+      </div>
+
+      <div class="nav-actions">
+        <div id="unit-toggle-container" class="unit-segmented">
+          <button id="unit-c" class="unit-btn active" onclick="setUnit('C')">°C</button>
+          <button id="unit-f" class="unit-btn" onclick="setUnit('F')">°F</button>
+        </div>
+      </div>
     </div>
-  </nav>
+  </header>
 
   <div class="state-container">
     <div id="welcome-screen" class="state-msg">
-      <h1>Atmospheric clarity, wherever you are.</h1>
-      <p>Search any destination above or tap GPS to view current weather and forecasts.</p>
+      <h1>Atmospheric clarity.<br/>Across every horizon.</h1>
+      <p class="welcome-tagline">Real-time meteorology, precision precipitation, and deep atmospheric telemetry rendered with effortless restraint.</p>
+      
+      <div class="welcome-cta-group">
+        <button class="btn-pill-primary" onclick="getUserLocation()">Use My Location</button>
+        <button class="btn-pill-secondary" onclick="document.getElementById('city-input').focus()">Search Cities</button>
+      </div>
+
+      <div class="service-preview-row">
+        <div class="service-preview-card">
+          <div class="service-badge">Precision</div>
+          <div class="service-card-title">Hourly Telemetry</div>
+          <div class="service-card-desc">Dynamic temperature curve and atmospheric shift tracking.</div>
+        </div>
+        <div class="service-preview-card">
+          <div class="service-badge">Global</div>
+          <div class="service-card-title">Worldwide Geocoding</div>
+          <div class="service-card-desc">Instant coordinates for hundreds of thousands of locations.</div>
+        </div>
+        <div class="service-preview-card">
+          <div class="service-badge">Restraint</div>
+          <div class="service-card-title">7-Day Horizon</div>
+          <div class="service-card-desc">Extended meteorological outlook structured for immediate clarity.</div>
+        </div>
+      </div>
     </div>
+
     <div id="loading-screen" class="state-msg hidden">
       <div class="loader-beacon">
         <div class="beacon-core"></div>
@@ -49,10 +80,11 @@
       </div>
       <p class="loader-text">Gathering atmospheric data...</p>
     </div>
+
     <div id="error-screen" class="state-msg hidden">
-      <h1>Unable to load</h1>
-      <p id="error-msg">Check your connection or try another city.</p>
-      <button class="retry-btn" onclick="retry()">Try again</button>
+      <h1>Unable to load.</h1>
+      <p class="welcome-tagline" id="error-msg">Check your connection or try searching for another city.</p>
+      <button class="btn-pill-primary" onclick="retry()">Try again</button>
     </div>
   </div>
 
@@ -95,7 +127,7 @@
       
       <div class="panel chart-panel">
         <div class="panel-header">
-          <h2>TODAY'S FORECAST</h2>
+          <h2>Today's Forecast</h2>
           <span id="loc-time" class="time-label">—</span>
         </div>
         <div class="canvas-wrap">
@@ -105,38 +137,36 @@
 
       <div class="stats-grid">
         <div class="stat-box">
-          <div class="stat-lbl">HUMIDITY</div>
+          <div class="stat-lbl">Humidity</div>
           <div class="stat-val" id="st-humidity">—</div>
         </div>
         <div class="stat-box">
-          <div class="stat-lbl">WIND</div>
+          <div class="stat-lbl">Wind</div>
           <div class="stat-val" id="st-wind">—</div>
         </div>
         <div class="stat-box">
-          <div class="stat-lbl">UV INDEX</div>
+          <div class="stat-lbl">UV Index</div>
           <div class="stat-val" id="st-uv">—</div>
         </div>
         <div class="stat-box">
-          <div class="stat-lbl">PRESSURE</div>
+          <div class="stat-lbl">Pressure</div>
           <div class="stat-val" id="st-pressure">—</div>
         </div>
         <div class="stat-box">
-          <div class="stat-lbl">VISIBILITY</div>
+          <div class="stat-lbl">Visibility</div>
           <div class="stat-val" id="st-vis">—</div>
         </div>
         <div class="stat-box">
-          <div class="stat-lbl">DEW POINT</div>
+          <div class="stat-lbl">Dew Point</div>
           <div class="stat-val" id="st-dew">—</div>
         </div>
       </div>
 
       <div class="panel forecast-panel">
         <div class="panel-header">
-          <h2>7-DAY FORECAST</h2>
+          <h2>7-Day Forecast</h2>
         </div>
-        <div class="forecast-row" id="forecast-row">
-          
-        </div>
+        <div class="forecast-row" id="forecast-row"></div>
       </div>
 
     </section>
@@ -144,11 +174,14 @@
   </main>
 
   <footer class="site-footer">
-    <span>© 2026 Akshat Mohanty. Built with ❤️</span>
-    <span class="footer-divider">·</span>
-    <a href="https://github.com/Akshat-mohanty/sterra-weather" target="_blank" rel="noopener noreferrer" class="bug-link">Found a Bug?</a>
+    <div class="footer-inner">
+      <span>Copyright © 2026 Akshat Mohanty. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="https://github.com/Akshat-mohanty/sterra-weather" target="_blank" rel="noopener noreferrer" class="bug-link">Found a Bug? GitHub Repository</a>
+      </div>
+    </div>
   </footer>
 
-  <script src="app.js?v=39"></script>
+  <script src="app.js?v=42"></script>
 </body>
 </html>
