@@ -109,6 +109,12 @@ function show(id) {
   if (unitToggle) {
     unitToggle.classList.toggle('hidden', id !== 'dashboard');
   }
+
+  if (id === 'welcome-screen') {
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new Event('scroll'));
+    });
+  }
 }
 
 function render(data) {
@@ -432,41 +438,66 @@ window.addEventListener('resize', () => {
 
 function initScrollAnimations() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  document.documentElement.classList.add('js-scroll-anim');
 
   const sections = document.querySelectorAll('.scroll-reveal-section');
   if (!sections.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-revealed');
-      }
-    });
-  }, {
-    threshold: 0.05,
-    rootMargin: '0px 0px -30px 0px'
-  });
+  let isTicking = false;
 
-  sections.forEach((el) => {
-    observer.observe(el);
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      el.classList.add('is-revealed');
-    }
-  });
-
-  window.addEventListener('scroll', () => {
+  function updateScroll3D() {
     const vh = window.innerHeight;
-    sections.forEach((el) => {
-      if (!el.classList.contains('is-revealed')) {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < vh - 20) {
-          el.classList.add('is-revealed');
-        }
+    const vhCenter = vh / 2;
+
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const elemCenter = rect.top + rect.height / 2;
+      const diff = (elemCenter - vhCenter) / (vh / 2);
+
+      let rotX = 0;
+      let ty = 0;
+      let scale = 1;
+      let opacity = 1;
+
+      if (diff > 0.25) {
+        const norm = Math.min(1, (diff - 0.25) / 0.85);
+        rotX = norm * 16;
+        ty = norm * 36;
+        scale = 1 - norm * 0.04;
+        opacity = Math.max(0.2, 1 - norm * 0.7);
+      } else if (diff < -0.25) {
+        const norm = Math.min(1, (-diff - 0.25) / 0.85);
+        rotX = -norm * 14;
+        ty = -norm * 30;
+        scale = 1 - norm * 0.035;
+        opacity = Math.max(0.2, 1 - norm * 0.65);
       }
+
+      section.style.transform = `perspective(1200px) rotateX(${rotX.toFixed(2)}deg) translateY(${ty.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+      section.style.opacity = opacity.toFixed(2);
+
+      const cards = section.querySelectorAll('.scroll-reveal-card');
+      cards.forEach((card, idx) => {
+        const factor = 1 + (idx - 1) * 0.18;
+        const cardRotX = rotX * 0.65 * factor;
+        const cardTy = ty * 0.45 * factor;
+        card.style.transform = `perspective(800px) rotateX(${cardRotX.toFixed(2)}deg) translateY(${cardTy.toFixed(1)}px)`;
+      });
     });
-  }, { passive: true });
+
+    isTicking = false;
+  }
+
+  function requestTick() {
+    if (!isTicking) {
+      isTicking = true;
+      requestAnimationFrame(updateScroll3D);
+    }
+  }
+
+  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener('resize', requestTick, { passive: true });
+
+  updateScroll3D();
 }
 
 (function init() {
