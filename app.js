@@ -430,7 +430,30 @@ window.addEventListener('resize', () => {
   }
 });
 
+function initScrollAnimations() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('js-scroll-anim');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+      } else if (entry.boundingClientRect.top > 0) {
+        entry.target.classList.remove('is-revealed');
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  document.querySelectorAll('.scroll-reveal-section').forEach((el) => {
+    observer.observe(el);
+  });
+}
+
 (function init() {
   localStorage.removeItem(CACHE_KEY);
   show('welcome-screen');
+  initScrollAnimations();
 })();

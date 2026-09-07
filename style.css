@@ -972,3 +972,92 @@ body {
     min-width: 84px;
   }
 }
+
+/* Scroll-Driven Folding & Unfolding Animations */
+.scroll-reveal-section {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-card {
+  will-change: transform, opacity;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base scroll fold state when JS observer is active */
+.js-scroll-anim .scroll-reveal-section {
+  opacity: 0;
+  transform: rotateX(16deg) translateY(45px) scale(0.97);
+  transform-origin: top center;
+}
+
+.js-scroll-anim .scroll-reveal-section.is-revealed {
+  opacity: 1;
+  transform: rotateX(0deg) translateY(0) scale(1);
+}
+
+.js-scroll-anim .scroll-reveal-card {
+  opacity: 0;
+  transform: translateY(30px) scale(0.96);
+}
+
+.js-scroll-anim .scroll-reveal-section.is-revealed .scroll-reveal-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.js-scroll-anim .scroll-reveal-card:nth-child(1) { transition-delay: 0.05s; }
+.js-scroll-anim .scroll-reveal-card:nth-child(2) { transition-delay: 0.15s; }
+.js-scroll-anim .scroll-reveal-card:nth-child(3) { transition-delay: 0.25s; }
+
+/* Progressive Enhancement: Native CSS Scroll-Driven Animations */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes fold-unfold-section {
+      from {
+        opacity: 0.15;
+        transform: rotateX(18deg) translateY(50px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: rotateX(0deg) translateY(0) scale(1);
+      }
+    }
+
+    @keyframes unfold-card {
+      from {
+        opacity: 0.2;
+        transform: translateY(35px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .scroll-reveal-section {
+      animation: fold-unfold-section auto cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view(block);
+      animation-range: entry 10% cover 40%;
+      transform-origin: top center;
+    }
+
+    .scroll-reveal-card {
+      animation: unfold-card auto cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view(block);
+      animation-range: entry 15% cover 35%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal-section,
+  .scroll-reveal-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
