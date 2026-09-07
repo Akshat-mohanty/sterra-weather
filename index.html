@@ -9,8 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"/>
   
-  <link rel="stylesheet" href="style.css?v=97"/>
+  <link rel="stylesheet" href="style.css?v=98"/>
 </head>
 <body>
   <header class="global-nav">
@@ -107,12 +108,30 @@
             <h3 class="apple-card-title">Six-Dimension Telemetry</h3>
             <p class="apple-card-desc">Monitor Humidity, Wind Velocity, UV Radiation, Barometric Surface Pressure, Optical Visibility, and Atmospheric Dew Point in real time.</p>
             <div class="metrics-mini-strip">
-              <span class="mini-tag">Humidity</span>
-              <span class="mini-tag">Wind Speed</span>
-              <span class="mini-tag">UV Index</span>
-              <span class="mini-tag">Pressure</span>
-              <span class="mini-tag">Visibility</span>
-              <span class="mini-tag">Dew Point</span>
+              <span class="mini-tag tag-humidity">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                <span>Humidity</span>
+              </span>
+              <span class="mini-tag tag-wind">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+                <span>Wind Speed</span>
+              </span>
+              <span class="mini-tag tag-uv">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                <span>UV Index</span>
+              </span>
+              <span class="mini-tag tag-pressure">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+                <span>Pressure</span>
+              </span>
+              <span class="mini-tag tag-visibility">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span>Visibility</span>
+              </span>
+              <span class="mini-tag tag-dew">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+                <span>Dew Point</span>
+              </span>
             </div>
           </div>
 
@@ -121,9 +140,18 @@
             <h3 class="apple-card-title">Local Geolocation Telemetry</h3>
             <p class="apple-card-desc">Your location coordinates never leave your browser for tracking or marketing. Geolocation requests are resolved live via open standards.</p>
             <div class="metrics-mini-strip">
-              <span class="mini-tag">Zero Profiling</span>
-              <span class="mini-tag">Open Data</span>
-              <span class="mini-tag">No Trackers</span>
+              <span class="mini-tag tag-privacy">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span>Zero Profiling</span>
+              </span>
+              <span class="mini-tag tag-opendata">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span>Open Data</span>
+              </span>
+              <span class="mini-tag tag-notrackers">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>No Trackers</span>
+              </span>
             </div>
           </div>
         </div>
@@ -301,6 +329,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=97"></script>
+  <script src="app.js?v=98"></script>
 </body>
 </html>
