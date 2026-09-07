@@ -651,10 +651,62 @@ body {
   padding: 56px 32px;
   text-align: center;
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+.solar-banner-card {
+  background: radial-gradient(circle at 50% 10%, rgba(254, 243, 199, 0.35) 0%, rgba(255, 255, 255, 1) 70%);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+.solar-arc-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.solar-arc-svg {
+  width: 260px;
+  height: 98px;
+  overflow: visible;
+  filter: drop-shadow(0 4px 12px rgba(245, 158, 11, 0.15));
+}
+.solar-pills-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+.tag-dawn {
+  background: #fff7ed;
+  border-color: #ffedd5;
+  color: #ea580c;
+}
+.tag-dawn svg {
+  stroke: #ea580c;
+}
+.tag-noon {
+  background: #fefce8;
+  border-color: #fef08a;
+  color: #ca8a04;
+}
+.tag-noon svg {
+  stroke: #ca8a04;
+}
+.tag-dusk {
+  background: #fff1f2;
+  border-color: #ffe4e6;
+  color: #e11d48;
+}
+.tag-dusk svg {
+  stroke: #e11d48;
 }
 .banner-content {
   max-width: 680px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .state-msg {
