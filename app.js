@@ -281,7 +281,7 @@ function drawHourlyChart(hourly) {
       const mx = (xS(i-1) + xS(i)) / 2;
       ctx.bezierCurveTo(mx, yS(temps[i-1]), mx, yS(temps[i]), xS(i), yS(temps[i]));
     }
-    ctx.strokeStyle = '#ffedd7';
+    ctx.strokeStyle = '#121214';
     ctx.lineWidth = 2;
     ctx.lineJoin = 'round';
     ctx.stroke();
@@ -290,12 +290,12 @@ function drawHourlyChart(hourly) {
     ctx.lineTo(xS(0), pad.t + cH);
     ctx.closePath();
     const grad = ctx.createLinearGradient(0, pad.t, 0, H);
-    grad.addColorStop(0, 'rgba(255, 237, 215, 0.12)');
-    grad.addColorStop(1, 'rgba(255, 237, 215, 0)');
+    grad.addColorStop(0, 'rgba(18, 18, 20, 0.08)');
+    grad.addColorStop(1, 'rgba(18, 18, 20, 0)');
     ctx.fillStyle = grad;
     ctx.fill();
 
-    ctx.fillStyle = '#ffedd7';
+    ctx.fillStyle = '#121214';
     for (let i = 0; i < temps.length; i++) {
       const x = xS(i), y = yS(temps[i]);
       if (x > clipW) continue;
@@ -303,7 +303,7 @@ function drawHourlyChart(hourly) {
       ctx.beginPath();
       ctx.arc(x, y, 3.5, 0, Math.PI*2);
       ctx.fill();
-      ctx.strokeStyle = '#100904';
+      ctx.strokeStyle = '#ffffff';
       ctx.lineWidth = 2;
       ctx.stroke();
 
@@ -314,9 +314,9 @@ function drawHourlyChart(hourly) {
       const h = new Date(times[i]).getHours();
       const lbl = h === 0 ? '12 AM' : h < 12 ? `${h} AM` : h === 12 ? '12 PM' : `${h-12} PM`;
       ctx.font = '500 10px Inter, sans-serif';
-      ctx.fillStyle = '#6c5f51';
+      ctx.fillStyle = '#8e8e93';
       ctx.fillText(i === 0 ? 'NOW' : lbl, x, H - 8);
-      ctx.fillStyle = '#ffedd7';
+      ctx.fillStyle = '#121214';
     }
     
     ctx.restore();
