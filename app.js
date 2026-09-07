@@ -434,22 +434,39 @@ function initScrollAnimations() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   document.documentElement.classList.add('js-scroll-anim');
 
+  const sections = document.querySelectorAll('.scroll-reveal-section');
+  if (!sections.length) return;
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-revealed');
-      } else if (entry.boundingClientRect.top > 0) {
-        entry.target.classList.remove('is-revealed');
       }
     });
   }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.05,
+    rootMargin: '0px 0px -30px 0px'
   });
 
-  document.querySelectorAll('.scroll-reveal-section').forEach((el) => {
+  sections.forEach((el) => {
     observer.observe(el);
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('is-revealed');
+    }
   });
+
+  window.addEventListener('scroll', () => {
+    const vh = window.innerHeight;
+    sections.forEach((el) => {
+      if (!el.classList.contains('is-revealed')) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < vh - 20) {
+          el.classList.add('is-revealed');
+        }
+      }
+    });
+  }, { passive: true });
 }
 
 (function init() {
