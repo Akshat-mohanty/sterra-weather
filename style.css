@@ -1,17 +1,20 @@
 :root {
-  /* Colors from apple design website/variables.css */
-  --color-apple-blue: #0071e3;
-  --color-link-blue: #0066cc;
-  --color-signal-blue: #2997ff;
+  /* Clean Monochrome / Slate Aesthetic (replacing electric blue) */
+  --color-accent: #1d1d1f;
+  --color-accent-hover: #000000;
+  --color-accent-border: #1d1d1f;
+  --color-accent-subtle: #f0f0f2;
+  --color-accent-glow: rgba(0, 0, 0, 0.08);
+
   --color-carbon: #1d1d1f;
   --color-frost: #f5f5f7;
-  --color-ice: #f4f8fb;
-  --color-smoke: #333333;
-  --color-graphite: #474747;
-  --color-ash: #707070;
-  --color-mist: #858585;
+  --color-ice: #fbfbfd;
+  --color-smoke: #424245;
+  --color-graphite: #515154;
+  --color-ash: #6e6e73;
+  --color-mist: #86868b;
   --color-onyx: #000000;
-  --color-pebble: #e2e2e5;
+  --color-pebble: #e8e8ed;
 
   /* Typography — Font Families */
   --font-sf-pro-display: 'SF Pro Display', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -69,29 +72,29 @@
   --element-gap: 12px;
 
   /* Border Radius */
-  --radius-lg: 8px;
-  --radius-lg-2: 11px;
+  --radius-lg: 10px;
+  --radius-lg-2: 12px;
   --radius-full: 980px;
   --radius-full-2: 999px;
 
   /* Named Radii */
   --radius-tags: 980px;
-  --radius-cards: 8px;
-  --radius-images: 8px;
+  --radius-cards: 10px;
+  --radius-images: 10px;
   --radius-inputs: 8px;
   --radius-buttons: 980px;
 
   /* Surfaces */
-  --surface-canvas: #f5f5f7;
-  --surface-elevated-wash: #f4f8fb;
-  --surface-pebble: #e2e2e5;
+  --surface-canvas: #fbfbfd;
+  --surface-elevated-wash: #f5f5f7;
+  --surface-pebble: #e8e8ed;
 
   /* Base mappings */
   --bg-color: var(--surface-canvas);
   --ink: var(--color-carbon);
   --ink-2: var(--color-smoke);
   --ink-3: var(--color-ash);
-  --border: var(--color-pebble);
+  --border: rgba(0, 0, 0, 0.08);
 }
 
 *, *::before, *::after {
@@ -101,11 +104,11 @@
 }
 
 ::selection {
-  background-color: #d0e6ff;
+  background-color: #e5e5ea;
   color: var(--color-carbon);
 }
 ::-moz-selection {
-  background-color: #d0e6ff;
+  background-color: #e5e5ea;
   color: var(--color-carbon);
 }
 
@@ -159,7 +162,7 @@ body {
   left: 0;
   right: 0;
   width: 100%;
-  background: rgba(245, 245, 247, 0.84);
+  background: rgba(251, 251, 253, 0.86);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -216,12 +219,12 @@ body {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .search-box:focus-within {
-  border-color: var(--color-apple-blue);
-  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.18);
+  border-color: var(--color-carbon);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
 }
 
 .search-icon {
-  color: var(--color-ash);
+  color: var(--color-mist);
   flex-shrink: 0;
 }
 
@@ -237,7 +240,7 @@ body {
   letter-spacing: var(--tracking-body-sm);
 }
 #city-input::placeholder {
-  color: var(--color-ash);
+  color: var(--color-mist);
 }
 
 .btn-gps {
@@ -256,7 +259,7 @@ body {
   transition: background 0.18s ease, color 0.18s ease;
 }
 .btn-gps:hover {
-  background: #d5d5d8;
+  background: #dcdce2;
   color: var(--color-carbon);
 }
 
@@ -295,8 +298,8 @@ body {
   font-size: var(--text-caption);
 }
 .sug-item:hover {
-  background: var(--color-ice);
-  color: var(--color-link-blue);
+  background: var(--surface-elevated-wash);
+  color: var(--color-carbon);
 }
 
 .nav-actions {
@@ -331,25 +334,26 @@ body {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
-/* Pill Buttons */
+/* Pill Buttons — Clean Obsidian & Ghost Styling (no blue) */
 .btn-pill-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-buttons);
-  background-color: var(--color-apple-blue);
+  background-color: var(--color-carbon);
   color: #ffffff;
   font-family: var(--font-sf-pro-text);
   font-size: var(--text-body);
   font-weight: 400;
-  padding: 11px 20px;
-  border: none;
+  padding: 11px 22px;
+  border: 1px solid var(--color-carbon);
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 0.18s ease;
+  transition: background-color 0.18s ease, transform 0.15s ease;
 }
 .btn-pill-primary:hover {
-  background-color: #0077ed;
+  background-color: var(--color-onyx);
+  transform: translateY(-1px);
 }
 
 .btn-pill-secondary {
@@ -357,19 +361,21 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-buttons);
-  border: 1px solid var(--color-link-blue);
+  border: 1px solid rgba(0, 0, 0, 0.22);
   background-color: transparent;
-  color: var(--color-link-blue);
+  color: var(--color-carbon);
   font-family: var(--font-sf-pro-text);
   font-size: var(--text-body);
   font-weight: 400;
-  padding: 11px 20px;
+  padding: 11px 22px;
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 0.18s ease, color 0.18s ease;
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.15s ease;
 }
 .btn-pill-secondary:hover {
-  background-color: rgba(0, 102, 204, 0.06);
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: var(--color-carbon);
+  transform: translateY(-1px);
 }
 
 /* Welcome Page & Home Sections */
@@ -469,17 +475,18 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-cards);
   padding: 32px 28px;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .apple-feature-card:hover {
-  border-color: #c7c7cc;
+  border-color: rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
 }
 .feature-icon-badge {
   width: 44px;
   height: 44px;
   border-radius: var(--radius-cards);
-  background: var(--color-ice);
-  color: var(--color-apple-blue);
+  background: var(--surface-elevated-wash);
+  color: var(--color-carbon);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -490,7 +497,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-apple-blue);
+  color: var(--color-ash);
   margin-bottom: 8px;
   display: block;
 }
@@ -513,10 +520,11 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-cards);
   padding: 36px 32px;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .apple-showcase-card:hover {
-  border-color: #c7c7cc;
+  border-color: rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
 }
 .metrics-mini-strip {
   display: flex;
@@ -525,13 +533,13 @@ body {
   margin-top: 24px;
 }
 .mini-tag {
-  background: var(--surface-canvas);
+  background: var(--surface-elevated-wash);
   border: 1px solid var(--border);
   border-radius: var(--radius-tags);
   padding: 4px 10px;
   font-size: var(--text-caption);
   font-weight: 500;
-  color: var(--color-graphite);
+  color: var(--color-smoke);
 }
 
 .apple-banner-card {
@@ -566,25 +574,25 @@ body {
 .beacon-core {
   width: 12px;
   height: 12px;
-  background: var(--color-apple-blue);
+  background: var(--color-carbon);
   border-radius: 50%;
   animation: beacon-pulse 2s ease-in-out infinite;
 }
 .beacon-ring {
   position: absolute;
   border-radius: 50%;
-  border: 1.5px solid rgba(0, 113, 227, 0.2);
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
 }
 .ring-1 {
   width: 36px;
   height: 36px;
-  border-top-color: var(--color-apple-blue);
+  border-top-color: var(--color-carbon);
   animation: beacon-spin 2.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
 }
 .ring-2 {
   width: 58px;
   height: 58px;
-  border-bottom-color: var(--color-apple-blue);
+  border-bottom-color: var(--color-carbon);
   animation: beacon-spin-rev 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
 }
 .loader-text {
@@ -593,7 +601,7 @@ body {
   color: var(--color-smoke);
 }
 
-/* Weather Dashboard Redesign */
+/* Weather Dashboard */
 .dashboard {
   flex: 1;
   max-width: var(--page-max-width);
@@ -623,13 +631,14 @@ body {
   background: transparent;
   border: none;
   font-size: var(--text-body-sm);
-  color: var(--color-link-blue);
+  color: var(--color-carbon);
+  font-weight: 500;
   cursor: pointer;
   padding: 0;
   transition: opacity 0.2s;
 }
 .btn-back-home:hover {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 .sub-nav-divider {
   color: var(--color-mist);
@@ -661,6 +670,7 @@ body {
   display: flex;
   flex-direction: column;
   height: fit-content;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
 }
 
 .weather-eyebrow {
@@ -668,7 +678,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-apple-blue);
+  color: var(--color-ash);
   display: block;
   margin-bottom: 6px;
 }
@@ -784,6 +794,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-cards);
   padding: var(--card-padding);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
 }
 .panel-header {
   display: flex;
@@ -802,7 +813,7 @@ body {
   font-size: var(--text-caption);
   font-weight: 500;
   color: var(--color-ash);
-  background: var(--surface-canvas);
+  background: var(--surface-elevated-wash);
   border: 1px solid var(--border);
   border-radius: var(--radius-tags);
   padding: 2px 8px;
@@ -831,10 +842,12 @@ body {
   padding: 18px 20px;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
 }
 .stat-box:hover {
-  border-color: #c7c7cc;
+  border-color: rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
 }
 .stat-header {
   display: flex;
@@ -883,11 +896,12 @@ body {
   background: var(--surface-elevated-wash);
   border: 1px solid var(--border);
   cursor: default;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 .fc-card:hover {
-  border-color: #c7c7cc;
+  border-color: rgba(0, 0, 0, 0.18);
   background: #ffffff;
+  transform: translateY(-2px);
 }
 .fc-day {
   font-size: var(--text-caption);
@@ -935,12 +949,13 @@ body {
   gap: 16px;
 }
 .bug-link {
-  color: var(--color-link-blue);
-  text-decoration: none;
+  color: var(--color-carbon);
+  text-decoration: underline;
+  text-underline-offset: 3px;
   transition: opacity 0.2s ease;
 }
 .bug-link:hover {
-  text-decoration: underline;
+  opacity: 0.7;
 }
 
 .hidden {

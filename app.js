@@ -281,7 +281,7 @@ function drawHourlyChart(hourly) {
       const mx = (xS(i-1) + xS(i)) / 2;
       ctx.bezierCurveTo(mx, yS(temps[i-1]), mx, yS(temps[i]), xS(i), yS(temps[i]));
     }
-    ctx.strokeStyle = '#0071e3';
+    ctx.strokeStyle = '#1d1d1f';
     ctx.lineWidth = 2.5;
     ctx.lineJoin = 'round';
     ctx.stroke();
@@ -290,8 +290,8 @@ function drawHourlyChart(hourly) {
     ctx.lineTo(xS(0), pad.t + cH);
     ctx.closePath();
     const grad = ctx.createLinearGradient(0, pad.t, 0, H);
-    grad.addColorStop(0, 'rgba(0, 113, 227, 0.12)');
-    grad.addColorStop(1, 'rgba(0, 113, 227, 0)');
+    grad.addColorStop(0, 'rgba(29, 29, 31, 0.08)');
+    grad.addColorStop(1, 'rgba(29, 29, 31, 0)');
     ctx.fillStyle = grad;
     ctx.fill();
 
