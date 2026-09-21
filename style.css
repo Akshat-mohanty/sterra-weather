@@ -617,17 +617,62 @@ body {
 .apple-feature-section {
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 68px 24px;
+  padding: 84px 24px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
 }
 .apple-feature-section.alt-surface {
-  background: var(--color-canvas-alt);
+  background: #ECEBE6;
+}
+
+.studio-section {
+  position: relative;
+}
+.studio-section-bg-text {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.studio-section-bg-text span {
+  font-family: var(--font-sf-pro-display);
+  font-size: clamp(80px, 14vw, 220px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  line-height: 0.8;
+  user-select: none;
+}
+
+.studio-pill-label {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(117, 197, 222, 0.15);
+  color: #0b5974;
+  border: 1px solid rgba(117, 197, 222, 0.35);
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-family: var(--font-sf-pro-text);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
 }
 
 .section-heading-wrap {
   text-align: center;
   max-width: 820px;
   margin: 0 auto var(--spacing-45) auto;
+  position: relative;
+  z-index: 2;
 }
 .section-label {
   font-family: var(--font-sf-pro-text);
@@ -662,11 +707,88 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--element-gap);
+  position: relative;
+  z-index: 2;
 }
 .apple-card-grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--element-gap);
+  position: relative;
+  z-index: 2;
+}
+
+.studio-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 24px;
+  padding: 36px 30px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+.studio-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(117, 197, 222, 0.5);
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.09), 0 4px 12px -2px rgba(117, 197, 222, 0.15);
+}
+.studio-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.studio-icon-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #75C5DE;
+  color: #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(117, 197, 222, 0.35);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.studio-card:hover .studio-icon-circle {
+  transform: scale(1.08) rotate(5deg);
+}
+.studio-tag-mono {
+  font-family: var(--font-sf-pro-text);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #8E8E93;
+}
+.studio-card-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+}
+.studio-metric-pill {
+  font-family: var(--font-sf-pro-text);
+  font-size: 11px;
+  font-weight: 600;
+  color: #111111;
+  background: #F4F1E8;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 9999px;
+  padding: 4px 12px;
+}
+
+.studio-card-showcase {
+  padding: 38px 32px;
+}
+
+.studio-banner-card {
+  background: #ffffff;
+  border: 1px solid rgba(117, 197, 222, 0.3);
+  border-radius: 28px;
+  box-shadow: 0 16px 40px -8px rgba(117, 197, 222, 0.12), 0 4px 16px -2px rgba(0, 0, 0, 0.04);
 }
 
 .apple-badge {
@@ -681,8 +803,8 @@ body {
 }
 .apple-card-title {
   font-family: var(--font-sf-pro-display);
-  font-size: 22px;
-  line-height: 1.2;
+  font-size: 24px;
+  line-height: 1.22;
   font-weight: 600;
   letter-spacing: -0.02em;
   text-transform: none;
@@ -693,7 +815,7 @@ body {
   font-family: var(--font-sf-pro-text);
   font-size: 15px;
   color: var(--color-ink-secondary);
-  line-height: 1.45;
+  line-height: 1.48;
   letter-spacing: -0.01em;
   font-weight: 400;
 }
