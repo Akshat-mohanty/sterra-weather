@@ -407,8 +407,9 @@ body {
 
 /* ===== HERO IMAGE ENTRANCE ===== */
 @keyframes heroImageIn {
-  from { opacity: 0; transform: scale(1.5) rotate(3deg); }
-  to { opacity: 1; transform: scale(1) rotate(0deg); }
+  from { opacity: 0; transform: scale(1.16) translateY(28px); filter: saturate(0.7) blur(12px); }
+  55% { opacity: 1; filter: saturate(1) blur(0); }
+  to { opacity: 1; transform: scale(1) translateY(0); filter: saturate(1) blur(0); }
 }
 .hero-image-animate {
   animation: heroImageIn 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
@@ -458,7 +459,8 @@ body {
   transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 @media (min-width: 768px) { .cta-btn-circle { width: 54px; height: 54px; } }
-.cta-btn:hover .cta-btn-circle { transform: translateX(-7px); }
+.cta-btn:hover .cta-btn-bg { transform: translateX(3px); box-shadow: 0 8px 24px rgba(117,197,222,0.18); }
+.cta-btn:hover .cta-btn-circle { transform: translate(2px,-2px) rotate(-8deg); box-shadow: 0 8px 18px rgba(117,197,222,0.28); }
 
 /* ===== MENU CTA (smaller) ===== */
 .menu-cta-btn { position: relative; overflow: hidden; display: flex; align-items: center; border: none; background: none; cursor: pointer; border-radius: 9999px; padding: 6px; gap: 8px; }
@@ -1539,14 +1541,16 @@ body {
 /* Scroll-Driven Folding & Unfolding Animations */
 .scroll-reveal-section {
   transform-style: preserve-3d;
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
   transform-origin: 50% 50%;
+  transition: filter 0.45s ease;
 }
 
 .scroll-reveal-card {
   transform-style: preserve-3d;
   will-change: transform;
   transform-origin: 50% 50%;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -448,7 +448,7 @@ function initScrollAnimations() {
     const vh = window.innerHeight;
     const vhCenter = vh / 2;
 
-    sections.forEach((section) => {
+    sections.forEach((section, sectionIndex) => {
       const rect = section.getBoundingClientRect();
       const elemCenter = rect.top + rect.height / 2;
       const diff = (elemCenter - vhCenter) / (vh / 2);
@@ -457,6 +457,7 @@ function initScrollAnimations() {
       let ty = 0;
       let scale = 1;
       let opacity = 1;
+      let blur = 0;
 
       if (diff > 0.25) {
         const norm = Math.min(1, (diff - 0.25) / 0.85);
@@ -464,23 +465,28 @@ function initScrollAnimations() {
         ty = norm * 36;
         scale = 1 - norm * 0.04;
         opacity = Math.max(0.2, 1 - norm * 0.7);
+        blur = norm * 1.5;
       } else if (diff < -0.25) {
         const norm = Math.min(1, (-diff - 0.25) / 0.85);
         rotX = -norm * 14;
         ty = -norm * 30;
         scale = 1 - norm * 0.035;
         opacity = Math.max(0.2, 1 - norm * 0.65);
+        blur = norm * 1.2;
       }
 
-      section.style.transform = `perspective(1200px) rotateX(${rotX.toFixed(2)}deg) translateY(${ty.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+      const drift = Math.sin((sectionIndex + 1) * 1.7) * 7 * Math.min(1, Math.abs(diff));
+      section.style.transform = `perspective(1200px) rotateX(${rotX.toFixed(2)}deg) rotateZ(${drift.toFixed(2)}deg) translateY(${ty.toFixed(1)}px) scale(${scale.toFixed(3)})`;
       section.style.opacity = opacity.toFixed(2);
+      section.style.filter = `blur(${blur.toFixed(2)}px)`;
 
       const cards = section.querySelectorAll('.scroll-reveal-card');
       cards.forEach((card, idx) => {
         const factor = 1 + (idx - 1) * 0.18;
         const cardRotX = rotX * 0.65 * factor;
         const cardTy = ty * 0.45 * factor;
-        card.style.transform = `perspective(800px) rotateX(${cardRotX.toFixed(2)}deg) translateY(${cardTy.toFixed(1)}px)`;
+        const cardLift = Math.sin((idx + 1) * 1.4 + sectionIndex) * 8 * Math.min(1, Math.abs(diff));
+        card.style.transform = `perspective(800px) rotateX(${cardRotX.toFixed(2)}deg) translate3d(0, ${(cardTy + cardLift).toFixed(1)}px, 0)`;
       });
     });
 
