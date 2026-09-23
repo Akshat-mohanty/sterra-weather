@@ -509,16 +509,7 @@ function initScrollAnimations() {
 function initShowcaseHero() {
   const headline = document.getElementById('headline');
   if (headline) {
-    headline.innerHTML = '';
-    const text = "Atmospheric clarity & real-time telemetry engineered for pure awareness.";
-    const words = text.split(' ');
-    words.forEach(function(word, i) {
-      const span = document.createElement('span');
-      span.className = 'word-reveal';
-      span.textContent = word;
-      span.style.animationDelay = (1 + i * 0.05) + 's';
-      headline.appendChild(span);
-    });
+    headline.textContent = "Atmospheric clarity & real-time telemetry engineered for pure awareness.";
   }
 
   const burgerBtn = document.getElementById('burger-btn');
