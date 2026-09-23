@@ -1102,6 +1102,40 @@ body {
   margin-bottom: 8px;
 }
 
+.location-header-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.location-header-topline .weather-eyebrow {
+  margin-bottom: 0;
+}
+
+.location-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 999px;
+  background: #f7f7f9;
+  color: var(--color-ink-tertiary);
+  font-family: var(--font-sf-pro-text);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.location-live-pill span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #72b883;
+  box-shadow: 0 0 0 3px rgba(114, 184, 131, 0.12);
+}
+
 .location-header h1 {
   font-family: var(--font-sf-pro-display);
   font-size: var(--text-heading);
@@ -1117,6 +1151,26 @@ body {
   font-weight: 400;
   letter-spacing: -0.01em;
   margin-top: 6px;
+}
+
+.location-header h1,
+.location-header p,
+.hero-temp-wrapper,
+.hero-condition,
+.hero-hilo,
+.sun-times-card {
+  position: relative;
+}
+
+.location-header h1::after {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 2px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background: #121214;
+  opacity: 0.12;
 }
 
 .hero-temp-wrapper {
@@ -1441,6 +1495,9 @@ body {
   .apple-feature-section {
     padding-top: 48px;
     padding-bottom: 48px;
+  }
+  .location-live-pill {
+    padding: 4px 8px;
   }
 }
 
