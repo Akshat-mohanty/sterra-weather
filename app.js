@@ -452,7 +452,7 @@ function initScrollAnimations() {
 function initShowcaseHero() {
   const headline = document.getElementById('headline');
   if (headline) {
-    headline.textContent = "Atmospheric clarity & real-time telemetry engineered for pure awareness.";
+    headline.textContent = "Clarity, in every breath.";
   }
 
   const burgerBtn = document.getElementById('burger-btn');
