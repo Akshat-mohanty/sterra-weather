@@ -437,73 +437,16 @@ window.addEventListener('resize', () => {
 });
 
 function initScrollAnimations() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
   const sections = document.querySelectorAll('.scroll-reveal-section');
   if (!sections.length) return;
-
-  let isTicking = false;
-
-  function updateScroll3D() {
-    const vh = window.innerHeight;
-    const vhCenter = vh / 2;
-
-    sections.forEach((section, sectionIndex) => {
-      const rect = section.getBoundingClientRect();
-      const elemCenter = rect.top + rect.height / 2;
-      const diff = (elemCenter - vhCenter) / (vh / 2);
-
-      let rotX = 0;
-      let ty = 0;
-      let scale = 1;
-      let opacity = 1;
-      let blur = 0;
-
-      if (diff > 0.25) {
-        const norm = Math.min(1, (diff - 0.25) / 0.85);
-        rotX = norm * 16;
-        ty = norm * 36;
-        scale = 1 - norm * 0.04;
-        opacity = Math.max(0.2, 1 - norm * 0.7);
-        blur = norm * 1.5;
-      } else if (diff < -0.25) {
-        const norm = Math.min(1, (-diff - 0.25) / 0.85);
-        rotX = -norm * 14;
-        ty = -norm * 30;
-        scale = 1 - norm * 0.035;
-        opacity = Math.max(0.2, 1 - norm * 0.65);
-        blur = norm * 1.2;
-      }
-
-      const drift = Math.sin((sectionIndex + 1) * 1.7) * 7 * Math.min(1, Math.abs(diff));
-      section.style.transform = `perspective(1200px) rotateX(${rotX.toFixed(2)}deg) rotateZ(${drift.toFixed(2)}deg) translateY(${ty.toFixed(1)}px) scale(${scale.toFixed(3)})`;
-      section.style.opacity = opacity.toFixed(2);
-      section.style.filter = `blur(${blur.toFixed(2)}px)`;
-
-      const cards = section.querySelectorAll('.scroll-reveal-card');
-      cards.forEach((card, idx) => {
-        const factor = 1 + (idx - 1) * 0.18;
-        const cardRotX = rotX * 0.65 * factor;
-        const cardTy = ty * 0.45 * factor;
-        const cardLift = Math.sin((idx + 1) * 1.4 + sectionIndex) * 8 * Math.min(1, Math.abs(diff));
-        card.style.transform = `perspective(800px) rotateX(${cardRotX.toFixed(2)}deg) translate3d(0, ${(cardTy + cardLift).toFixed(1)}px, 0)`;
-      });
+  sections.forEach((section) => {
+    section.style.transform = 'none';
+    section.style.opacity = '1';
+    section.style.filter = 'none';
+    section.querySelectorAll('.scroll-reveal-card').forEach((card) => {
+      card.style.transform = 'none';
     });
-
-    isTicking = false;
-  }
-
-  function requestTick() {
-    if (!isTicking) {
-      isTicking = true;
-      requestAnimationFrame(updateScroll3D);
-    }
-  }
-
-  window.addEventListener('scroll', requestTick, { passive: true });
-  window.addEventListener('resize', requestTick, { passive: true });
-
-  updateScroll3D();
+  });
 }
 
 function initShowcaseHero() {

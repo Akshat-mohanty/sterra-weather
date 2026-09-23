@@ -1457,27 +1457,15 @@ body {
   }
 }
 
-/* Scroll-Driven Folding & Unfolding Animations */
+/* Sections remain static while scrolling. */
 .scroll-reveal-section {
-  transform-style: preserve-3d;
-  will-change: transform, opacity, filter;
-  transform-origin: 50% 50%;
-  transition: filter 0.45s ease;
+  transform: none !important;
+  opacity: 1 !important;
+  filter: none !important;
 }
 
 .scroll-reveal-card {
-  transform-style: preserve-3d;
-  will-change: transform;
-  transform-origin: 50% 50%;
-  transition: box-shadow 0.35s ease, border-color 0.35s ease;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-reveal-section,
-  .scroll-reveal-card {
-    opacity: 1 !important;
-    transform: none !important;
-  }
+  transform: none !important;
 }
 
 
