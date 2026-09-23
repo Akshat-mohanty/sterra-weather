@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"/>
   
-  <link rel="stylesheet" href="style.css?v=101"/>
+  <link rel="stylesheet" href="style.css?v=102"/>
 </head>
 <body>
   <header class="global-nav">
@@ -155,106 +155,64 @@
         </div>
       </section>
 
-      <!-- Section: Why Sterra / Benefits -->
-      <section id="experience" class="apple-feature-section studio-section alt-surface scroll-reveal-section">        <div class="section-heading-wrap">
-          <span class="studio-pill-label">Experience</span>
-          <h2 class="section-title">Respect for your attention.</h2>
-          <p class="section-subtitle">Pure atmospheric clarity, free of trackers and visual clutter.</p>
-        </div>
-
-        <div class="apple-card-grid-2">
-          <div class="studio-card studio-card-showcase scroll-reveal-card">
-            <div class="studio-card-top">
-              <div class="studio-icon-circle">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-              </div>
-              <span class="studio-tag-mono">Physics</span>
+      <!-- Section 3: Signal / Experience -->
+      <section id="experience" class="signal-section scroll-reveal-section">
+        <div class="signal-shell">
+          <div class="signal-intro">
+            <div>
+              <span class="studio-pill-label">03 / Signal</span>
+              <h2 class="section-title">The numbers behind<br><em>the feeling.</em></h2>
             </div>
-            <h3 class="apple-card-title">Six-Dimension Telemetry</h3>
-            <p class="apple-card-desc">Monitor Humidity, Wind Velocity, UV Radiation, Barometric Surface Pressure, Optical Visibility, and Atmospheric Dew Point in real time.</p>
-            <div class="metrics-mini-strip">
-              <span class="mini-tag tag-humidity">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-                <span>Humidity</span>
-              </span>
-              <span class="mini-tag tag-wind">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
-                <span>Wind Speed</span>
-              </span>
-              <span class="mini-tag tag-uv">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-                <span>UV Index</span>
-              </span>
-              <span class="mini-tag tag-pressure">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
-                <span>Pressure</span>
-              </span>
-              <span class="mini-tag tag-visibility">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                <span>Visibility</span>
-              </span>
-              <span class="mini-tag tag-dew">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
-                <span>Dew Point</span>
-              </span>
-            </div>
+            <p class="section-subtitle">Six atmospheric signals, distilled into one quiet interface. Move through each layer to see what the sky is actually doing.</p>
           </div>
-
-          <div class="studio-card studio-card-showcase scroll-reveal-card">
-            <div class="studio-card-top">
-              <div class="studio-icon-circle">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-              </div>
-              <span class="studio-tag-mono">Privacy</span>
+          <div class="signal-layout scroll-reveal-card">
+            <div class="signal-rail">
+              <button class="signal-tab active" data-signal="humidity"><span class="signal-tab-index">01</span><span>Humidity</span><strong>↗</strong></button>
+              <button class="signal-tab" data-signal="wind"><span class="signal-tab-index">02</span><span>Wind</span><strong>↗</strong></button>
+              <button class="signal-tab" data-signal="uv"><span class="signal-tab-index">03</span><span>UV index</span><strong>↗</strong></button>
+              <button class="signal-tab" data-signal="pressure"><span class="signal-tab-index">04</span><span>Pressure</span><strong>↗</strong></button>
+              <button class="signal-tab" data-signal="visibility"><span class="signal-tab-index">05</span><span>Visibility</span><strong>↗</strong></button>
+              <button class="signal-tab" data-signal="dew"><span class="signal-tab-index">06</span><span>Dew point</span><strong>↗</strong></button>
             </div>
-            <h3 class="apple-card-title">Local Geolocation Telemetry</h3>
-            <p class="apple-card-desc">Your location coordinates never leave your browser for profiling. Telemetry queries resolve in-session via open standards.</p>
-            <div class="metrics-mini-strip">
-              <span class="mini-tag tag-privacy">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-                <span>Zero Profiling</span>
-              </span>
-              <span class="mini-tag tag-opendata">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                <span>Open Data</span>
-              </span>
-              <span class="mini-tag tag-notrackers">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span>No Trackers</span>
-              </span>
+            <div class="signal-display">
+              <div class="signal-display-top"><span class="signal-live-dot"></span> LIVE TELEMETRY <span class="signal-display-location" id="signal-location">YOUR LOCATION</span></div>
+              <div class="signal-value-wrap"><span class="signal-value" id="signal-value">—</span><span class="signal-unit" id="signal-unit">%</span></div>
+              <h3 id="signal-title">Relative humidity</h3>
+              <p id="signal-copy">The amount of moisture present in the air, useful for reading comfort and cloud-building potential.</p>
+              <div class="signal-meter"><div class="signal-meter-track"><span id="signal-meter-fill"></span></div><div class="signal-meter-labels"><span>LOW</span><span>MODERATE</span><span>HIGH</span></div></div>
+              <div class="signal-privacy"><span class="signal-privacy-icon">⌁</span><span>Resolved in your browser · no profile built</span></div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Section: Celestial Cycle -->
-      <section id="solar" class="apple-feature-section studio-section scroll-reveal-section">        <div class="apple-banner-card solar-banner-card studio-banner-card scroll-reveal-card">
-          <div class="solar-arc-visual">
-            <svg class="solar-arc-svg" viewBox="0 0 320 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="solarGlowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#75C5DE" stop-opacity="0.3"/>
-                  <stop offset="50%" stop-color="#fbbf24" stop-opacity="0.9"/>
-                  <stop offset="100%" stop-color="#ea580c" stop-opacity="0.3"/>
-                </linearGradient>
-                <radialGradient id="sunCenterGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#fffbeb"/>
-                  <stop offset="40%" stop-color="#fde68a"/>
-                  <stop offset="80%" stop-color="#f59e0b"/>
-                  <stop offset="100%" stop-color="#ea580c"/>
-                </radialGradient>
-                <filter id="sunBlur" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="6" result="blur"/>
-                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-              </defs>
-              <path class="solar-horizon" d="M 20 110 L 300 110" stroke="rgba(0,0,0,0.08)" stroke-width="1.5" stroke-dasharray="4 4"/>
-              <path class="solar-path" d="M 30 110 Q 160 -10 290 110" stroke="url(#solarGlowGrad)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-              <circle cx="160" cy="50" r="18" fill="#f59e0b" opacity="0.15" filter="url(#sunBlur)"/>
-              <circle cx="160" cy="50" r="10" fill="url(#sunCenterGlow)"/>
-              <circle cx="160" cy="50" r="14" stroke="#fbbf24" stroke-width="1.5" opacity="0.6" stroke-dasharray="3 3"/>
-            </svg>
+      <!-- Section 4: Solar Cycle -->
+      <section id="solar" class="solar-section scroll-reveal-section">
+        <div class="solar-shell">
+          <div class="solar-header">
+            <span class="studio-pill-label">04 / Solar cycle</span>
+            <h2 class="section-title">Your day has<br><em>a light signature.</em></h2>
+            <p class="section-subtitle">Sunrise, solar noon and sunset translated into a simple arc, so the rhythm of the day stays visible without becoming noise.</p>
           </div>
+          <div class="solar-journey scroll-reveal-card">
+            <div class="solar-sky">
+              <div class="solar-sky-stars"></div>
+              <div class="solar-arc-line"></div>
+              <div class="solar-orbit-dot"></div>
+              <div class="solar-sun"><span></span></div>
+              <div class="solar-horizon-line"></div>
+              <div class="solar-landscape"><span></span><span></span><span></span></div>
+            </div>
+            <div class="solar-times">
+              <article class="solar-time-card"><span class="solar-time-kicker">DAWN</span><strong id="solar-dawn">—</strong><span>first light</span></article>
+              <article class="solar-time-card solar-time-card-active"><span class="solar-time-kicker">DAY</span><strong id="solar-noon">—</strong><span>solar noon</span></article>
+              <article class="solar-time-card"><span class="solar-time-kicker">DUSK</span><strong id="solar-dusk">—</strong><span>last light</span></article>
+            </div>
+            <div class="solar-footer-row"><span id="solar-location">LOCAL SOLAR WINDOW</span><button class="solar-cta" onclick="getUserLocation()"><span>Use my live sky</span><span class="solar-cta-arrow">↗</span></button></div>
+          </div>
+        </div>
+      </section>
+    </div>
 
           <div class="banner-content">
             <span class="studio-pill-label">Solar Cycle</span>
@@ -443,6 +401,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=101"></script>
+  <script src="app.js?v=102"></script>
 </body>
 </html>

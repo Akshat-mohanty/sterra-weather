@@ -164,6 +164,8 @@ function render(data) {
   }, 50);
 
   updateTime();
+  if (window.refreshExperienceTelemetry) window.refreshExperienceTelemetry('humidity');
+  if (window.refreshSolarCycle) window.refreshSolarCycle();
 }
 
 function fmtTime(iso) {
@@ -436,6 +438,62 @@ window.addEventListener('resize', () => {
   }
 });
 
+function initExperienceTelemetry() {
+  const tabs = document.querySelectorAll('.signal-tab');
+  if (!tabs.length) return;
+  const valueEl = document.getElementById('signal-value');
+  const unitEl = document.getElementById('signal-unit');
+  const titleEl = document.getElementById('signal-title');
+  const copyEl = document.getElementById('signal-copy');
+  const fillEl = document.getElementById('signal-meter-fill');
+  const locationEl = document.getElementById('signal-location');
+  const content = {
+    humidity: ['Relative humidity', 'The amount of moisture present in the air, useful for reading comfort and cloud-building potential.', '%'],
+    wind: ['Surface wind', 'How quickly air is moving at ten metres above the surface, where the day-to-day feel changes first.', ' km/h'],
+    uv: ['UV exposure', 'A simple measure of ultraviolet intensity at the surface, useful for planning time outdoors.', ''],
+    pressure: ['Surface pressure', 'The weight of the atmosphere above you. Changes can hint at shifting weather patterns.', ' hPa'],
+    visibility: ['Horizontal visibility', 'The distance the atmosphere lets you see clearly, influenced by haze, moisture and precipitation.', ' km'],
+    dew: ['Dew point', 'The temperature at which air becomes saturated and moisture starts to condense.', '°']
+  };
+  function update(key) {
+    const c = S.data && S.data.current ? S.data.current : {};
+    const values = { humidity: c.relative_humidity_2m, wind: c.wind_speed_10m, uv: c.uv_index, pressure: c.surface_pressure, visibility: c.visibility == null ? null : +(c.visibility / 1000).toFixed(1), dew: c.dew_point_2m == null ? null : cvt(c.dew_point_2m) };
+    const meta = content[key] || content.humidity;
+    const number = values[key];
+    tabs.forEach(function(t) { t.classList.toggle('active', t.dataset.signal === key); });
+    valueEl.textContent = number == null ? '—' : Math.round(number * 10) / 10;
+    unitEl.textContent = meta[2];
+    titleEl.textContent = meta[0];
+    copyEl.textContent = meta[1];
+    var pct = key === 'humidity' ? number : key === 'wind' ? Math.min((number || 0) / 18 * 100, 100) : key === 'uv' ? Math.min((number || 0) / 11 * 100, 100) : key === 'pressure' ? Math.min(Math.max(((number || 1000) - 960) / 90 * 100, 5), 100) : key === 'visibility' ? Math.min((number || 0) / 12 * 100, 100) : Math.min(Math.max(((number || 0) + 4) / 30 * 100, 5), 100);
+    fillEl.style.width = Math.max(6, Math.min(100, pct || 8)) + '%';
+    if (locationEl) locationEl.textContent = S.city ? S.city.toUpperCase() : 'YOUR LOCATION';
+  }
+  tabs.forEach(function(t) { t.addEventListener('click', function() { update(t.dataset.signal); }); });
+  window.refreshExperienceTelemetry = update;
+  update('humidity');
+}
+
+function initSolarCycle() {
+  var dawn = document.getElementById('solar-dawn');
+  var noon = document.getElementById('solar-noon');
+  var dusk = document.getElementById('solar-dusk');
+  var loc = document.getElementById('solar-location');
+  if (!dawn) return;
+  function update() {
+    var d = S.data && S.data.daily;
+    if (d && d.sunrise && d.sunrise[0]) dawn.textContent = fmtTime(d.sunrise[0]);
+    if (d && d.sunset && d.sunset[0]) dusk.textContent = fmtTime(d.sunset[0]);
+    if (d && d.sunrise && d.sunrise[0] && d.sunset && d.sunset[0]) {
+      var midpoint = (new Date(d.sunrise[0]).getTime() + new Date(d.sunset[0]).getTime()) / 2;
+      noon.textContent = new Date(midpoint).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+    if (loc) loc.textContent = S.city ? S.city.toUpperCase() + ' · LOCAL SOLAR WINDOW' : 'LOCAL SOLAR WINDOW';
+  }
+  window.refreshSolarCycle = update;
+  update();
+}
+
 function initScrollAnimations() {
   const sections = document.querySelectorAll('.scroll-reveal-section');
   if (!sections.length) return;
@@ -557,5 +615,7 @@ function initShowcaseHero() {
   localStorage.removeItem(CACHE_KEY);
   show('welcome-screen');
   initScrollAnimations();
+  initExperienceTelemetry();
+  initSolarCycle();
   initShowcaseHero();
 })();
