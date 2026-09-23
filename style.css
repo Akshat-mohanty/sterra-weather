@@ -489,18 +489,6 @@ body {
 }
 @media (min-width: 768px) { .hero { height: 100vh; min-height: 800px; } }
 
-.hero-big-text {
-  position: absolute; bottom: -30px; left: 0; right: 0; z-index: 2;
-  pointer-events: none; width: 100%; text-align: center;
-}
-@media (min-width: 768px) { .hero-big-text { bottom: -40px; } }
-.hero-big-text h2 {
-  font-family: var(--font-sf-pro-display);
-  font-weight: 600; color: #F4F1E8; line-height: 80%;
-  letter-spacing: -0.04em; white-space: nowrap;
-  font-size: clamp(120px, 20vw, 420px);
-}
-
 .hero-content {
   position: relative; z-index: 20;
   display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
