@@ -452,7 +452,7 @@ function initScrollAnimations() {
 function initShowcaseHero() {
   const headline = document.getElementById('headline');
   if (headline) {
-    headline.textContent = "Weather, reimagined for every moment.";
+    headline.textContent = "Weather that moves with you";
   }
 
   const burgerBtn = document.getElementById('burger-btn');
