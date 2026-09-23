@@ -452,7 +452,7 @@ function initScrollAnimations() {
 function initShowcaseHero() {
   const headline = document.getElementById('headline');
   if (headline) {
-    headline.textContent = "Clarity, in every breath.";
+    headline.textContent = "Weather, reimagined for every moment.";
   }
 
   const burgerBtn = document.getElementById('burger-btn');
