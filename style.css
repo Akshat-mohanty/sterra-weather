@@ -484,7 +484,7 @@ body {
 /* ===== HERO CONTAINER ===== */
 .hero {
   position: relative; width: 100%; overflow: hidden;
-  background: #E4E4E4 url("/Users/akshatmohanty/Desktop/diego-ph-vTitvl4O2kE-unsplash.jpg") center center / cover no-repeat; min-height: 100vh;
+  background: url("diego-ph-vTitvl4O2kE-unsplash.jpg") center center / cover no-repeat; min-height: 100vh;
   min-height: 100dvh;
 }
 @media (min-width: 768px) { .hero { height: 100vh; min-height: 800px; } }
