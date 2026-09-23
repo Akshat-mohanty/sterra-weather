@@ -161,9 +161,9 @@
           <div class="signal-intro">
             <div>
               <span class="studio-pill-label">03 / Signal</span>
-              <h2 class="section-title">The numbers behind<br><em>the feeling.</em></h2>
+              <h2 class="section-title">The numbers behind<br><em id="signal-headline-location">the feeling.</em></h2>
             </div>
-            <p class="section-subtitle">Six atmospheric signals, distilled into one quiet interface. Move through each layer to see what the sky is actually doing.</p>
+            <p class="section-subtitle" id="signal-subtitle">Six atmospheric signals, distilled into one quiet interface. Search a location above and this section follows the place you are actually exploring.</p>
           </div>
           <div class="signal-layout scroll-reveal-card">
             <div class="signal-rail">
@@ -175,11 +175,12 @@
               <button class="signal-tab" data-signal="dew"><span class="signal-tab-index">06</span><span>Dew point</span><strong>↗</strong></button>
             </div>
             <div class="signal-display">
-              <div class="signal-display-top"><span class="signal-live-dot"></span> LIVE TELEMETRY <span class="signal-display-location" id="signal-location">YOUR LOCATION</span></div>
+              <div class="signal-display-top"><span class="signal-live-dot"></span> LIVE TELEMETRY <span class="signal-display-location" id="signal-location">SEARCH A LOCATION</span></div>
               <div class="signal-value-wrap"><span class="signal-value" id="signal-value">—</span><span class="signal-unit" id="signal-unit">%</span></div>
               <h3 id="signal-title">Relative humidity</h3>
               <p id="signal-copy">The amount of moisture present in the air, useful for reading comfort and cloud-building potential.</p>
               <div class="signal-meter"><div class="signal-meter-track"><span id="signal-meter-fill"></span></div><div class="signal-meter-labels"><span>LOW</span><span>MODERATE</span><span>HIGH</span></div></div>
+              <div class="signal-context-row"><span class="signal-context-label" id="signal-context-city">WAITING FOR A LOCATION</span><span class="signal-context-meta" id="signal-context-meta">Search above to resolve live atmospheric data.</span></div>
               <div class="signal-privacy"><span class="signal-privacy-icon">⌁</span><span>Resolved in your browser · no profile built</span></div>
             </div>
           </div>

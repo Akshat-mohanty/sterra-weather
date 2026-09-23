@@ -156,6 +156,7 @@ function render(data) {
   document.getElementById('st-dew').textContent = fmt(cur.dew_point_2m);
 
   renderForecast(daily);
+  updateSignalLocationContext();
 
   show('dashboard');
 
@@ -467,11 +468,27 @@ function initExperienceTelemetry() {
     copyEl.textContent = meta[1];
     var pct = key === 'humidity' ? number : key === 'wind' ? Math.min((number || 0) / 18 * 100, 100) : key === 'uv' ? Math.min((number || 0) / 11 * 100, 100) : key === 'pressure' ? Math.min(Math.max(((number || 1000) - 960) / 90 * 100, 5), 100) : key === 'visibility' ? Math.min((number || 0) / 12 * 100, 100) : Math.min(Math.max(((number || 0) + 4) / 30 * 100, 5), 100);
     fillEl.style.width = Math.max(6, Math.min(100, pct || 8)) + '%';
-    if (locationEl) locationEl.textContent = S.city ? S.city.toUpperCase() : 'YOUR LOCATION';
+    if (locationEl) locationEl.textContent = S.city ? S.city.toUpperCase() : 'SEARCH A LOCATION';
   }
   tabs.forEach(function(t) { t.addEventListener('click', function() { update(t.dataset.signal); }); });
   window.refreshExperienceTelemetry = update;
   update('humidity');
+}
+
+function updateSignalLocationContext() {
+  const headline = document.getElementById('signal-headline-location');
+  const subtitle = document.getElementById('signal-subtitle');
+  const city = document.getElementById('signal-context-city');
+  const meta = document.getElementById('signal-context-meta');
+  const location = document.getElementById('signal-location');
+  if (!S.city) return;
+  if (headline) headline.textContent = S.city;
+  if (subtitle) subtitle.textContent = S.region
+    ? `Live atmospheric signals for ${S.city}, ${S.region}. Move through each layer to see what the sky is actually doing.`
+    : `Live atmospheric signals for ${S.city}. Move through each layer to see what the sky is actually doing.`;
+  if (city) city.textContent = S.city.toUpperCase();
+  if (meta) meta.textContent = S.region ? `${S.region} · LOCAL ATMOSPHERE` : 'LOCAL ATMOSPHERE';
+  if (location) location.textContent = S.city.toUpperCase();
 }
 
 function initSolarCycle() {
