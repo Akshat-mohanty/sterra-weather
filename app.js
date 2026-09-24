@@ -139,7 +139,8 @@ function render(data) {
 
   const navModeBtn = document.getElementById('nav-mode-btn');
   if (navModeBtn) {
-    navModeBtn.textContent = 'Close Console';
+    navModeBtn.innerHTML = '<span class="nav-mode-label">Close Console</span><svg class="nav-mode-close" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    navModeBtn.classList.add('console-open');
     navModeBtn.setAttribute('onclick', 'returnToOverview()');
   }
 
@@ -619,6 +620,13 @@ function setupSearch() {
       suggestions.classList.add('hidden');
     }
   });
+
+  window.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      focusSearch();
+    }
+  });
 }
 
 function focusSearch() {
@@ -645,7 +653,8 @@ function returnToOverview() {
 
   const navModeBtn = document.getElementById('nav-mode-btn');
   if (navModeBtn) {
-    navModeBtn.textContent = 'Search Station';
+    navModeBtn.innerHTML = '<span class="nav-mode-label">Search Station</span><svg class="nav-mode-arrow" width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+    navModeBtn.classList.remove('console-open');
     navModeBtn.setAttribute('onclick', 'focusSearch()');
   }
 
