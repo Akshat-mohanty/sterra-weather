@@ -39,7 +39,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   background-color: var(--bg-black);
   color: var(--text-primary);
   font-family: var(--font-family);
@@ -59,11 +58,11 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: #000000;
   border-bottom: 1px solid var(--border-hairline);
   padding: 14px 24px;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .nav-inner {
@@ -383,9 +382,9 @@ body {
   max-height: 600px;
   object-fit: contain;
   object-position: right center;
-  filter: contrast(1.1) brightness(0.95);
   user-select: none;
   pointer-events: none;
+  transform: translateZ(0);
 }
 
 .hero-gradient-overlay {
