@@ -25,16 +25,16 @@
 
       <div class="nav-search-container">
         <div class="search-input-wrapper">
-          <svg class="search-glyph" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="search-glyph" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
           </svg>
           <input id="city-input" type="text" placeholder="Search station, city, or coordinates..." autocomplete="off"/>
-          <kbd class="search-shortcut-badge">⌘K</kbd>
-          <button class="gps-trigger" onclick="getUserLocation()" title="Use GPS Coordinates">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-              <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+          <button class="gps-trigger" onclick="getUserLocation()" title="Locate via GPS" aria-label="Locate via GPS">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+              <circle cx="12" cy="12" r="8" stroke-width="1.2" stroke-dasharray="2.5 3"/>
             </svg>
-            <span>GPS</span>
           </button>
         </div>
         <div id="suggestions" class="suggestions hidden"></div>
@@ -499,6 +499,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=204"></script>
+  <script src="app.js?v=205"></script>
 </body>
 </html>

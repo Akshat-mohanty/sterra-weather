@@ -615,6 +615,24 @@ function setupSearch() {
     }
   });
 
+  input.addEventListener('focus', () => {
+    if (!input.value.trim()) {
+      suggestions.innerHTML = '';
+      const gpsItem = document.createElement('div');
+      gpsItem.className = 'suggestion-item';
+      gpsItem.style.display = 'flex';
+      gpsItem.style.alignItems = 'center';
+      gpsItem.style.gap = '8px';
+      gpsItem.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span>Detect Current Location</span>';
+      gpsItem.addEventListener('click', () => {
+        suggestions.classList.add('hidden');
+        getUserLocation();
+      });
+      suggestions.appendChild(gpsItem);
+      suggestions.classList.remove('hidden');
+    }
+  });
+
   document.addEventListener('click', e => {
     if (!e.target.closest('.nav-search-container')) {
       suggestions.classList.add('hidden');
