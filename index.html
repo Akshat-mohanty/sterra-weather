@@ -3,32 +3,36 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sterra Weather — Atmospheric Telemetry</title>
-  <meta name="description" content="A clean, typographic weather dashboard with real-time atmospheric telemetry."/>
+  <title>Sterra / Atmospheric Telemetry</title>
+  <meta name="description" content="Architectural weather telemetry instrument in uncompromising black and white."/>
   
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"/>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet"/>
   
-  <link rel="stylesheet" href="style.css?v=102"/>
+  <link rel="stylesheet" href="style.css?v=201"/>
 </head>
 <body>
-  <header class="global-nav">
-    <div class="global-nav-content">
-      <div class="nav-brand" onclick="show('welcome-screen')" title="Sterra Home">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+
+  <header class="monolith-nav">
+    <div class="nav-inner">
+      <div class="nav-brand" onclick="scrollToTop()">
+        <svg class="brand-monogram" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16M7 20V8m5 12V4m5 16v-8"/>
         </svg>
-        <span class="brand-name">Sterra</span>
+        <span class="brand-wordmark">Sterra</span>
       </div>
 
-      <div class="nav-search-wrap">
-        <div class="search-box">
-          <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input id="city-input" type="text" placeholder="Search city or location..." autocomplete="off"/>
-          <button class="btn-gps" onclick="getUserLocation()" title="Use my location">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+      <div class="nav-search-container">
+        <div class="search-input-wrapper">
+          <svg class="search-glyph" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <input id="city-input" type="text" placeholder="Search station or coordinates..." autocomplete="off"/>
+          <button class="gps-trigger" onclick="getUserLocation()" title="Use GPS Coordinates">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+            </svg>
             <span>GPS</span>
           </button>
         </div>
@@ -36,339 +40,316 @@
       </div>
 
       <div class="nav-actions">
-        <div id="unit-toggle-container" class="unit-segmented">
+        <div id="unit-toggle-container" class="unit-toggle-pill">
           <button id="unit-c" class="unit-btn active" onclick="setUnit('C')">°C</button>
           <button id="unit-f" class="unit-btn" onclick="setUnit('F')">°F</button>
         </div>
-        <div class="burger-wrapper">
-          <button class="burger-btn" id="burger-btn" aria-label="Open menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </button>
-        </div>
+        <a href="#dashboard" class="nav-action-link" onclick="scrollToDashboard()">Live Console</a>
       </div>
     </div>
   </header>
 
-  <!-- SPLASH OVERLAY -->
-  <!-- SLIDE-DOWN MENU PANEL -->
-  <div class="menu-panel" id="menu-panel">
-    <nav>
-      <a href="#capabilities">Capabilities</a>
-      <a href="#experience">Telemetry</a>
-      <a href="#solar">Solar Cycle</a>
-    </nav>
-    <div class="menu-contact">
-      <span class="menu-city-hint">Atmospheric Geolocation & Telemetry</span>
-      <div class="menu-socials">
-        <a href="javascript:void(0)" onclick="getUserLocation(); closeMenu();">Use GPS Location</a>
-        <a href="javascript:void(0)" onclick="document.getElementById('city-input').focus(); closeMenu();">Search Cities</a>
-        <a href="https://github.com/Akshat-mohanty/sterra-weather" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </div>
-    </div>
-    <div style="margin-top: 32px;">
-      <button class="menu-cta-btn" onclick="getUserLocation(); closeMenu();">
-        <span class="menu-cta-bg"></span>
-        <span class="menu-cta-text">Live Telemetry</span>
-        <span class="menu-cta-circle">
-          <svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 13L13 5M13 5H6M13 5V12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-      </button>
-    </div>
-  </div>
-
-  <div class="state-container">
-    <div id="welcome-screen" class="welcome-container">
-      
-      <!-- HERO (Creative Studio Showcase Design) -->
-      <section class="hero">
-        <!-- Content overlay -->
-        <div class="hero-content">
-          <div class="hero-content-inner">
-            <h1 class="hero-headline" id="headline"></h1>
-            <button class="cta-btn" onclick="getUserLocation()">
-              <span class="cta-btn-bg"></span>
-              <span class="cta-btn-text">Start Telemetry now</span>
-              <span class="cta-btn-circle">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 13L13 5M13 5H6M13 5V12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
+  <main>
+    <section class="monolith-hero" id="hero">
+      <div class="hero-main-frame">
+        <div class="hero-left">
+          <h1 class="hero-headline">Every Great Horizon Begins with Atmospheric Truth.</h1>
+          <p class="hero-subtext">Real-time meteorological telemetry and astronomical cycles, rendered with architectural permanence and zero artificial noise.</p>
+          
+          <div class="hero-cta-group">
+            <button class="monolith-primary-btn" onclick="scrollToDashboard()">
+              <span>Explore Live Telemetry</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
             </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section: Atmospheric Snapshot -->
-      <section id="capabilities" class="atmosphere-section scroll-reveal-section">
-        <div class="atmosphere-shell">
-          <div class="atmosphere-intro">
-            <div>
-              <span class="studio-pill-label">Atmospheric snapshot</span>
-              <h2 class="section-title">See the forecast<br><em>as a system.</em></h2>
-            </div>
-            <p class="section-subtitle">One glance should tell you what is changing, what is steady, and what is worth noticing next.</p>
-          </div>
-
-          <div class="atmosphere-stage scroll-reveal-card">
-            <div class="atmosphere-glow atmosphere-glow-1"></div>
-            <div class="atmosphere-glow atmosphere-glow-2"></div>
-            <div class="weather-orbit orbit-main"></div>
-            <div class="weather-orbit orbit-secondary"></div>
-            <div class="weather-core">
-              <span class="weather-core-kicker">LIVE ATMOSPHERE</span>
-              <span class="weather-core-icon">☼</span>
-              <strong>01</strong>
-              <span>location-led</span>
-            </div>
-
-            <article class="atmosphere-card card-left-top">
-              <span class="atmosphere-card-index">01</span>
-              <div>
-                <span class="atmosphere-card-label">Hourly dynamics</span>
-                <h3>Watch the day bend.</h3>
-                <p>Temperatures, rain probability, and pressure shifts stay readable at a glance.</p>
-              </div>
-            </article>
-
-            <article class="atmosphere-card card-right-top">
-              <span class="atmosphere-card-index">02</span>
-              <div>
-                <span class="atmosphere-card-label">Global resolution</span>
-                <h3>Search anywhere.</h3>
-                <p>Jump from your current coordinates to another city without leaving the flow.</p>
-              </div>
-            </article>
-
-            <article class="atmosphere-card card-bottom">
-              <div class="atmosphere-stat"><strong>24H</strong><span>continuous</span></div>
-              <div class="atmosphere-divider"></div>
-              <div class="atmosphere-stat"><strong>7D</strong><span>horizon</span></div>
-              <div class="atmosphere-divider"></div>
-              <div class="atmosphere-stat"><strong>6×</strong><span>telemetry</span></div>
-              <div class="atmosphere-divider"></div>
-              <div class="atmosphere-stat atmosphere-stat-note"><span>Designed for calm decisions, not weather noise.</span></div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 3: Signal / Experience -->
-      <section id="experience" class="signal-section scroll-reveal-section">
-        <div class="signal-shell">
-          <div class="signal-intro">
-            <div>
-              <span class="studio-pill-label">03 / Signal</span>
-              <h2 class="section-title">The numbers behind<br><em id="signal-headline-location">the feeling.</em></h2>
-            </div>
-            <p class="section-subtitle" id="signal-subtitle">Six atmospheric signals, distilled into one quiet interface. Search a location above and this section follows the place you are actually exploring.</p>
-          </div>
-          <div class="signal-layout scroll-reveal-card">
-            <div class="signal-rail">
-              <button class="signal-tab active" data-signal="humidity"><span class="signal-tab-index">01</span><span>Humidity</span><strong>↗</strong></button>
-              <button class="signal-tab" data-signal="wind"><span class="signal-tab-index">02</span><span>Wind</span><strong>↗</strong></button>
-              <button class="signal-tab" data-signal="uv"><span class="signal-tab-index">03</span><span>UV index</span><strong>↗</strong></button>
-              <button class="signal-tab" data-signal="pressure"><span class="signal-tab-index">04</span><span>Pressure</span><strong>↗</strong></button>
-              <button class="signal-tab" data-signal="visibility"><span class="signal-tab-index">05</span><span>Visibility</span><strong>↗</strong></button>
-              <button class="signal-tab" data-signal="dew"><span class="signal-tab-index">06</span><span>Dew point</span><strong>↗</strong></button>
-            </div>
-            <div class="signal-display">
-              <div class="signal-display-top"><span class="signal-live-dot"></span> LIVE TELEMETRY <span class="signal-display-location" id="signal-location">SEARCH A LOCATION</span></div>
-              <div class="signal-value-wrap"><span class="signal-value" id="signal-value">—</span><span class="signal-unit" id="signal-unit">%</span></div>
-              <h3 id="signal-title">Relative humidity</h3>
-              <p id="signal-copy">The amount of moisture present in the air, useful for reading comfort and cloud-building potential.</p>
-              <div class="signal-meter"><div class="signal-meter-track"><span id="signal-meter-fill"></span></div><div class="signal-meter-labels"><span>LOW</span><span>MODERATE</span><span>HIGH</span></div></div>
-              <div class="signal-context-row"><span class="signal-context-label" id="signal-context-city">WAITING FOR A LOCATION</span><span class="signal-context-meta" id="signal-context-meta">Search above to resolve live atmospheric data.</span></div>
-              <div class="signal-privacy"><span class="signal-privacy-icon">⌁</span><span>Resolved in your browser · no profile built</span></div>
+            <div class="hero-status-indicator">
+              <span class="status-pulse-dot"></span>
+              <span id="hero-station-label">Live Telemetry Synchronized</span>
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- Section 4: Solar Cycle -->
-      <section id="solar" class="solar-section scroll-reveal-section">
-        <div class="solar-shell">
-          <div class="solar-header">
-            <span class="studio-pill-label">04 / Solar cycle</span>
-            <h2 class="section-title">Your day has<br><em>a light signature.</em></h2>
-            <p class="section-subtitle">Sunrise, solar noon and sunset translated into a simple arc, so the rhythm of the day stays visible without becoming noise.</p>
-          </div>
-          <div class="solar-journey scroll-reveal-card">
-            <div class="solar-sky">
-              <div class="solar-sky-stars"></div>
-              <div class="solar-arc-line"></div>
-              <div class="solar-orbit-dot"></div>
-              <div class="solar-sun"><span></span></div>
-              <div class="solar-horizon-line"></div>
-              <div class="solar-landscape"><span></span><span></span><span></span></div>
-            </div>
-            <div class="solar-times">
-              <article class="solar-time-card"><span class="solar-time-kicker">DAWN</span><strong id="solar-dawn">—</strong><span>first light</span></article>
-              <article class="solar-time-card solar-time-card-active"><span class="solar-time-kicker">DAY</span><strong id="solar-noon">—</strong><span>solar noon</span></article>
-              <article class="solar-time-card"><span class="solar-time-kicker">DUSK</span><strong id="solar-dusk">—</strong><span>last light</span></article>
-            </div>
-            <div class="solar-footer-row"><span id="solar-location">LOCAL SOLAR WINDOW</span><button class="solar-cta" onclick="getUserLocation()"><span>Use my live sky</span><span class="solar-cta-arrow">↗</span></button></div>
+        <div class="hero-right">
+          <div class="hero-image-container">
+            <img src="assets/hero-monolith.jpg" alt="Classical Greek temple architectural columns in dramatic high-contrast monochrome" class="hero-monolith-img"/>
+            <div class="hero-gradient-overlay"></div>
           </div>
         </div>
-      </section>
-    </div>
-
-    <div id="loading-screen" class="state-msg hidden">
-      <div class="loader-beacon">
-        <div class="beacon-core"></div>
-        <div class="beacon-ring ring-1"></div>
-        <div class="beacon-ring ring-2"></div>
       </div>
-      <p class="loader-text">Gathering atmospheric telemetry...</p>
+
+      <div class="hero-manifesto-strip">
+        <div class="manifesto-grid">
+          <div class="manifesto-col">
+            <div class="manifesto-mark">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/>
+              </svg>
+              <span class="manifesto-label">Foundation</span>
+            </div>
+            <p class="manifesto-text">Sterra is the foundation for atmospheric telemetry built to endure.</p>
+          </div>
+
+          <div class="manifesto-col">
+            <div class="manifesto-header">Observatory</div>
+            <ul class="manifesto-list">
+              <li><span class="list-bullet">Station</span> <span id="subnav-city" class="list-value">San Francisco</span></li>
+              <li><span class="list-bullet">Telemetry</span> <span class="list-value">Open-Meteo Core</span></li>
+              <li><span class="list-bullet">Privacy</span> <span class="list-value">100% In-Session</span></li>
+            </ul>
+          </div>
+
+          <div class="manifesto-col">
+            <div class="manifesto-header">Architecture</div>
+            <ul class="manifesto-list">
+              <li><span class="list-bullet">Dynamics</span> <span class="list-value">24H Spline Curves</span></li>
+              <li><span class="list-bullet">Forecast</span> <span class="list-value">7-Day Horizon</span></li>
+              <li><span class="list-bullet">Celestial</span> <span class="list-value">Solar Zenith Arc</span></li>
+            </ul>
+          </div>
+
+          <div class="manifesto-col">
+            <div class="manifesto-header">Navigation</div>
+            <ul class="manifesto-links">
+              <li><a href="#dashboard" onclick="scrollToDashboard()">01 / Live Console</a></li>
+              <li><a href="#hourly-section" onclick="scrollToSection('hourly-section')">02 / 24H Dynamics</a></li>
+              <li><a href="#telemetry-section" onclick="scrollToSection('telemetry-section')">03 / Six Metrics</a></li>
+              <li><a href="#forecast-section" onclick="scrollToSection('forecast-section')">04 / 7-Day Horizon</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="loading-screen" class="state-container hidden">
+      <div class="monolith-loader">
+        <div class="loader-line"></div>
+        <p class="loader-label">Synchronizing Atmospheric Telemetry...</p>
+      </div>
     </div>
 
-    <div id="error-screen" class="state-msg hidden">
-      <h1>Unable to load.</h1>
-      <p class="welcome-tagline" id="error-msg">Check your connection or try searching for another city.</p>
-      <button class="btn-pill-primary" onclick="retry()">Try again</button>
-    </div>
-  </div>
-
-  <main id="dashboard" class="dashboard hidden">
-    <!-- Sub-nav bar for active location -->
-    <div class="sub-nav-bar">
-      <div class="sub-nav-left">
-        <button class="btn-back-home" onclick="show('welcome-screen')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-          <span>Overview</span>
+    <div id="error-screen" class="state-container hidden">
+      <div class="monolith-error-card">
+        <h2>Station Unreachable</h2>
+        <p id="error-msg">Failed to retrieve meteorological telemetry for requested coordinates.</p>
+        <button class="monolith-primary-btn" onclick="retryFetch()">
+          <span>Reconnect Station</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+            <path d="M3 3v5h5"/>
+            <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+            <path d="M16 21h5v-5"/>
+          </svg>
         </button>
-        <span class="sub-nav-divider">/</span>
-        <span class="sub-nav-city" id="subnav-city">—</span>
-      </div>
-      <div class="sub-nav-right">
-        <span id="loc-time" class="time-label">—</span>
       </div>
     </div>
 
-    <div class="dashboard-grid">
-      <!-- Hero Product Showcase Column -->
-      <section class="col-hero-card">
-        <div class="location-header">
-          <div class="location-header-topline">
-            <span class="weather-eyebrow">Current Condition</span>
-            <span class="location-live-pill"><span></span> LIVE</span>
-          </div>
-          <h1 id="loc-city">—</h1>
-          <p id="loc-region">—</p>
-        </div>
+    <section id="dashboard" class="monolith-dashboard">
+      <div class="dashboard-inner">
 
-        <div class="hero-temp-wrapper">
-          <div class="hero-temp" id="hero-temp">—</div>
-          <div class="hero-deg" id="hero-deg">°C</div>
-        </div>
-
-        <div class="hero-condition">
-          <span class="hero-icon" id="hero-icon"></span>
-          <span class="hero-desc" id="hero-desc">—</span>
-        </div>
-
-        <div class="hero-hilo">
-          Feels like <strong id="hero-feels">—</strong> &nbsp;·&nbsp; Range <strong id="hero-range">—</strong>
-        </div>
-
-        <div class="sun-times-card">
-          <div class="sun-box">
-            <span class="sun-lbl">Sunrise</span>
-            <span class="sun-val" id="sunrise-val">—</span>
-          </div>
-          <div class="sun-divider"></div>
-          <div class="sun-box">
-            <span class="sun-lbl">Sunset</span>
-            <span class="sun-val" id="sunset-val">—</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Telemetry Right Column -->
-      <section class="col-telemetry">
-        
-        <!-- Hourly Spline Panel -->
-        <div class="panel chart-panel">
-          <div class="panel-header">
-            <h2>Hourly Temperature Telemetry</h2>
-          </div>
-          <div class="canvas-wrap">
-            <canvas id="hourly-chart" width="700" height="180"></canvas>
-          </div>
-        </div>
-
-        <!-- 6 Metrics Grid -->
-        <div class="stats-grid">
-          <div class="stat-box">
-            <div class="stat-header">
-              <span class="stat-lbl">Humidity</span>
+        <div class="station-meta-bezel">
+          <div class="bezel-left">
+            <span class="bezel-tag">STATION OBSERVATION</span>
+            <div class="bezel-location">
+              <h2 id="loc-city" class="station-city">Station</h2>
+              <span id="loc-region" class="station-region">Synchronizing</span>
             </div>
-            <div class="stat-val" id="st-humidity">—</div>
-            <div class="stat-footnote">Relative atmospheric moisture</div>
           </div>
-          <div class="stat-box">
-            <div class="stat-header">
-              <span class="stat-lbl">Wind Speed</span>
+          <div class="bezel-right">
+            <div class="bezel-time-block">
+              <span class="bezel-time-label">LOCAL CHRONOMETER</span>
+              <span id="loc-time" class="bezel-time-val">00:00:00</span>
             </div>
-            <div class="stat-val" id="st-wind">—</div>
-            <div class="stat-footnote">10m surface velocity</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-header">
-              <span class="stat-lbl">UV Index</span>
-            </div>
-            <div class="stat-val" id="st-uv">—</div>
-            <div class="stat-footnote">Ultraviolet exposure level</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-header">
-              <span class="stat-lbl">Surface Pressure</span>
-            </div>
-            <div class="stat-val" id="st-pressure">—</div>
-            <div class="stat-footnote">Barometric atmospheric reading</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-header">
-              <span class="stat-lbl">Visibility</span>
-            </div>
-            <div class="stat-val" id="st-vis">—</div>
-            <div class="stat-footnote">Horizontal visual range</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-header">
-              <span class="stat-lbl">Dew Point</span>
-            </div>
-            <div class="stat-val" id="st-dew">—</div>
-            <div class="stat-footnote">Condensation threshold</div>
           </div>
         </div>
 
-        <!-- 7-Day Horizon Panel -->
-        <div class="panel forecast-panel">
-          <div class="panel-header">
-            <h2>7-Day Weather Horizon</h2>
+        <div class="monolith-primary-deck">
+          <div class="primary-reading-card">
+            <div class="reading-top-bar">
+              <div id="hero-icon" class="reading-weather-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              </div>
+              <span id="hero-desc" class="reading-condition-badge">Clear Sky</span>
+            </div>
+
+            <div class="reading-temperature-lockup">
+              <span id="hero-temp" class="reading-numeral">--</span>
+              <span id="hero-deg" class="reading-degree">°C</span>
+            </div>
+
+            <div class="reading-sub-metrics">
+              <div class="sub-metric">
+                <span class="sub-metric-label">Perceived</span>
+                <span id="hero-feels" class="sub-metric-val">--</span>
+              </div>
+              <div class="sub-metric-divider"></div>
+              <div class="sub-metric">
+                <span class="sub-metric-label">24H Range</span>
+                <span id="hero-range" class="sub-metric-val">--</span>
+              </div>
+            </div>
           </div>
-          <div class="forecast-row" id="forecast-row"></div>
+
+          <div class="solar-transit-card">
+            <div class="solar-card-header">
+              <span class="card-title-mono">CELESTIAL TRANSIT</span>
+              <span class="card-status-mono">ASTRONOMICAL</span>
+            </div>
+
+            <div class="solar-arc-viewport">
+              <svg class="solar-transit-svg" viewBox="0 0 360 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="20" y1="140" x2="340" y2="140" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+                <path d="M 30 140 Q 180 10 330 140" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none"/>
+                <path id="solar-active-path" d="M 30 140 Q 180 10 330 140" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-dasharray="420" stroke-dashoffset="210"/>
+                <circle id="solar-sun-dot" cx="180" cy="75" r="5" fill="#FFFFFF"/>
+                <circle id="solar-sun-pulse" cx="180" cy="75" r="9" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+              </svg>
+            </div>
+
+            <div class="solar-timestamps-row">
+              <div class="solar-time-col">
+                <span class="solar-marker-label">ASTRONOMICAL DAWN</span>
+                <span id="sunrise-val" class="solar-marker-time">--</span>
+              </div>
+              <div class="solar-time-col text-right">
+                <span class="solar-marker-label">TWILIGHT HORIZON</span>
+                <span id="sunset-val" class="solar-marker-time">--</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-      </section>
-    </div>
+        <div id="hourly-section" class="monolith-section-container">
+          <div class="section-top-bar">
+            <h3 class="section-heading">24-Hour Temperature Trajectory</h3>
+            <span class="section-mono-tag">SPLINE INTERPOLATION / 1H STEP</span>
+          </div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="hourly-chart"></canvas>
+          </div>
+        </div>
+
+        <div id="telemetry-section" class="monolith-section-container">
+          <div class="section-top-bar">
+            <h3 class="section-heading">Six-Dimension Atmospheric Telemetry</h3>
+            <span class="section-mono-tag">SURFACE SENSORS</span>
+          </div>
+
+          <div class="telemetry-rack-grid">
+            <div class="telemetry-module">
+              <div class="module-header">
+                <span class="module-code">01</span>
+                <span class="module-name">Relative Humidity</span>
+              </div>
+              <div class="module-body">
+                <span id="st-humidity" class="module-value">--</span>
+              </div>
+              <div class="module-footer">
+                <span class="module-sub">Ambient moisture saturation</span>
+              </div>
+            </div>
+
+            <div class="telemetry-module">
+              <div class="module-header">
+                <span class="module-code">02</span>
+                <span class="module-name">Surface Pressure</span>
+              </div>
+              <div class="module-body">
+                <span id="st-pressure" class="module-value">--</span>
+              </div>
+              <div class="module-footer">
+                <span class="module-sub">Barometric sea-level</span>
+              </div>
+            </div>
+
+            <div class="telemetry-module">
+              <div class="module-header">
+                <span class="module-code">03</span>
+                <span class="module-name">Wind Velocity</span>
+              </div>
+              <div class="module-body">
+                <span id="st-wind" class="module-value">--</span>
+              </div>
+              <div class="module-footer">
+                <span class="module-sub">10-meter vector velocity</span>
+              </div>
+            </div>
+
+            <div class="telemetry-module">
+              <div class="module-header">
+                <span class="module-code">04</span>
+                <span class="module-name">UV Radiation</span>
+              </div>
+              <div class="module-body">
+                <span id="st-uv" class="module-value">--</span>
+              </div>
+              <div class="module-footer">
+                <span class="module-sub">Solar ultraviolet index</span>
+              </div>
+            </div>
+
+            <div class="telemetry-module">
+              <div class="module-header">
+                <span class="module-code">05</span>
+                <span class="module-name">Optical Visibility</span>
+              </div>
+              <div class="module-body">
+                <span id="st-vis" class="module-value">--</span>
+              </div>
+              <div class="module-footer">
+                <span class="module-sub">Horizontal atmospheric sight</span>
+              </div>
+            </div>
+
+            <div class="telemetry-module">
+              <div class="module-header">
+                <span class="module-code">06</span>
+                <span class="module-name">Dew Point</span>
+              </div>
+              <div class="module-body">
+                <span id="st-dew" class="module-value">--</span>
+              </div>
+              <div class="module-footer">
+                <span class="module-sub">Condensation temperature</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="forecast-section" class="monolith-section-container">
+          <div class="section-top-bar">
+            <h3 class="section-heading">7-Day Extended Weather Horizon</h3>
+            <span class="section-mono-tag">MULTI-DAY PROJECTION</span>
+          </div>
+
+          <div class="forecast-rack" id="forecast-row"></div>
+        </div>
+
+      </div>
+    </section>
 
   </main>
 
-  <footer class="site-footer">
+  <footer class="monolith-footer">
     <div class="footer-inner">
-      <div class="footer-legal">
-        <span>Copyright © 2026 Akshat Mohanty.</span>
+      <div class="footer-left">
+        <span class="footer-brand">Sterra</span>
+        <span class="footer-tagline">Architectural telemetry built to endure.</span>
       </div>
-      <div class="footer-links">
-        <a href="https://github.com/Akshat-mohanty/sterra-weather" target="_blank" rel="noopener noreferrer" class="bug-link">Found a bug?</a>
+      <div class="footer-center">
+        <span>© 2026 Akshat Mohanty. Open meteorological data via Open-Meteo.</span>
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com/Akshat-mohanty/sterra-weather" target="_blank" rel="noopener noreferrer" class="footer-link">
+          <span>GitHub</span>
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12L12 4M12 4H6M12 4V10"/>
+          </svg>
+        </a>
       </div>
     </div>
   </footer>
 
-  <script src="app.js?v=102"></script>
+  <script src="app.js?v=200"></script>
 </body>
 </html>
