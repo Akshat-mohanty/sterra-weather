@@ -1118,10 +1118,7 @@ body {
 }
 
 .launcher-banner {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-hairline);
-  border-radius: 16px;
-  padding: 60px 40px;
+  padding: 40px 24px;
   text-align: center;
   max-width: 860px;
   margin: 0 auto;
