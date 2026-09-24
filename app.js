@@ -210,11 +210,6 @@ function render(data) {
     drawHourlyChart(data.hourly);
   }, 60);
 
-  const heroLabel = document.getElementById('hero-station-label');
-  if (heroLabel) {
-    heroLabel.textContent = `${S.city || 'Station'} Synchronized`;
-  }
-
   scrollToDashboard();
 }
 

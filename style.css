@@ -311,23 +311,6 @@ body {
   transform: translateX(4px);
 }
 
-.hero-status-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12.5px;
-  color: #71717A;
-  font-weight: 500;
-}
-.status-pulse-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #FFFFFF;
-  opacity: 0.8;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-}
-
 .hero-right {
   position: relative;
   height: 100%;
