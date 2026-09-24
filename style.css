@@ -943,24 +943,23 @@ body {
 
 .monolith-footer {
   border-top: 1px solid var(--border-hairline);
-  padding: 32px 24px;
+  padding: 28px 24px;
   background: var(--bg-black);
   margin-top: auto;
 }
 
 .footer-inner {
-  max-width: var(--page-max-width);
-  margin: 0 auto;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   font-size: 13px;
   color: #71717A;
-  flex-wrap: wrap;
 }
 
 .footer-left {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -974,6 +973,18 @@ body {
   color: #71717A;
 }
 
+.footer-center {
+  text-align: center;
+  color: #71717A;
+  white-space: nowrap;
+}
+
+.footer-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .footer-link {
   color: #8E8E93;
   text-decoration: none;
@@ -1253,5 +1264,14 @@ body {
   }
   .launcher-banner {
     padding: 40px 20px;
+  }
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  .footer-left, .footer-right {
+    justify-content: center;
+    flex: initial;
   }
 }
