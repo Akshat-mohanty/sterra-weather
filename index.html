@@ -10,13 +10,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet"/>
   
-  <link rel="stylesheet" href="style.css?v=201"/>
+  <link rel="stylesheet" href="style.css?v=202"/>
 </head>
 <body>
 
   <header class="monolith-nav">
     <div class="nav-inner">
-      <div class="nav-brand" onclick="scrollToTop()">
+      <div class="nav-brand" onclick="returnToOverview()">
         <svg class="brand-monogram" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 20h16M7 20V8m5 12V4m5 16v-8"/>
         </svg>
@@ -28,7 +28,7 @@
           <svg class="search-glyph" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
           </svg>
-          <input id="city-input" type="text" placeholder="Search station or coordinates..." autocomplete="off"/>
+          <input id="city-input" type="text" placeholder="Search station or coordinates to reveal data..." autocomplete="off"/>
           <button class="gps-trigger" onclick="getUserLocation()" title="Use GPS Coordinates">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
               <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
@@ -40,11 +40,11 @@
       </div>
 
       <div class="nav-actions">
-        <div id="unit-toggle-container" class="unit-toggle-pill">
+        <div id="unit-toggle-container" class="unit-toggle-pill hidden">
           <button id="unit-c" class="unit-btn active" onclick="setUnit('C')">°C</button>
           <button id="unit-f" class="unit-btn" onclick="setUnit('F')">°F</button>
         </div>
-        <a href="#dashboard" class="nav-action-link" onclick="scrollToDashboard()">Live Console</a>
+        <button id="nav-mode-btn" class="nav-action-link" onclick="focusSearch()">Search Station</button>
       </div>
     </div>
   </header>
@@ -57,15 +57,15 @@
           <p class="hero-subtext">Real-time meteorological telemetry and astronomical cycles, rendered with architectural permanence and zero artificial noise.</p>
           
           <div class="hero-cta-group">
-            <button class="monolith-primary-btn" onclick="scrollToDashboard()">
-              <span>Explore Live Telemetry</span>
+            <button class="monolith-primary-btn" onclick="focusSearch()">
+              <span>Search Station Telemetry</span>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 8h10M9 4l4 4-4 4"/>
               </svg>
             </button>
             <div class="hero-status-indicator">
               <span class="status-pulse-dot"></span>
-              <span id="hero-station-label">Live Telemetry Synchronized</span>
+              <span id="hero-station-label">Observatory Standby / Awaiting Query</span>
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@
           <div class="manifesto-col">
             <div class="manifesto-header">Observatory</div>
             <ul class="manifesto-list">
-              <li><span class="list-bullet">Station</span> <span id="subnav-city" class="list-value">San Francisco</span></li>
+              <li><span class="list-bullet">Station</span> <span id="subnav-city" class="list-value">Global Standby</span></li>
               <li><span class="list-bullet">Telemetry</span> <span class="list-value">Open-Meteo Core</span></li>
               <li><span class="list-bullet">Privacy</span> <span class="list-value">100% In-Session</span></li>
             </ul>
@@ -109,17 +109,158 @@
           </div>
 
           <div class="manifesto-col">
-            <div class="manifesto-header">Navigation</div>
+            <div class="manifesto-header">Sections</div>
             <ul class="manifesto-links">
-              <li><a href="#dashboard" onclick="scrollToDashboard()">01 / Live Console</a></li>
-              <li><a href="#hourly-section" onclick="scrollToSection('hourly-section')">02 / 24H Dynamics</a></li>
-              <li><a href="#telemetry-section" onclick="scrollToSection('telemetry-section')">03 / Six Metrics</a></li>
-              <li><a href="#forecast-section" onclick="scrollToSection('forecast-section')">04 / 7-Day Horizon</a></li>
+              <li><a href="#data-architecture" onclick="scrollToSection('data-architecture')">01 / Telemetry Model</a></li>
+              <li><a href="#benefits-architecture" onclick="scrollToSection('benefits-architecture')">02 / System Advantages</a></li>
+              <li><a href="#station-launcher" onclick="scrollToSection('station-launcher')">03 / Launch Station</a></li>
+              <li><a href="#" onclick="getUserLocation()">04 / Direct GPS Query</a></li>
             </ul>
           </div>
         </div>
       </div>
     </section>
+
+    <div id="overview-content">
+      <section id="data-architecture" class="monolith-section-container page-padded">
+        <div class="section-top-bar">
+          <h2 class="section-heading">Telemetry System / Meteorological Data Model</h2>
+          <span class="section-mono-tag">OBSERVATIONAL SCOPE</span>
+        </div>
+        <p class="section-lead-copy">Sterra computes and visualizes four distinct tiers of atmospheric physics upon location query, synthesizing raw satellite and ground-sensor feeds into architectural clarity.</p>
+
+        <div class="telemetry-pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-top">
+              <span class="pillar-index">01</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
+              </svg>
+            </div>
+            <h3 class="pillar-title">24-Hour Continuous Dynamics</h3>
+            <p class="pillar-desc">Continuous cubic bezier spline interpolation charting real-time temperature fluctuations and localized dew threshold curves with hourly step resolution.</p>
+            <div class="pillar-meta">
+              <span class="pillar-badge">1H Precision Step</span>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-top">
+              <span class="pillar-index">02</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Six-Dimension Surface Metrics</h3>
+            <p class="pillar-desc">Live physical sensor telemetry capturing Relative Humidity, Barometric Sea-Level Pressure, 10-meter Vector Wind Velocity, Solar UV Index, Optical Horizontal Visibility, and Dew Point.</p>
+            <div class="pillar-meta">
+              <span class="pillar-badge">6 Physical Sensors</span>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-top">
+              <span class="pillar-index">03</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>
+              </svg>
+            </div>
+            <h3 class="pillar-title">7-Day Extended Projection</h3>
+            <p class="pillar-desc">Multi-day high-resolution numerical models forecasting daily highs, lows, precipitation probabilities, and atmospheric transition shifts across the week.</p>
+            <div class="pillar-meta">
+              <span class="pillar-badge">168-Hour Window</span>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-top">
+              <span class="pillar-index">04</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Astronomical Solar Transit</h3>
+            <p class="pillar-desc">Sub-second celestial solar arc calculating astronomical dawn, solar zenith angle, golden hour transitions, and twilight horizon specific to target coordinates.</p>
+            <div class="pillar-meta">
+              <span class="pillar-badge">Minute-by-Minute Arc</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="benefits-architecture" class="monolith-section-container page-padded">
+        <div class="section-top-bar">
+          <h2 class="section-heading">Architectural Advantages / Why Sterra</h2>
+          <span class="section-mono-tag">CORE PRINCIPLES</span>
+        </div>
+        <p class="section-lead-copy">Unlike conventional commercial weather portals compromised by ad networks, clickbait traps, and tracking scripts, Sterra is designed as an uncompromising digital instrument.</p>
+
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-header">
+              <svg class="benefit-inline-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <h3 class="benefit-title">Zero Profiling & In-Session Privacy</h3>
+            </div>
+            <p class="benefit-desc">Your location coordinates and search terms never leave your browser session for behavioral profiling or third-party marketing brokers. Meteorological queries resolve cleanly via open standards.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-header">
+              <svg class="benefit-inline-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="4.93" x2="19.07" y1="4.93" y2="19.07"/>
+              </svg>
+              <h3 class="benefit-title">Zero Advertising & Sensationalism</h3>
+            </div>
+            <p class="benefit-desc">Completely free of banner ads, autoplay videos, sponsored articles, or exaggerated weather clickbait. The interface respects your time and attention with pure mathematical signal.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-header">
+              <svg class="benefit-inline-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+              <h3 class="benefit-title">Sub-Second Open Telemetry</h3>
+            </div>
+            <p class="benefit-desc">Direct high-performance integration with Open-Meteo numerical weather prediction models, pulling non-commercial atmospheric forecasts with millisecond client-side hydration.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-header">
+              <svg class="benefit-inline-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+              </svg>
+              <h3 class="benefit-title">Museum-Grade Architectural Restraint</h3>
+            </div>
+            <p class="benefit-desc">Monochrome Swiss and Scandinavian design discipline inspired by classical monuments and industrial instruments, ensuring optimal contrast, tabular precision, and enduring elegance.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="station-launcher" class="monolith-section-container page-padded">
+        <div class="launcher-banner">
+          <div class="launcher-content">
+            <h2 class="launcher-title">Initiate Coordinate Telemetry</h2>
+            <p class="launcher-sub">Search any metropolis, village, or postal region worldwide, or synchronize instantly via device GPS to unlock the live console.</p>
+            <div class="launcher-actions">
+              <button class="monolith-primary-btn" onclick="focusSearch()">
+                <span>Search Location Station</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 8h10M9 4l4 4-4 4"/>
+                </svg>
+              </button>
+              <button class="monolith-secondary-btn" onclick="getUserLocation()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                  <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+                </svg>
+                <span>Synchronize via GPS</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
     <div id="loading-screen" class="state-container hidden">
       <div class="monolith-loader">
@@ -144,7 +285,7 @@
       </div>
     </div>
 
-    <section id="dashboard" class="monolith-dashboard">
+    <section id="dashboard" class="monolith-dashboard hidden">
       <div class="dashboard-inner">
 
         <div class="station-meta-bezel">
@@ -160,6 +301,12 @@
               <span class="bezel-time-label">LOCAL CHRONOMETER</span>
               <span id="loc-time" class="bezel-time-val">00:00:00</span>
             </div>
+            <button class="close-console-btn" onclick="returnToOverview()" title="Return to Overview">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+              <span>Close Console</span>
+            </button>
           </div>
         </div>
 
@@ -350,6 +497,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=200"></script>
+  <script src="app.js?v=202"></script>
 </body>
 </html>

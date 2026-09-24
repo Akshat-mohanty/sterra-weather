@@ -11,6 +11,7 @@ const S = {
   region: null,
   data: null,
   timezone: null,
+  consoleOpen: false,
 };
 
 const SVG_ICONS = {
@@ -130,6 +131,20 @@ function render(data) {
   const daily = data.daily;
   const [cond, svgIcon] = wmo(cur.weather_code);
 
+  const dashboard = document.getElementById('dashboard');
+  if (dashboard) dashboard.classList.remove('hidden');
+
+  const unitToggle = document.getElementById('unit-toggle-container');
+  if (unitToggle) unitToggle.classList.remove('hidden');
+
+  const navModeBtn = document.getElementById('nav-mode-btn');
+  if (navModeBtn) {
+    navModeBtn.textContent = 'Close Console';
+    navModeBtn.setAttribute('onclick', 'returnToOverview()');
+  }
+
+  S.consoleOpen = true;
+
   const locCity = document.getElementById('loc-city');
   if (locCity) locCity.textContent = S.city || 'Observatory';
 
@@ -199,6 +214,8 @@ function render(data) {
   if (heroLabel) {
     heroLabel.textContent = `${S.city || 'Station'} Synchronized`;
   }
+
+  scrollToDashboard();
 }
 
 function updateSolarTransit(sunriseIso, sunsetIso) {
@@ -583,20 +600,70 @@ function setupSearch() {
     }, 280);
   });
 
+  input.addEventListener('keydown', async e => {
+    if (e.key === 'Escape') suggestions.classList.add('hidden');
+    if (e.key === 'Enter') {
+      const q = input.value.trim();
+      if (q.length >= 2) {
+        try {
+          const results = await geocode(q);
+          if (results.length > 0) {
+            const item = results[0];
+            const reg = [item.admin1, item.country].filter(Boolean).join(', ');
+            input.value = '';
+            suggestions.classList.add('hidden');
+            loadLocation(item.latitude, item.longitude, item.name, reg);
+          }
+        } catch(err) {}
+      }
+    }
+  });
+
   document.addEventListener('click', e => {
     if (!e.target.closest('.nav-search-container')) {
       suggestions.classList.add('hidden');
     }
   });
+}
 
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Escape') suggestions.classList.add('hidden');
-  });
+function focusSearch() {
+  const input = document.getElementById('city-input');
+  if (input) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      input.focus();
+      const wrap = input.closest('.search-input-wrapper');
+      if (wrap) {
+        wrap.style.borderColor = '#FFFFFF';
+        setTimeout(() => { wrap.style.borderColor = ''; }, 1200);
+      }
+    }, 350);
+  }
+}
+
+function returnToOverview() {
+  const dashboard = document.getElementById('dashboard');
+  if (dashboard) dashboard.classList.add('hidden');
+
+  const unitToggle = document.getElementById('unit-toggle-container');
+  if (unitToggle) unitToggle.classList.add('hidden');
+
+  const navModeBtn = document.getElementById('nav-mode-btn');
+  if (navModeBtn) {
+    navModeBtn.textContent = 'Search Station';
+    navModeBtn.setAttribute('onclick', 'focusSearch()');
+  }
+
+  S.consoleOpen = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function scrollToDashboard() {
   const el = document.getElementById('dashboard');
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
+  if (el) {
+    el.classList.remove('hidden');
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 function scrollToSection(id) {
@@ -617,21 +684,10 @@ function retryFetch() {
 }
 
 window.addEventListener('resize', () => {
-  if (S.data?.hourly) drawHourlyChart(S.data.hourly);
+  if (S.data?.hourly && S.consoleOpen) drawHourlyChart(S.data.hourly);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
   setupSearch();
   setupChartEvents();
-
-  const saved = localStorage.getItem(CACHE_KEY);
-  if (saved) {
-    try {
-      const c = JSON.parse(saved);
-      loadLocation(c.lat, c.lon, c.city, c.region);
-      return;
-    } catch(e) {}
-  }
-
-  loadLocation(37.7749, -122.4194, 'San Francisco', 'California, USA');
 });
