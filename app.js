@@ -149,9 +149,6 @@ function render(data) {
   const locCity = document.getElementById('loc-city');
   if (locCity) locCity.textContent = S.city || 'Observatory';
 
-  const subnavCity = document.getElementById('subnav-city');
-  if (subnavCity) subnavCity.textContent = S.city || 'Observatory';
-
   const locRegion = document.getElementById('loc-region');
   if (locRegion) locRegion.textContent = S.region || `${S.lat.toFixed(2)}°N, ${Math.abs(S.lon).toFixed(2)}°W`;
 
