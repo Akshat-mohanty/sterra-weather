@@ -8,15 +8,15 @@ web
 
 ## Users
 
-Atmosphere-conscious professionals, designers, travellers, and daily weather watchers seeking immediate meteorological clarity without advertising, invasive telemetry tracking, or sensory overload.
+Atmosphere-conscious professionals, designers, researchers, travellers, and daily weather watchers seeking immediate meteorological clarity without advertising, invasive telemetry tracking, or sensory overload.
 
 ## Product Purpose
 
-Sterra Weather exists to provide real-time atmospheric telemetry and astronomical cycles through an ethereal, museum-grade web interface. Success means delivering instant local atmospheric awareness—current conditions, 24-hour temperature dynamics, 7-day extended forecasts, and solar horizon metrics—with poetic visual fluidity and zero cognitive friction.
+Santerra Weather exists to provide real-time atmospheric telemetry and astronomical cycles through an ethereal, museum-grade web interface. Success means delivering instant local atmospheric awareness—current conditions, 24-hour temperature dynamics, 7-day extended forecasts, and solar horizon metrics—with poetic visual fluidity and zero cognitive friction.
 
 ## Positioning
 
-Unlike bloated commercial weather portals cluttered with clickbait banners, ads, and opaque tracking scripts, Sterra Weather is an open-data, client-side meteorological instrument powered directly by open APIs (Open-Meteo) and browser geolocation, treating atmospheric data with typographical elegance and atmospheric beauty.
+Unlike bloated commercial weather portals cluttered with clickbait banners, ads, and opaque tracking scripts, Santerra Weather is an open-data, client-side meteorological instrument powered directly by open APIs (Open-Meteo) and browser geolocation, treating atmospheric data with typographical elegance and atmospheric beauty.
 
 ## Operating Context
 
@@ -35,9 +35,9 @@ Desktop browsers, mobile devices, ambient displays, and design workspaces where 
 
 ## Brand Commitments
 
-- Brand Name: Sterra (or Sterra Weather).
-- Visual Identity: Monolithic Architectural Luxury in strict Black & White — deep matte obsidian canvas (#000000 / #0C0C0D), pure white typography (#FFFFFF), muted ash secondary type (#71717A), dramatic grayscale architectural imagery, generous negative space, crisp white pill/rectangular CTAs, razor-sharp 1px dividers, and ultra-high-end editorial telemetry.
-- Tone: Timeless, expensive, authoritative, architectural, and serene.
+- Brand Name: Santerra (or Santerra Weather).
+- Visual Identity: Editorial Luxury & Observational Precision — warm ivory canvas (#FAF9F5), rich slate typography (#141413 / #3D3D3A), terracotta clay interactive accents (#D97757), botanical olive highlights (#5C6E21), Newsreader serif headlines, Plus Jakarta Sans body, and JetBrains Mono technical telemetry.
+- Tone: Timeless, architectural, editorial, and serene.
 
 ## Evidence on Hand
 
@@ -50,11 +50,11 @@ Desktop browsers, mobile devices, ambient displays, and design workspaces where 
 1. **Atmosphere as Material:** Weather is dynamic light, humidity, and pressure—the interface should breathe and adapt gracefully to celestial and atmospheric shifts.
 2. **Precision Without Noise:** Every data point must be mathematically accurate, clearly labeled, and easily digested without chart clutter or fake visual embellishment.
 3. **Respect for Attention:** Zero unsolicited prompts, zero trackers, fast sub-second client-side hydration, and frictionless keyboard-friendly interaction.
-4. **Sculptural Fluidity:** Transitions, glass surfaces, and curves should evoke the organic fluidity of clouds, sunlight, and air.
+4. **Editorial Luxury:** Transitions, typography, and card surfaces evoke the warmth, craft, and permanence of fine print journals and bespoke design studios.
 
 ## Accessibility & Inclusion
 
-- High contrast text options and legible typography hierarchy.
+- High contrast text ratios meeting WCAG AAA across ivory and slate tones.
 - Semantic HTML landmark regions (`<header>`, `<main>`, `<section>`, `<footer>`).
 - Full keyboard navigation for search, GPS, unit toggling, and card inspection.
 - Respect for `prefers-reduced-motion` across animated gradients and canvas splines.

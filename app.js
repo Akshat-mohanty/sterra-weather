@@ -139,7 +139,7 @@ function render(data) {
 
   const navModeBtn = document.getElementById('nav-mode-btn');
   if (navModeBtn) {
-    navModeBtn.innerHTML = '<span class="nav-mode-label">Close Console</span><svg class="nav-mode-close" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    navModeBtn.innerHTML = '<span class="nav-mode-label">Close Console</span><span class="btn-icon" aria-hidden="true">✕</span>';
     navModeBtn.classList.add('console-open');
     navModeBtn.setAttribute('onclick', 'returnToOverview()');
   }
@@ -234,7 +234,8 @@ function updateSolarTransit(sunriseIso, sunsetIso) {
     const startX = 30;
     const endX = 330;
     const currX = startX + (endX - startX) * progress;
-    const currY = 140 - Math.sin(progress * Math.PI) * 120;
+    // Exact point on quadratic bezier Q(30,140; 180,10; 330,140)
+    const currY = 140 - 260 * progress * (1 - progress);
 
     sunDot.setAttribute('cx', currX);
     sunDot.setAttribute('cy', currY);
@@ -336,7 +337,7 @@ function drawHourlyChart(hourly) {
 
   ctx.clearRect(0, 0, W, H);
 
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.strokeStyle = 'rgba(20, 20, 19, 0.08)';
   ctx.lineWidth = 1;
   ctx.setLineDash([4, 4]);
 
@@ -349,8 +350,8 @@ function drawHourlyChart(hourly) {
     ctx.stroke();
 
     const tVal = (maxT - (range / gridSteps) * g).toFixed(0);
-    ctx.fillStyle = '#71717A';
-    ctx.font = '11px "Schibsted Grotesk", sans-serif';
+    ctx.fillStyle = '#71706B';
+    ctx.font = '11px "JetBrains Mono", monospace';
     ctx.textAlign = 'right';
     ctx.fillText(`${tVal}°`, padLeft - 10, y + 3);
   }
@@ -363,8 +364,8 @@ function drawHourlyChart(hourly) {
   });
 
   const grad = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-  grad.addColorStop(0, 'rgba(255, 255, 255, 0.12)');
-  grad.addColorStop(1, 'rgba(255, 255, 255, 0.00)');
+  grad.addColorStop(0, 'rgba(217, 119, 87, 0.16)');
+  grad.addColorStop(1, 'rgba(217, 119, 87, 0.00)');
 
   ctx.beginPath();
   ctx.moveTo(points[0].x, points[0].y);
@@ -403,12 +404,12 @@ function drawHourlyChart(hourly) {
 
     ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
   }
-  ctx.strokeStyle = '#FFFFFF';
-  ctx.lineWidth = 2;
+  ctx.strokeStyle = '#D97757';
+  ctx.lineWidth = 2.2;
   ctx.stroke();
 
-  ctx.fillStyle = '#71717A';
-  ctx.font = '11px "Schibsted Grotesk", sans-serif';
+  ctx.fillStyle = '#71706B';
+  ctx.font = '11px "JetBrains Mono", monospace';
   ctx.textAlign = 'center';
 
   points.forEach((pt, idx) => {
@@ -418,8 +419,8 @@ function drawHourlyChart(hourly) {
       ctx.fillText(hStr, pt.x, H - 12);
 
       ctx.beginPath();
-      ctx.arc(pt.x, pt.y, 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = '#FFFFFF';
+      ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = '#D97757';
       ctx.fill();
     }
   });
@@ -435,7 +436,7 @@ function drawHourlyChart(hourly) {
       }
     });
 
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.strokeStyle = 'rgba(20, 20, 19, 0.25)';
     ctx.lineWidth = 1;
     ctx.setLineDash([3, 3]);
     ctx.beginPath();
@@ -446,30 +447,30 @@ function drawHourlyChart(hourly) {
 
     ctx.beginPath();
     ctx.arc(closest.x, closest.y, 5, 0, Math.PI * 2);
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = '#FAF9F5';
     ctx.fill();
-    ctx.strokeStyle = '#FFFFFF';
+    ctx.strokeStyle = '#D97757';
     ctx.lineWidth = 2.5;
     ctx.stroke();
 
     const dt = new Date(closest.time);
     const label = `${String(dt.getHours()).padStart(2, '0')}:00 · ${closest.temp}°`;
-    ctx.font = '11.5px "Schibsted Grotesk", sans-serif';
+    ctx.font = '11.5px "JetBrains Mono", monospace';
     const textW = ctx.measureText(label).width;
-    const boxX = Math.min(Math.max(closest.x - textW / 2 - 8, 10), W - textW - 26);
-    const boxY = Math.max(closest.y - 32, 10);
+    const boxX = Math.min(Math.max(closest.x - textW / 2 - 9, 10), W - textW - 28);
+    const boxY = Math.max(closest.y - 34, 10);
 
-    ctx.fillStyle = '#09090B';
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.fillStyle = '#141413';
+    ctx.strokeStyle = 'rgba(20, 20, 19, 0.15)';
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.roundRect(boxX, boxY, textW + 16, 22, 4);
+    ctx.roundRect(boxX, boxY, textW + 18, 24, 6);
     ctx.fill();
     ctx.stroke();
 
-    ctx.fillStyle = '#FFFFFF';
+    ctx.fillStyle = '#FAF9F5';
     ctx.textAlign = 'left';
-    ctx.fillText(label, boxX + 8, boxY + 15);
+    ctx.fillText(label, boxX + 9, boxY + 16);
   }
 }
 
@@ -652,8 +653,12 @@ function focusSearch() {
       input.focus();
       const wrap = input.closest('.search-input-wrapper');
       if (wrap) {
-        wrap.style.borderColor = '#FFFFFF';
-        setTimeout(() => { wrap.style.borderColor = ''; }, 1200);
+        wrap.style.borderColor = 'var(--swatch--clay)';
+        wrap.style.boxShadow = '0 0 0 3px rgba(217, 119, 87, 0.15)';
+        setTimeout(() => {
+          wrap.style.borderColor = '';
+          wrap.style.boxShadow = '';
+        }, 1200);
       }
     }, 350);
   }
@@ -668,7 +673,7 @@ function returnToOverview() {
 
   const navModeBtn = document.getElementById('nav-mode-btn');
   if (navModeBtn) {
-    navModeBtn.innerHTML = '<span class="nav-mode-label">Search Station</span><svg class="nav-mode-arrow" width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+    navModeBtn.innerHTML = '<span class="nav-mode-label">Search Station</span><span class="btn-icon" aria-hidden="true">↗</span>';
     navModeBtn.classList.remove('console-open');
     navModeBtn.setAttribute('onclick', 'focusSearch()');
   }
@@ -681,7 +686,9 @@ function scrollToDashboard() {
   const el = document.getElementById('dashboard');
   if (el) {
     el.classList.remove('hidden');
-    el.scrollIntoView({ behavior: 'smooth' });
+    const yOffset = -90;
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
   }
 }
 
